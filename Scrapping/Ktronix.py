@@ -4,6 +4,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
+import datetime
 def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict:
     driver.get("https://www.ktronix.com/")
     print(driver.title)
@@ -69,15 +70,17 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
     data_product['marca'].extend(marcas_productos)
     data_product['imagen'].extend(images)
     data_product['empresa'].extend(["Ktronix"] * len(titles_products))
+    data_product['fecha'].extend([datetime.datetime.today()] * len(titles_products))
 
     with open('products.csv', 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha'])
 
-        # Write the CSV header
-        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa'])
 
         # Write the data to the CSV file
         for title, price, link, marca, imagen, empresa in zip(titles_products, prices, links, marcas_productos, images, ["Ktronix"] * len(titles_products)):
             csv_writer.writerow([title, price, link, marca, imagen, empresa])
+            fecha = datetime.datetime.today()
+            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha])
 
     return data_product

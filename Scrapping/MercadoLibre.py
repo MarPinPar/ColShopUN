@@ -1,8 +1,7 @@
 import csv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
-import pandas as pd
+import datetime
 
 def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict:
 
@@ -13,7 +12,6 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
     search_bar.clear()
     search_bar.send_keys(f"{keyWord}")
     search_bar.submit()
-
     product_total = driver.find_elements(by=By.CLASS_NAME, value="ui-search-layout__item")
 
     titles_products = []
@@ -62,16 +60,19 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
     data_product['marca'].extend(marcas_productos)
     data_product['imagen'].extend(image_urls)
     data_product['empresa'].extend(["Mercado Libre"] * len(titles_products))
+    data_product['fecha'].extend([datetime.datetime.today()] * len(titles_products))
 
     # Initialize a CSV file for writing
     with open('products.csv', 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
 
+
         # Write the CSV header
-        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa'])
+        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha'])
 
         # Write the data to the CSV file
         for title, price, link, marca, imagen, empresa in zip(titles_products, prices, links_products, marcas_productos, image_urls, ["Mercado Libre"] * len(titles_products)):
             csv_writer.writerow([title, price, link, marca, imagen, empresa])
-
+            fecha = datetime.datetime.today()
+            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha])
     return data_product
