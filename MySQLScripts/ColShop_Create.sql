@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS PRODUCTO (
   );
   
   
+  
 -- -----------------------------------------------------
 -- Table LISTA
 -- -----------------------------------------------------
@@ -237,3 +238,32 @@ CREATE TABLE IF NOT EXISTS RESEÑA (
   FOREIGN KEY (`ACCIONES_ac_ID` , `ACCIONES_ac_fechaHora`) REFERENCES ACCIONES (`ac_ID` , `ac_fechaHora`),
   FOREIGN KEY (`PRODUCTO_pro_ID`) REFERENCES PRODUCTO (`pro_ID`)
   );
+  
+-- add values from Scrapping --
+
+ALTER TABLE PRODUCTO MODIFY COLUMN pro_nombre VARCHAR(100);
+
+INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
+('Apple iPhone 14 Pro (128 GB) - Morado oscuro', 'iPhone'),
+('Apple iPhone 14 Pro Max (256 GB) - Morado oscuro', 'iPhone'),
+('Apple iPhone 14 (512 GB) - Morado', 'iPhone'),
+('Apple iPhone 14 Plus (512 GB) - Azul', 'iPhone'),
+('Apple iPhone 14 (128 GB) - Medianoche', 'iPhone');
+
+SELECT * FROM PRODUCTO;
+
+INSERT INTO TIENDA (tie_nombre, tie_URL) VALUES
+('Ktronix', 'https://www.ktronix.com/'),
+('Mercadolibre', 'https://www.mercadolibre.com.co/'),
+('Éxito', 'https://www.exito.com/');
+
+SELECT * FROM TIENDA;
+
+INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pre_URL,pre_imagen) VALUES
+(16, 2, '2023-10-25 15:46:57.848482', 4960000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-128-gb-morado-oscuro/p/MCO19615353?pdp_filters=category:MCO1055#searchVariation=MCO19615353&position=1&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598', 'https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
+(17, 2, '2023-10-25 15:46:57.848482', 5780000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-max-256-gb-morado-oscuro/p/MCO19615354?pdp_filters=category:MCO1055#searchVariation=MCO19615354&position=2&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598', 'https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
+(18, 2, '2023-10-25 15:46:57.848482', 4479000, 'https://www.mercadolibre.com.co/apple-iphone-14-512-gb-morado/p/MCO19615374?pdp_filters=category:MCO1055#searchVariation=MCO19615374&position=3&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598','https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
+(19, 2, '2023-10-25 15:46:57.848482', 4499900, 'https://www.mercadolibre.com.co/apple-iphone-14-plus-512-gb-azul/p/MCO19615368?pdp_filters=category:MCO1055#searchVariation=MCO19615368&position=4&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598', 'https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
+(20, 2, '2023-10-25 15:46:57.848482', 3490000, 'https://www.mercadolibre.com.co/apple-iphone-14-128-gb-medianoche/p/MCO19615360?pdp_filters=category:MCO1055#searchVariation=MCO19615360&position=5&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598','https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp');
+
+SELECT * FROM PRECIO;
