@@ -240,6 +240,15 @@ CREATE TABLE IF NOT EXISTS RESEÑA (
   );
   
 -- add values from Scrapping --
+INSERT INTO USUARIO (us_username, us_alias, us_correo, us_contraseña, us_fechaReg) VALUES
+('luis_gomez', 'Luis', 'luis@example.com', 'luispass123', '2023-10-25 15:50:00'),
+('ana_perez', 'Ana', 'ana@example.com', 'anapass', '2023-10-25 15:51:00'),
+('carlos_rodriguez', 'Carlos', 'carlos@example.com', 'mipassword', '2023-10-25 15:52:00'),
+('maria_lopez', 'Maria', 'maria@example.com', 'mariapass123', '2023-10-25 15:53:00'),
+('juan_hernandez', 'Juan', 'juan@example.com', 'juanpass', '2023-10-25 15:54:00');
+
+SELECT * FROM USUARIO;
+
 
 ALTER TABLE PRODUCTO MODIFY COLUMN pro_nombre VARCHAR(100);
 
