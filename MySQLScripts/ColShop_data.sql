@@ -1,6 +1,7 @@
 -- add values from Scrapping --
-
+ALTER TABLE CATEGORIA AUTO_INCREMENT = 1;
 INSERT INTO CATEGORIA (cat_nombre) VALUES
+
 ('Celulares'),
 ('Computadores'),
 ('Televisores'),
@@ -20,22 +21,15 @@ INSERT INTO CATEGORIA (cat_nombre) VALUES
 ('Instalaciones'),
 ('Seguros');
 
+SELECT * FROM CATEGORIA;
 
+-- Modificar la columna pro_nombre a VARCHAR(100)
+ALTER TABLE PRODUCTO MODIFY COLUMN pro_nombre VARCHAR(300);
+ALTER TABLE PRODUCTO AUTO_INCREMENT = 1;
 
+-- Insertar nuevos productos
 
-INSERT INTO USUARIO (us_username, us_alias, us_correo, us_contraseña, us_fechaReg) VALUES
-('luis_gomez', 'Luis', 'luis@example.com', 'luispass123', '2023-10-25 15:50:00'),
-('ana_perez', 'Ana', 'ana@example.com', 'anapass', '2023-10-25 15:51:00'),
-('carlos_rodriguez', 'Carlos', 'carlos@example.com', 'mipassword', '2023-10-25 15:52:00'),
-('maria_lopez', 'Maria', 'maria@example.com', 'mariapass123', '2023-10-25 15:53:00'),
-('juan_hernandez', 'Juan', 'juan@example.com', 'juanpass', '2023-10-25 15:54:00');
-
-SELECT * FROM USUARIO;
-
-
-ALTER TABLE PRODUCTO MODIFY COLUMN pro_nombre VARCHAR(100);
 INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
-
 ('Apple iPhone 14 Pro (128 GB) - Morado oscuro', 'iPhone'),
 ('Apple iPhone 14 Pro Max (256 GB) - Morado oscuro', 'iPhone'),
 ('Apple iPhone 14 (512 GB) - Morado', 'iPhone'),
@@ -50,17 +44,32 @@ INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
 ('iPhone 14 128 GB Morado', 'iPhone'),
 ('iPhone 14 Pro Max 128 GB Morado Oscuro', 'iPhone'),
 ('iPhone 14 Pro 128 GB Negro Espacial', 'iPhone'),
-('iPhone 14 128 GB Azul', 'iPhone');
+('iPhone 14 128 GB Azul', 'iPhone'),
+('Portátil gamer Asus TUF Gaming F15 FX506HC eclipse gray 15.6 Intel Core i5', 'Asus'),
+('Portatil Gamer Asus Tuf Gaming A15 Fa507xv-bs93 Mecha Gray 15.6, Amd Ryzen 9 7940hs, 16gb De Ram, 512gb Ssd, Nvidia Geforce Rtx 4060 8gb, 144hz 1920x1080px Windows 11 Home', 'Asus'),
+('Computador Portátil Asus Gamer Fx516pc Corei7 16gb Ssd 1tb', 'Asus'),
+('Computador ASUS Vivobook 16 Intel Core i5 1135G7 RAM 8 GB 1 TB SSD X1605EAMB186W', 'Asus'),
+('Computador ASUS Intel Core i3 1115G4 RAM 12 GB 512 GB SSD X515EABR3779W', 'Asus'),	
+('Computador ASUS Vivobook Go 15 AMD Ryzen 5 7520U RAM 8 GB 512 GB SSD E1504FANJ475W', 'Asus'),
+('Computador Portátil Gamer ASUS TUF 15,6" Pulgadas FX506 - Intel Core i5 - RAM 8GB - Disco SSD 512 GB - Negro', 'LG'),
+('Computador Portátil Gamer ASUS TUF A15 15.6" Pulgadas FA507NU - AMD Ryzen 7 - RAM 16GB - Disco SSD 512 GB - Gris', 'LG'),
+('Computador Portátil Gamer ASUS TUF Dash 15.6" Pulgadas FX517ZM - Intel Core i7 - RAM 16GB - Disco SSD 512 GB - Negro', 'LG');
 
 SELECT * FROM PRODUCTO;
 
+
+SELECT * FROM USUARIO;
+
+
+
+ALTER TABLE TIENDA AUTO_INCREMENT = 1;
 INSERT INTO TIENDA (tie_nombre, tie_URL) VALUES
 
 ('Ktronix', 'https://www.ktronix.com/'),
 ('Mercadolibre', 'https://www.mercadolibre.com.co/'),
 ('Éxito', 'https://www.exito.com/');
 
-SELECT * FROM TIENDA;
+
 
 INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pre_URL,pre_imagen) VALUES
 (1, 2, '2023-10-25 15:46:57.848482', 4960000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-128-gb-morado-oscuro/p/MCO19615353?pdp_filters=category:MCO1055#searchVariation=MCO19615353&position=1&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598', 'https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
@@ -80,3 +89,11 @@ INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pr
 (15, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-azul/p/194253488262', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
 
 SELECT * FROM PRECIO;
+
+DELETE FROM CATEGORIA;
+DELETE FROM PRODUCTO;
+DELETE FROM USUARIO;
+DELETE FROM TIENDA;
+DELETE FROM PRECIO;
+DELETE FROM PRECIO WHERE PRODUCTO_pro_ID IN (SELECT pro_ID FROM PRODUCTO);
+
