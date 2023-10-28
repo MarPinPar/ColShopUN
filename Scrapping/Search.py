@@ -28,6 +28,6 @@ chromedriver_path = '/Users/knsmolina.28/Desktop/Scrapping/chromedriver'
 output_csv_path = 'products.csv'
 
 
-product_to_search = "Computador Portátil Gamer ASUS TUF"
+product_to_search = "Nevecón samsung Side by Side 628 Litros"
 result = unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 print(result)
