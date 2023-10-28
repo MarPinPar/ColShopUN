@@ -79,7 +79,9 @@ INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
 ('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Azul', 'JBL'),
 ('Playstation 5', 'Otra'),
 ('Consola Playstation Ps5 Estándar 825Gb + 2 Juegos', 'Otra'),
-('Consola PS5 Estándar 825GB + 1 Control Dualsense + Voucher de descarga Juego FC24', 'Otra');
+('Consola PS5 Estándar 825GB + 1 Control Dualsense + Voucher de descarga Juego FC24', 'Otra'),
+('iPad Air 10,9 Pulgadas 256 Gb Wifi 5ta Gen', 'Apple'),
+('iPad Air 10,9" Pulgadas 256 GB Wifi 5ta Gen - Gris Espacial', 'Apple');
 
 
 
@@ -227,7 +229,9 @@ INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pr
 (33, 1, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-azul/p/6925281982170', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (34, 2, '2023-10-28 14:35:00.419906', 2850000, 'https://articulo.mercadolibre.com.co/MCO-1965054870-playstation-5-_JM#position=14&search_layout=stack&type=item&tracking_id=9bda2cb0-e7df-41eb-b5e8-2a9aa2be0e60', 'https://http2.mlstatic.com/D_NQ_NP_875179-MCO71808719229_092023-V.webp'),
 (35, 3, '2023-10-28 14:35:46.055831', 2999997, 'https://exitocol.vtexassets.com/arquivos/ids/11010896-500-auto?v=637733054436400000&width=500&height=auto&aspect=true', NULL),
-(36, 1, '2023-10-28 14:36:02.605185', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
+(36, 1, '2023-10-28 14:36:02.605185', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(37, 2, '2023-10-28 14:51:26.074661', 4300000, 'https://articulo.mercadolibre.com.co/MCO-1895720592-ipad-air-109-pulgadas-256-gb-wifi-5ta-gen-_JM#position=1&search_layout=stack&type=item&tracking_id=de1632be-506f-4387-ab38-2d34966afaa5', 'https://http2.mlstatic.com/D_NQ_NP_741049-MCO71541041196_092023-V.webp'),
+(38, 1, '2023-10-28 14:52:18.883596', 4539000, 'https://www.ktronix.com/ipadair-109-pulgadas-256gb-wifi-5ta-gen-gris-espacial/p/194252796764', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
 
 
 SELECT * FROM PRECIO;
