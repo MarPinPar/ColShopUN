@@ -87,7 +87,6 @@ INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
 
 SELECT * FROM PRODUCTO;
 
-
 -- -----------------------------------------------------
 -- Llenado de LISTA
 -- -----------------------------------------------------
@@ -269,7 +268,47 @@ SELECT * FROM CATEGORIA;
 -- Llenado de  PRODUCTO_has_CATEGORIA
 -- -----------------------------------------------------
 
+INSERT INTO PRODUCTO_has_CATEGORIA (PRODUCTO_pro_ID, CATEGORIA_cat_ID) VALUES
+(1, 1), -- Producto 1 pertenece a la categoría Celulares
+(2, 1), -- Producto 2 pertenece a la categoría Celulares
+(3, 1), -- Producto 3 pertenece a la categoría Celulares
+(4, 1), -- Producto 4 pertenece a la categoría Celulares
+(5, 1), -- Producto 5 pertenece a la categoría Celulares
+(6, 1), -- Producto 6 pertenece a la categoría Celulares
+(7, 1), -- Producto 7 pertenece a la categoría Celulares
+(8, 1), -- Producto 8 pertenece a la categoría Celulares
+(9, 1), -- Producto 9 pertenece a la categoría Celulares
+(10, 1), -- Producto 10 pertenece a la categoría Celulares
+(11, 2), -- Producto 11 pertenece a la categoría Computadores
+(12, 2), -- Producto 12 pertenece a la categoría Computadores
+(13, 2), -- Producto 13 pertenece a la categoría Computadores
+(14, 2), -- Producto 14 pertenece a la categoría Computadores
+(15, 2), -- Producto 15 pertenece a la categoría Computadores
+(16, 2), -- Producto 16 pertenece a la categoría Computadores
+(17, 2), -- Producto 17 pertenece a la categoría Computadores
+(18, 2), -- Producto 18 pertenece a la categoría Computadores
+(19, 3), -- Producto 19 pertenece a la categoría Televisores
+(20, 3), -- Producto 20 pertenece a la categoría Televisores
+(21, 3), -- Producto 21 pertenece a la categoría Televisores
+(22, 2), -- Producto 22 pertenece a la categoría Computadores
+(23, 2), -- Producto 23 pertenece a la categoría Computadores
+(24, 2), -- Producto 24 pertenece a la categoría Computadores
+(25, 4), -- Producto 25 pertenece a la categoría Electrodomésticos
+(26, 4), -- Producto 26 pertenece a la categoría Electrodomésticos
+(27, 3), -- Producto 27 pertenece a la categoría Televisores
+(28, 4), -- Producto 28 pertenece a la categoría Electrodomésticos
+(29, 4), -- Producto 29 pertenece a la categoría Electrodomésticos
+(30, 4), -- Producto 30 pertenece a la categoría Electrodomésticos
+(31, 5), -- Producto 31 pertenece a la categoría Audio
+(32, 5), -- Producto 32 pertenece a la categoría Audio
+(33, 5), -- Producto 33 pertenece a la categoría Audio
+(34, 6), -- Producto 34 pertenece a la categoría Videojuegos
+(35, 6), -- Producto 35 pertenece a la categoría Videojuegos
+(36, 6), -- Producto 36 pertenece a la categoría Videojuegos
+(37, 7), -- Producto 37 pertenece a la categoría Tablets
+(38, 7); -- Producto 38 pertenece a la categoría Tablets
 
+SELECT * FROM 
 -- -----------------------------------------------------
 -- Llenado de SESION
 -- -----------------------------------------------------
@@ -300,7 +339,7 @@ INSERT INTO SESION (ses_fechaHoraIn, ses_fechaHoraOut, USUARIO_us_username) VALU
 ('2023-10-25 15:53:00', '2023-10-25 16:53:00', 'maria_lopez'),
 ('2023-10-25 15:54:00', '2023-10-25 16:54:00', 'juan_hernandez');
 
-SELECT * FROM SESION;
+SELECT * FROM PRODUCTO_has_CATEGORIA;
 
 -- -----------------------------------------------------
 -- Llenado de  ACCIONES
