@@ -25,7 +25,7 @@ INSERT INTO USUARIO (us_username, us_alias, us_correo, us_contraseña, us_fechaR
 ('patricia_santos', 'Patricia', 'patricia.santos@testmail.com', 'S3gur0@abc', '2023-10-29 18:30:00'),
 ('manuel_ramirez', 'Manuel', 'manuel.ramirez@gmail.com', 'S3cr3t0xyz&', '2023-10-29 19:30:00'),
 ('rosa_gutierrez', 'Rosa', 'rosa.gutierrez@hotmail.com', 'C0nf1d3nc1al123#', '2023-10-30 20:30:00'),
-('sergio_diaz', 'Sergio', 'sergio.diaz@outlook.com', 'S3gur0123!', '2023-10-30 21:30:00');
+('sergio_diaz', 'Sergio', 'sergio.diaz@outlook.com', 'S3gur0123!', '2023-10-30 21:30:00'),
 ('luis_gomez', 'Luis', 'luis@example.com', 'luispass123', '2023-10-25 15:50:00'),
 ('ana_perez', 'Ana', 'ana@example.com', 'anapass', '2023-10-25 15:51:00'),
 ('carlos_rodriguez', 'Carlos', 'carlos@example.com', 'mipassword', '2023-10-25 15:52:00'),
@@ -67,7 +67,15 @@ INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
 ('Computador ASUS Vivobook Go 15 AMD Ryzen 5 7520U RAM 8 GB 512 GB SSD E1504FANJ475W', 'Asus'),
 ('Computador Portátil Gamer ASUS TUF 15,6" Pulgadas FX506 - Intel Core i5 - RAM 8GB - Disco SSD 512 GB - Negro', 'LG'),
 ('Computador Portátil Gamer ASUS TUF A15 15.6" Pulgadas FA507NU - AMD Ryzen 7 - RAM 16GB - Disco SSD 512 GB - Gris', 'LG'),
-('Computador Portátil Gamer ASUS TUF Dash 15.6" Pulgadas FX517ZM - Intel Core i7 - RAM 16GB - Disco SSD 512 GB - Negro', 'LG');
+('Computador Portátil Gamer ASUS TUF Dash 15.6" Pulgadas FX517ZM - Intel Core i7 - RAM 16GB - Disco SSD 512 GB - Negro', 'LG'),
+('Televisor Samsung Smart 55 The Frame Qled 4k 55ls03b', 'Samsung'),
+('Televisor SAMSUNG 55 Pulgadas QLED Uhd4K Smart TV QN55Q60CAKXZL', 'Samsung'),
+('TV SAMSUNG 55" Pulgadas 139,7 cm QN55Q60C 4K-UHD QLED Smart TV', 'Samsung'),
+('Nevecón Samsung Side By Side 628 Litros Rs22t5200s9/co Gris', 'Samsung'),
+('Nevecón SAMSUNG Side By Side 628 Litros RS22T5200B1/CO', 'Samsung'),
+('Nevecón SAMSUNG Side by Side 628 Litros RS22T5200B1/CO Grafito', 'Samsung');
+
+
 
 SELECT * FROM PRODUCTO;
 
@@ -134,7 +142,7 @@ INSERT INTO LISTA_has_PRODUCTO (LISTA_lis_nombre, LISTA_USUARIO_us_username, PRO
 ('Lista de carmen_lopez', 'carmen_lopez', 23),
 ('Lista de javier_molina', 'javier_molina', 24),
 ('Lista de patricia_santos', 'patricia_santos', 5),
-('Lista de manuel_ramirez', 'manuel_ramirez', 6);
+('Lista de manuel_ramirez', 'manuel_ramirez', 6),
 ('Lista de rosa_gutierrez', 'rosa_gutierrez', 18),
 ('Lista de rosa_gutierrez', 'rosa_gutierrez', 12),
 ('Lista de sergio_diaz', 'sergio_diaz', 13),
@@ -192,7 +200,23 @@ INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pr
 (12, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-morado/p/194253488248', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (13, 1, '2023-10-25 15:48:07.566115', 6099000, 'https://www.ktronix.com/iphone-14-pro-max-128gb-morado-oscuro/p/194253486770', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (14, 1, '2023-10-25 15:48:07.566115', 5579000, 'https://www.ktronix.com/iphone-14-pro-128gb-negro-espacial/p/194253488378', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(15, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-azul/p/194253488262', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
+(15, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-azul/p/194253488262', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(16, 1, '2023-10-28 11:14:43.800826', 4149950, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-f15-fx506hc-eclipse-gray-156-intel-core-i5-11400h-16gb-de-ram-1512gb-ssd-nvidia-geforce-rtx-3050-144-hz-1920x1080px-windows-10-home/p/MCO20885775?pdp_filters=category:MCO1648#searchVariation=MCO20885775&position=1&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
+(17, 1, '2023-10-28 11:14:43.800826', 6699999, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-a15-fa507xv-bs93-mecha-gray-156-amd-ryzen-9-7940hs-16gb-de-ram-512gb-ssd-nvidia-geforce-rtx-4060-8gb-144hz-1920x1080px-windows-11-home/p/MCO24345264?pdp_filters=category:MCO1648#searchVariation=MCO24345264&position=2&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
+(18, 1, '2023-10-28 11:14:43.800826', 5559900, 'https://www.mercadolibre.com.co/computador-portatil-asus-gamer-fx516pc-corei7-16gb-ssd-1tb/p/MCO23285860?pdp_filters=category:MCO1648#searchVariation=MCO23285860&position=3&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
+(19, 2, '2023-10-28 11:15:34.762263', 4299000, 'https://exitocol.vtexassets.com/arquivos/ids/20066698-500-auto?v=638339279637930000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-16-intel-core-i5-4-nucleos-8-gb-ram-1-tb-ssd-3128849/p'),
+(20, 2, '2023-10-28 11:15:34.762263', 3499000, 'https://exitocol.vtexassets.com/arquivos/ids/20069135-500-auto?v=638339383263070000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-intel-core-i3-1115g4-12-gb-512-gb-ssd-x515ea-br3779w-3116530/p'),
+(21, 2, '2023-10-28 11:15:34.762263', 3599000, 'https://exitocol.vtexassets.com/arquivos/ids/20066705-500-auto?v=638339279763000000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-go-15-amd-ryzen-5-4-nucleos-8-gb-ram-512-gb-ssd-3128850/p'),
+(22, 3, '2023-10-28 11:15:50.063743', 3599000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-156-pulgadas-fx506-intel-core-i5-ram-8gb-disco-ssd-512-gb-negro/p/4711387063491', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(23, 3, '2023-10-28 11:15:50.063743', 5999000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-a15-156-pulgadas-fa507nu-amd-ryzen-7-ram-16gb-disco-ssd-512-gb-gris/p/4711387204382', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(24, 3, '2023-10-28 11:15:50.063743', 6799000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-dash-156-pulgadas-fx517zm-intel-core-i7-ram-16gb-disco-ssd-512-gb-negro/p/4711081739487', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(25, 1, '2023-10-28 13:09:21.958796', 3699900, 'https://click1.mercadolibre.com.co/mclics/clicks/external/MCO/count?a=WTy%2FUxBlWI1bgc%2Bj0E9syEZ5V8UB5Oxj8wZ9QcZUQpM54lphA94NbLFxX8NzOGHXKOz9V8O6rQMt3%2F5FEp6KvUVPUy8M7NCfuJ0QO8O9386pCnoNXcI%2FVuYC7NhBlAqmxVt01MqcTLf0FPi1qgqW2dAmmySBESzvHZVRJ3GbWGP6eSigSTOcv%2FeUPq6hBW9TKlNBq8zbkEjIarQB%2FEn63IlX2NRYdNDH%2FHGKVLLLhbAMZxTNEe%2B17%2FI6PValP%2BNSjtaP0SQVSDQEyYYJG9bSMfwiz5wuWYUOA2OLNRhdszl7V%2BxZy1LJaV4P3LCRUEZ59hqq4Qh72Bhpjfj%2FhI7XcD4jqMwjJ4bFBZFpw7wehzrVz8l9APfZzvBWWv%2FkNSPnhrU29rBNLnW5sP78PFC3aFVI%2Bg9b8P5uGI0hdRjwrlTruLVEbj2UP6tv1uqQwu1qBsvdjpftPPm6Al2DJXQkKkLRa%2BFkyFQcjw%2FJdea%2BvMADpM31oAUlOAHYHQLEFeeAGp1i1Ac6Bw96aE0%2Bfbh%2BlcvjpOw7SlR7KpJEWcelTX%2BLbex%2BXikAV51l7Df0N%2FOkiGuhON%2Bb5%2BAizMSKqNETHsqdpv2wvh%2B9X%2BMLd79PfvhQr27vOdqbGy9Hl%2FIY0jC6Kp4JccYZbiPWcmhXgHvLBFdiDenwWSNIr3BEsz1BJFE9swfH5%2FqLEYPOuq%2B4XbTQDgYKVLsOhtyD6WAJR6kY58Lpn2%2FmHb%2Fx8QJAxLdJv2FBXH3MDOcpZIiwIp4MhMnNyR5XOKQlg1vgmyuA4L1end8ZHDnp1su1GnHL7hneRRI%3D&e=mclics%2Fadvertising-results-augmenter-on%2B15097%2Cmclics%2Fpseudo-search-pads-buybox%2B7708%2Cmclics%2Fbuybox-layout%2B25349%2Cmclics%2Fdifferential-cvr-factor%2B29495%2Cmclics%2Fsearch-list-ad-algorithm%2B16026%2Cmclics%2Fshow-pads-search-list%2B5146%2Cmclics%2Fshow-pads-global%2B5176%2Cmclics%2Fpads-score-mla%2B17263%2Cmclics%2Fbuybox-threshold%2B24613%2Cmclics%2Flax-top-domain%2B23443&rb=x', 'https://http2.mlstatic.com/D_NQ_NP_660321-MLU71662728070_092023-V.webp'),
+(26, 3, '2023-10-28 13:19:56.145947', 3699900, 'https://exitocol.vtexassets.com/arquivos/ids/19798792-500-auto?v=638318759457870000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/televisor-samsung-55-pulgadas-qled-uhd-4k-smart-tv-qn55q60cakxzl-3130970/p'),
+(27, 2, '2023-10-28 13:20:12.005191', 2399900, 'https://www.ktronix.com/tv-samsung-55-pulgadas-1397-cm-qn55q60c-4k-uhd-qled-smart-tv/p/8806094783889', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(28, 1, '2023-10-28 13:33:18.837504', 6009900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_940993-MLA48256464464_112021-V.webp'),
+(29, 2, '2023-10-28 13:33:55.705196', 9299900, 'https://tienda.exito.com/nevecon-649litros-brutos-black-samsung-rs22t5200b1co-3034390/p', 'https://exitocol.vtexassets.com/arquivos/ids/20007002-500-auto?v=638333518046470000&width=500&height=auto&aspect=true'),
+(30, 3, '2023-10-28 13:34:11.338318', 6099900, 'https://www.ktronix.com/nevecon-samsung-side-by-side-628-litros-rs22t5200b1-co-grafito/p/8806092234468', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
+
 
 SELECT * FROM PRECIO;
 
@@ -253,7 +277,7 @@ INSERT INTO SESION (ses_fechaHoraIn, ses_fechaHoraOut, USUARIO_us_username) VALU
 ('2023-10-30 17:00:00', '2023-10-30 18:00:00', 'patricia_santos'),
 ('2023-10-30 18:15:00', '2023-10-30 19:15:00', 'manuel_ramirez'),
 ('2023-10-30 19:30:00', '2023-10-30 20:30:00', 'rosa_gutierrez'),
-('2023-10-30 20:45:00', '2023-10-30 21:45:00', 'sergio_diaz');
+('2023-10-30 20:45:00', '2023-10-30 21:45:00', 'sergio_diaz'),
 ('2023-10-25 15:50:00', '2023-10-25 16:50:00', 'luis_gomez'),
 ('2023-10-25 15:51:00', '2023-10-25 16:51:00', 'ana_perez'),
 ('2023-10-25 15:52:00', '2023-10-25 16:52:00', 'carlos_rodriguez'),
