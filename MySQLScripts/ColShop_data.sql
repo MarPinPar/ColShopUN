@@ -76,7 +76,10 @@ INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
 ('Nevecón SAMSUNG Side by Side 628 Litros RS22T5200B1/CO Grafito', 'Samsung'),
 ('Parlante Jbl Bluetooth Charge 5 Color Red 110V/220V', 'JBL'),
 ('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Negro', 'JBL'),
-('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Azul', 'JBL');
+('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Azul', 'JBL'),
+('Playstation 5', 'Otra'),
+('Consola Playstation Ps5 Estándar 825Gb + 2 Juegos', 'Otra'),
+('Consola PS5 Estándar 825GB + 1 Control Dualsense + Voucher de descarga Juego FC24', 'Otra');
 
 
 
@@ -184,7 +187,7 @@ INSERT INTO TIENDA (tie_nombre, tie_URL) VALUES
 ('Mercadolibre', 'https://www.mercadolibre.com.co/'),
 ('Éxito', 'https://www.exito.com/');
 
-
+SELECT * FROM TIENDA;
 -- -----------------------------------------------------
 -- Llenado de PRECIO
 -- -----------------------------------------------------
@@ -204,24 +207,27 @@ INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pr
 (13, 1, '2023-10-25 15:48:07.566115', 6099000, 'https://www.ktronix.com/iphone-14-pro-max-128gb-morado-oscuro/p/194253486770', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (14, 1, '2023-10-25 15:48:07.566115', 5579000, 'https://www.ktronix.com/iphone-14-pro-128gb-negro-espacial/p/194253488378', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (15, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-azul/p/194253488262', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(16, 1, '2023-10-28 11:14:43.800826', 4149950, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-f15-fx506hc-eclipse-gray-156-intel-core-i5-11400h-16gb-de-ram-1512gb-ssd-nvidia-geforce-rtx-3050-144-hz-1920x1080px-windows-10-home/p/MCO20885775?pdp_filters=category:MCO1648#searchVariation=MCO20885775&position=1&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
-(17, 1, '2023-10-28 11:14:43.800826', 6699999, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-a15-fa507xv-bs93-mecha-gray-156-amd-ryzen-9-7940hs-16gb-de-ram-512gb-ssd-nvidia-geforce-rtx-4060-8gb-144hz-1920x1080px-windows-11-home/p/MCO24345264?pdp_filters=category:MCO1648#searchVariation=MCO24345264&position=2&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
-(18, 1, '2023-10-28 11:14:43.800826', 5559900, 'https://www.mercadolibre.com.co/computador-portatil-asus-gamer-fx516pc-corei7-16gb-ssd-1tb/p/MCO23285860?pdp_filters=category:MCO1648#searchVariation=MCO23285860&position=3&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
-(19, 2, '2023-10-28 11:15:34.762263', 4299000, 'https://exitocol.vtexassets.com/arquivos/ids/20066698-500-auto?v=638339279637930000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-16-intel-core-i5-4-nucleos-8-gb-ram-1-tb-ssd-3128849/p'),
-(20, 2, '2023-10-28 11:15:34.762263', 3499000, 'https://exitocol.vtexassets.com/arquivos/ids/20069135-500-auto?v=638339383263070000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-intel-core-i3-1115g4-12-gb-512-gb-ssd-x515ea-br3779w-3116530/p'),
-(21, 2, '2023-10-28 11:15:34.762263', 3599000, 'https://exitocol.vtexassets.com/arquivos/ids/20066705-500-auto?v=638339279763000000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-go-15-amd-ryzen-5-4-nucleos-8-gb-ram-512-gb-ssd-3128850/p'),
-(22, 3, '2023-10-28 11:15:50.063743', 3599000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-156-pulgadas-fx506-intel-core-i5-ram-8gb-disco-ssd-512-gb-negro/p/4711387063491', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(23, 3, '2023-10-28 11:15:50.063743', 5999000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-a15-156-pulgadas-fa507nu-amd-ryzen-7-ram-16gb-disco-ssd-512-gb-gris/p/4711387204382', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(24, 3, '2023-10-28 11:15:50.063743', 6799000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-dash-156-pulgadas-fx517zm-intel-core-i7-ram-16gb-disco-ssd-512-gb-negro/p/4711081739487', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(25, 1, '2023-10-28 13:09:21.958796', 3699900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris-_JM#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_660321-MLU71662728070_092023-V.webp'),
+(16, 2, '2023-10-28 11:14:43.800826', 4149950, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-f15-fx506hc-eclipse-gray-156-intel-core-i5-11400h-16gb-de-ram-1512gb-ssd-nvidia-geforce-rtx-3050-144-hz-1920x1080px-windows-10-home/p/MCO20885775?pdp_filters=category:MCO1648#searchVariation=MCO20885775&position=1&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
+(17, 2, '2023-10-28 11:14:43.800826', 6699999, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-a15-fa507xv-bs93-mecha-gray-156-amd-ryzen-9-7940hs-16gb-de-ram-512gb-ssd-nvidia-geforce-rtx-4060-8gb-144hz-1920x1080px-windows-11-home/p/MCO24345264?pdp_filters=category:MCO1648#searchVariation=MCO24345264&position=2&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
+(18, 2, '2023-10-28 11:14:43.800826', 5559900, 'https://www.mercadolibre.com.co/computador-portatil-asus-gamer-fx516pc-corei7-16gb-ssd-1tb/p/MCO23285860?pdp_filters=category:MCO1648#searchVariation=MCO23285860&position=3&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
+(19, 3, '2023-10-28 11:15:34.762263', 4299000, 'https://exitocol.vtexassets.com/arquivos/ids/20066698-500-auto?v=638339279637930000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-16-intel-core-i5-4-nucleos-8-gb-ram-1-tb-ssd-3128849/p'),
+(20, 3, '2023-10-28 11:15:34.762263', 3499000, 'https://exitocol.vtexassets.com/arquivos/ids/20069135-500-auto?v=638339383263070000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-intel-core-i3-1115g4-12-gb-512-gb-ssd-x515ea-br3779w-3116530/p'),
+(21, 3, '2023-10-28 11:15:34.762263', 3599000, 'https://exitocol.vtexassets.com/arquivos/ids/20066705-500-auto?v=638339279763000000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-go-15-amd-ryzen-5-4-nucleos-8-gb-ram-512-gb-ssd-3128850/p'),
+(22, 1, '2023-10-28 11:15:50.063743', 3599000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-156-pulgadas-fx506-intel-core-i5-ram-8gb-disco-ssd-512-gb-negro/p/4711387063491', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(23, 1, '2023-10-28 11:15:50.063743', 5999000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-a15-156-pulgadas-fa507nu-amd-ryzen-7-ram-16gb-disco-ssd-512-gb-gris/p/4711387204382', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(24, 1, '2023-10-28 11:15:50.063743', 6799000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-dash-156-pulgadas-fx517zm-intel-core-i7-ram-16gb-disco-ssd-512-gb-negro/p/4711081739487', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(25, 2, '2023-10-28 13:09:21.958796', 3699900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris-_JM#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_660321-MLU71662728070_092023-V.webp'),
 (26, 3, '2023-10-28 13:19:56.145947', 3699900, 'https://exitocol.vtexassets.com/arquivos/ids/19798792-500-auto?v=638318759457870000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/televisor-samsung-55-pulgadas-qled-uhd-4k-smart-tv-qn55q60cakxzl-3130970/p'),
-(27, 2, '2023-10-28 13:20:12.005191', 2399900, 'https://www.ktronix.com/tv-samsung-55-pulgadas-1397-cm-qn55q60c-4k-uhd-qled-smart-tv/p/8806094783889', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(27, 1, '2023-10-28 13:20:12.005191', 2399900, 'https://www.ktronix.com/tv-samsung-55-pulgadas-1397-cm-qn55q60c-4k-uhd-qled-smart-tv/p/8806094783889', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (28, 1, '2023-10-28 13:33:18.837504', 6009900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_940993-MLA48256464464_112021-V.webp'),
-(29, 2, '2023-10-28 13:33:55.705196', 9299900, 'https://tienda.exito.com/nevecon-649litros-brutos-black-samsung-rs22t5200b1co-3034390/p', 'https://exitocol.vtexassets.com/arquivos/ids/20007002-500-auto?v=638333518046470000&width=500&height=auto&aspect=true'),
-(30, 3, '2023-10-28 13:34:11.338318', 6099900, 'https://www.ktronix.com/nevecon-samsung-side-by-side-628-litros-rs22t5200b1-co-grafito/p/8806092234468', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(31, 6, '2023-10-28 14:25:01.710322', 673900, 'https://www.mercadolibre.com.co/parlante-jbl-bluetooth-charge-5-color-red-110v220v/p/MCO18060987#searchVariation=MCO18060987&position=1&search_layout=stack&type=product&tracking_id=b2e3098e-2369-44e4-8579-5d9960a9ba49', 'https://http2.mlstatic.com/D_NQ_NP_616671-MLA46509924671_062021-V.webp'),
-(32, 7, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-negro/p/6925281982163', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(33, 7, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-azul/p/6925281982170', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
+(29, 3, '2023-10-28 13:33:55.705196', 9299900, 'https://tienda.exito.com/nevecon-649litros-brutos-black-samsung-rs22t5200b1co-3034390/p', 'https://exitocol.vtexassets.com/arquivos/ids/20007002-500-auto?v=638333518046470000&width=500&height=auto&aspect=true'),
+(30, 1, '2023-10-28 13:34:11.338318', 6099900, 'https://www.ktronix.com/nevecon-samsung-side-by-side-628-litros-rs22t5200b1-co-grafito/p/8806092234468', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(31, 2, '2023-10-28 14:25:01.710322', 673900, 'https://www.mercadolibre.com.co/parlante-jbl-bluetooth-charge-5-color-red-110v220v/p/MCO18060987#searchVariation=MCO18060987&position=1&search_layout=stack&type=product&tracking_id=b2e3098e-2369-44e4-8579-5d9960a9ba49', 'https://http2.mlstatic.com/D_NQ_NP_616671-MLA46509924671_062021-V.webp'),
+(32, 1, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-negro/p/6925281982163', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(33, 1, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-azul/p/6925281982170', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(34, 2, '2023-10-28 14:35:00.419906', 2850000, 'https://articulo.mercadolibre.com.co/MCO-1965054870-playstation-5-_JM#position=14&search_layout=stack&type=item&tracking_id=9bda2cb0-e7df-41eb-b5e8-2a9aa2be0e60', 'https://http2.mlstatic.com/D_NQ_NP_875179-MCO71808719229_092023-V.webp'),
+(35, 3, '2023-10-28 14:35:46.055831', 2999997, 'https://exitocol.vtexassets.com/arquivos/ids/11010896-500-auto?v=637733054436400000&width=500&height=auto&aspect=true', NULL),
+(36, 1, '2023-10-28 14:36:02.605185', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
 
 
 SELECT * FROM PRECIO;

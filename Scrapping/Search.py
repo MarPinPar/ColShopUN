@@ -28,6 +28,6 @@ chromedriver_path = '/Users/knsmolina.28/Desktop/Scrapping/chromedriver'
 output_csv_path = 'products.csv'
 
 
-product_to_search = "Consola PS5 Estándar 825GB"
+product_to_search = "iPad Air 10,9 Pulgadas 256 GB Wifi 5ta Gen"
 result = unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 print(result)
