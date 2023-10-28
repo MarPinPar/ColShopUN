@@ -28,6 +28,6 @@ chromedriver_path = '/Users/knsmolina.28/Desktop/Scrapping/chromedriver'
 output_csv_path = 'products.csv'
 
 
-product_to_search = "Parlante JBL Inalámbrico Bluetooth Charge 5 40W"
+product_to_search = "Consola PS5 Estándar 825GB"
 result = unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 print(result)

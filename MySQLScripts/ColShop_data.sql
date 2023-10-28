@@ -73,7 +73,10 @@ INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
 ('TV SAMSUNG 55" Pulgadas 139,7 cm QN55Q60C 4K-UHD QLED Smart TV', 'Samsung'),
 ('Nevecón Samsung Side By Side 628 Litros Rs22t5200s9/co Gris', 'Samsung'),
 ('Nevecón SAMSUNG Side By Side 628 Litros RS22T5200B1/CO', 'Samsung'),
-('Nevecón SAMSUNG Side by Side 628 Litros RS22T5200B1/CO Grafito', 'Samsung');
+('Nevecón SAMSUNG Side by Side 628 Litros RS22T5200B1/CO Grafito', 'Samsung'),
+('Parlante Jbl Bluetooth Charge 5 Color Red 110V/220V', 'JBL'),
+('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Negro', 'JBL'),
+('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Azul', 'JBL');
 
 
 
@@ -210,12 +213,15 @@ INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pr
 (22, 3, '2023-10-28 11:15:50.063743', 3599000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-156-pulgadas-fx506-intel-core-i5-ram-8gb-disco-ssd-512-gb-negro/p/4711387063491', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (23, 3, '2023-10-28 11:15:50.063743', 5999000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-a15-156-pulgadas-fa507nu-amd-ryzen-7-ram-16gb-disco-ssd-512-gb-gris/p/4711387204382', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (24, 3, '2023-10-28 11:15:50.063743', 6799000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-dash-156-pulgadas-fx517zm-intel-core-i7-ram-16gb-disco-ssd-512-gb-negro/p/4711081739487', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(25, 1, '2023-10-28 13:09:21.958796', 3699900, 'https://click1.mercadolibre.com.co/mclics/clicks/external/MCO/count?a=WTy%2FUxBlWI1bgc%2Bj0E9syEZ5V8UB5Oxj8wZ9QcZUQpM54lphA94NbLFxX8NzOGHXKOz9V8O6rQMt3%2F5FEp6KvUVPUy8M7NCfuJ0QO8O9386pCnoNXcI%2FVuYC7NhBlAqmxVt01MqcTLf0FPi1qgqW2dAmmySBESzvHZVRJ3GbWGP6eSigSTOcv%2FeUPq6hBW9TKlNBq8zbkEjIarQB%2FEn63IlX2NRYdNDH%2FHGKVLLLhbAMZxTNEe%2B17%2FI6PValP%2BNSjtaP0SQVSDQEyYYJG9bSMfwiz5wuWYUOA2OLNRhdszl7V%2BxZy1LJaV4P3LCRUEZ59hqq4Qh72Bhpjfj%2FhI7XcD4jqMwjJ4bFBZFpw7wehzrVz8l9APfZzvBWWv%2FkNSPnhrU29rBNLnW5sP78PFC3aFVI%2Bg9b8P5uGI0hdRjwrlTruLVEbj2UP6tv1uqQwu1qBsvdjpftPPm6Al2DJXQkKkLRa%2BFkyFQcjw%2FJdea%2BvMADpM31oAUlOAHYHQLEFeeAGp1i1Ac6Bw96aE0%2Bfbh%2BlcvjpOw7SlR7KpJEWcelTX%2BLbex%2BXikAV51l7Df0N%2FOkiGuhON%2Bb5%2BAizMSKqNETHsqdpv2wvh%2B9X%2BMLd79PfvhQr27vOdqbGy9Hl%2FIY0jC6Kp4JccYZbiPWcmhXgHvLBFdiDenwWSNIr3BEsz1BJFE9swfH5%2FqLEYPOuq%2B4XbTQDgYKVLsOhtyD6WAJR6kY58Lpn2%2FmHb%2Fx8QJAxLdJv2FBXH3MDOcpZIiwIp4MhMnNyR5XOKQlg1vgmyuA4L1end8ZHDnp1su1GnHL7hneRRI%3D&e=mclics%2Fadvertising-results-augmenter-on%2B15097%2Cmclics%2Fpseudo-search-pads-buybox%2B7708%2Cmclics%2Fbuybox-layout%2B25349%2Cmclics%2Fdifferential-cvr-factor%2B29495%2Cmclics%2Fsearch-list-ad-algorithm%2B16026%2Cmclics%2Fshow-pads-search-list%2B5146%2Cmclics%2Fshow-pads-global%2B5176%2Cmclics%2Fpads-score-mla%2B17263%2Cmclics%2Fbuybox-threshold%2B24613%2Cmclics%2Flax-top-domain%2B23443&rb=x', 'https://http2.mlstatic.com/D_NQ_NP_660321-MLU71662728070_092023-V.webp'),
+(25, 1, '2023-10-28 13:09:21.958796', 3699900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris-_JM#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_660321-MLU71662728070_092023-V.webp'),
 (26, 3, '2023-10-28 13:19:56.145947', 3699900, 'https://exitocol.vtexassets.com/arquivos/ids/19798792-500-auto?v=638318759457870000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/televisor-samsung-55-pulgadas-qled-uhd-4k-smart-tv-qn55q60cakxzl-3130970/p'),
 (27, 2, '2023-10-28 13:20:12.005191', 2399900, 'https://www.ktronix.com/tv-samsung-55-pulgadas-1397-cm-qn55q60c-4k-uhd-qled-smart-tv/p/8806094783889', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
 (28, 1, '2023-10-28 13:33:18.837504', 6009900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_940993-MLA48256464464_112021-V.webp'),
 (29, 2, '2023-10-28 13:33:55.705196', 9299900, 'https://tienda.exito.com/nevecon-649litros-brutos-black-samsung-rs22t5200b1co-3034390/p', 'https://exitocol.vtexassets.com/arquivos/ids/20007002-500-auto?v=638333518046470000&width=500&height=auto&aspect=true'),
-(30, 3, '2023-10-28 13:34:11.338318', 6099900, 'https://www.ktronix.com/nevecon-samsung-side-by-side-628-litros-rs22t5200b1-co-grafito/p/8806092234468', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
+(30, 3, '2023-10-28 13:34:11.338318', 6099900, 'https://www.ktronix.com/nevecon-samsung-side-by-side-628-litros-rs22t5200b1-co-grafito/p/8806092234468', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(31, 6, '2023-10-28 14:25:01.710322', 673900, 'https://www.mercadolibre.com.co/parlante-jbl-bluetooth-charge-5-color-red-110v220v/p/MCO18060987#searchVariation=MCO18060987&position=1&search_layout=stack&type=product&tracking_id=b2e3098e-2369-44e4-8579-5d9960a9ba49', 'https://http2.mlstatic.com/D_NQ_NP_616671-MLA46509924671_062021-V.webp'),
+(32, 7, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-negro/p/6925281982163', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+(33, 7, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-azul/p/6925281982170', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
 
 
 SELECT * FROM PRECIO;
