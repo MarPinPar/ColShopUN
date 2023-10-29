@@ -82,3 +82,11 @@ DROP USER IF EXISTS 'juan_perez'@'localhost';
 CREATE USER 'juan_perez'@'localhost' IDENTIFIED BY 'Cl4v3#123';
 GRANT 'usuario'@'localhost' TO 'juan_perez'@'localhost';
 SET DEFAULT ROLE ALL TO 'juan_perez'@'localhost';
+
+-- -----------------------------------------------------------------------
+-- CREACION MODERADOR
+-- -----------------------------------------------------------------------
+DROP USER IF EXISTS 'mod_test'@'localhost';
+CREATE USER 'mod_test'@'localhost' IDENTIFIED BY 'key_test';
+GRANT 'moderador'@'localhost' TO 'mod_test'@'localhost';
+SET DEFAULT ROLE ALL TO 'mod_test'@'localhost';
