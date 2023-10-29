@@ -43,11 +43,6 @@ DELETE FROM PRECIO WHERE PRODUCTO_pro_ID IN (SELECT pro_ID FROM PRODUCTO);
 -- -----------------------------------------------------
 -- Llenado de PRODUCTO
 -- -----------------------------------------------------
-ALTER TABLE PRODUCTO MODIFY pro_ID VARCHAR(20);
-
-
-
--- Insertar nuevos productos
 INSERT INTO PRODUCTO (pro_ID, pro_nombre, pro_marca)
 VALUES 
   ('MCO1991235718', 'Apple iPhone 14 Pro Max (256 GB) - Morado oscuro', 'iPhone'),
