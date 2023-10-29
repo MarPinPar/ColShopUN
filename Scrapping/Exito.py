@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 import csv
 import datetime
@@ -38,6 +40,7 @@ def searchProduct(keyWord, data_product : dict, driver : webdriver.Chrome) -> di
     links = []
     links_product = []
     marcas_productos = []
+    identificador_producto = []
 
     marcas = ['GE', 'HP', 'LG', 'TCL', 'ROG', 'Xiaomi', 'Kalley', 'Braun', 'Maytag', 'Realme', 'Alcatel', 'Challenger',
               'Alexa', 'Babyliss',
@@ -48,6 +51,11 @@ def searchProduct(keyWord, data_product : dict, driver : webdriver.Chrome) -> di
               'Moto', 'Apple', 'Nintendo', 'Microsoft', 'Sony']
 
     for product in product_total:
+
+        article = product.find_element(By.TAG_NAME, 'article')
+        print(article.text)
+        id_product = article.get_attribute('data-fs-product-card-sku')
+
         title_products = product.find_element(By.CLASS_NAME, value = 'vtex-store-components-3-x-productBrand')
         title_products = title_products.text
 
@@ -59,6 +67,8 @@ def searchProduct(keyWord, data_product : dict, driver : webdriver.Chrome) -> di
 
         link = product.find_element(By.CLASS_NAME, 'vtex-product-summary-2-x-clearLink')
         link = link.get_attribute("href")
+
+
 
         marca_encontrada = False
         for marca in marcas:
@@ -73,6 +83,7 @@ def searchProduct(keyWord, data_product : dict, driver : webdriver.Chrome) -> di
         prices.append(price_element)
         links.append(link_element)
         links_product.append(link)
+        identificador_producto.append(id_product)
 
     data_product['titulo'].extend(titles_products)
     data_product['precio'].extend(prices)
@@ -81,16 +92,17 @@ def searchProduct(keyWord, data_product : dict, driver : webdriver.Chrome) -> di
     data_product['imagen'].extend(links_product)
     data_product['empresa'].extend(["Exito"] * len(titles_products))
     data_product['fecha'].extend([datetime.datetime.today()] * len(titles_products))
+    data_product['id'].extend(identificador_producto)
 
 
     with open('products.csv', 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha'])
+        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha', 'Identificador'])
 
-        for title, price, link, marca, imagen, empresa in zip(titles_products, prices, links, marcas_productos, links,
-                                                              ["Exito"] * len(titles_products)):
+        for title, price, link, marca, imagen, empresa, idpro in zip(titles_products, prices, links, marcas_productos, links,
+                                                              ["Exito"] * len(titles_products), identificador_producto):
             fecha = datetime.datetime.today()
-            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha])
+            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha,idpro])
 
 
     driver.quit()
