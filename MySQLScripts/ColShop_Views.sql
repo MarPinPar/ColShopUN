@@ -45,7 +45,22 @@ CREATE VIEW historialBusqueda AS
     FROM sesion_has_accion S JOIN accion ON ac_ID = S.ACCION_ac_ID JOIN busqueda B ON ac_ID = B.ACCION_ac_ID
     WHERE SESION_USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
 
-
+-- Historial de Comparaciones
+DROP VIEW IF EXISTS historialComparaciones;
+CREATE VIEW historialComparaciones AS
+	SELECT ac_fechaHora AS 'Fecha', pro_nombre AS 'Nombre'
+    FROM sesion_has_accion S JOIN accion ON ac_ID = S.ACCION_ac_ID JOIN comparacion C ON ac_ID = C.ACCION_ac_ID
+		JOIN comparacion_has_producto ON COMPARACION_ACCION_ac_ID = C.ACCION_ac_ID JOIN producto ON PRODUCTO_pro_ID = pro_ID
+    WHERE SESION_USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
+    
+-- Comentarios de Producto
+DROP VIEW IF EXISTS comentariosProducto;
+CREATE VIEW comentariosProducto AS
+	SELECT pro_nombre AS 'Nombre', ac_fechaHora AS 'Fecha', SESION_USUARIO_us_username AS 'Usuario', 
+		res_calificacion AS 'Calificacion', res_comentario AS 'Comentario'
+    FROM sesion_has_accion S JOIN accion ON ac_ID = S.ACCION_ac_ID JOIN reseña R ON ac_ID = S.ACCION_ac_ID 
+    JOIN producto ON R.PRODUCTO_pro_ID = pro_ID;
+    
 /*----------------------- ADMIN ------------------------*/
 
 
@@ -106,20 +121,6 @@ JOIN USUARIO U ON SA.SESION_USUARIO_us_username = U.us_username
 LEFT JOIN RESEÑA R ON A.ac_ID = R.ACCION_ac_ID;
 
 
--- Vista de Tiendas Registradas:
-DROP VIEW IF EXISTS Vista_TiendasRegistradas;
-CREATE VIEW Vista_TiendasRegistradas AS
-SELECT tie_ID AS Tienda_ID, tie_nombre AS Nombre_Tienda, tie_URL AS URL
-FROM TIENDA;
-
-
--- Vista de categorías registradas:
-DROP VIEW IF EXISTS Vista_CategoriasProductos;
-CREATE VIEW Vista_CategoriasProductos AS
-SELECT cat_ID AS Categoria_ID, cat_nombre AS Nombre_Categoria
-FROM CATEGORIA;
-
-
 -- Vista de estadisticas:
 DROP VIEW IF EXISTS Vista_EstadisticasSistema;
 CREATE VIEW Vista_EstadisticasSistema AS
@@ -132,17 +133,60 @@ SELECT
 -- CREACION ROLES
 -- -----------------------------------------------------------------------
 
+-- USUARIO
 DROP ROLE IF EXISTS 'usuario'@'localhost';
 CREATE ROLE 'usuario'@'localhost';
 
 GRANT SELECT, UPDATE ON miPerfil TO 'usuario'@'localhost';
 GRANT SELECT ON perfiles TO 'usuario'@'localhost';
-
 GRANT SELECT ON listasVisibles TO 'usuario'@'localhost';
-GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
 GRANT SELECT ON contenidoListas TO 'usuario'@'localhost';
-GRANT CREATE ON lista_has_producto TO 'usuario'@'localhost';
 GRANT SELECT ON historialBusqueda TO 'usuario'@'localhost';
+GRANT SELECT ON historialComparaciones TO 'usuario'@'localhost';
+GRANT SELECT ON comentariosProducto TO 'usuario'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
+
+GRANT CREATE ON lista_has_producto TO 'usuario'@'localhost';
+GRANT CREATE ON sesion TO 'usuario'@'localhost';
+GRANT CREATE ON sesion_has_accion TO 'usuario'@'localhost';
+GRANT CREATE ON accion TO 'usuario'@'localhost';
+GRANT CREATE ON comparacion TO 'usuario'@'localhost';
+GRANT CREATE ON comparacion_has_producto TO 'usuario'@'localhost';
+GRANT CREATE ON busqueda TO 'usuario'@'localhost';
+GRANT CREATE ON busqueda_has_producto TO 'usuario'@'localhost';
+
+GRANT SELECT ON categoria TO 'usuario'@'localhost';
+GRANT SELECT ON producto_has_categoria TO 'usuario'@'localhost';
+GRANT SELECT ON producto TO 'usuario'@'localhost';
+GRANT SELECT ON precio TO 'usuario'@'localhost';
+GRANT SELECT ON tienda TO 'usuario'@'localhost';
+
+
+GRANT CREATE, UPDATE, DELETE ON reseña TO 'usuario'@'localhost';
+
+-- ADMIN
+DROP ROLE IF EXISTS 'admin'@'localhost';
+CREATE ROLE 'admin'@'localhost';
+
+GRANT SELECT ON AccionesDeUsuarios TO 'admin'@'localhost';
+GRANT SELECT ON Vista_EstadisticasSistema TO 'admin'@'localhost';
+GRANT SELECT, DELETE ON Vista_UsuariosRegistrados TO 'admin'@'localhost';
+
+GRANT SELECT, UPDATE, DELETE, INSERT ON accion TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON busqueda TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON busqueda_has_producto TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON categoria TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON comparacion TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON comparacion_has_producto TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON lista TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON lista_has_producto TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON precio TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON producto TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON producto_has_categoria TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON reseña TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sesion TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sesion_has_accion TO 'admin'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON tienda TO 'admin'@'localhost';
 
 
 -- -----------------------------------------------------------------------
