@@ -30,6 +30,8 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
     links = []
     images = []
     marcas_productos = []
+    identificador_producto = []
+
 
     marcas = ['GE', 'HP', 'LG', 'TCL', 'ROG', 'Xiaomi', 'Kalley', 'Braun', 'Maytag', 'Realme', 'Alcatel', 'Challenger',
               'Alexa', 'Babyliss', 'Honor', 'Nokia', 'Huawei', 'Haceb', 'Panasonic', 'Lenovo', 'Whirlpool', 'MSI',
@@ -38,6 +40,10 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
               'Legion', 'Moto', 'Apple', 'Nintendo', 'Microsoft', 'Sony']
 
     for product in product_total:
+
+        id_products = product.find_element(by=By.CLASS_NAME, value='js-view-details')
+        id_products = id_products.get_attribute("data-id")
+
         title_product = product.find_element(by=By.CLASS_NAME, value='js-algolia-product-title').text
         price_text = product.find_element(by=By.CLASS_NAME, value='price').text
 
@@ -61,6 +67,7 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
         prices.append(price)
         links.append(product_link_element)
         images.append(product_image_element)
+        identificador_producto.append(id_products)
 
     driver.close()
 
@@ -71,16 +78,17 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
     data_product['imagen'].extend(images)
     data_product['empresa'].extend(["Ktronix"] * len(titles_products))
     data_product['fecha'].extend([datetime.datetime.today()] * len(titles_products))
+    data_product['id'].extend(identificador_producto)
 
     with open('products.csv', 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha'])
+        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha','Identificador'])
 
 
         # Write the data to the CSV file
-        for title, price, link, marca, imagen, empresa in zip(titles_products, prices, links, marcas_productos, images, ["Ktronix"] * len(titles_products)):
+        for title, price, link, marca, imagen, empresa, idpro in zip(titles_products, prices, links, marcas_productos, images, ["Ktronix"] * len(titles_products), identificador_producto):
             csv_writer.writerow([title, price, link, marca, imagen, empresa])
             fecha = datetime.datetime.today()
-            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha])
+            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha, idpro])
 
     return data_product
