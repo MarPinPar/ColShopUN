@@ -82,4 +82,3 @@ DROP USER IF EXISTS 'juan_perez'@'localhost';
 CREATE USER 'juan_perez'@'localhost' IDENTIFIED BY 'Cl4v3#123';
 GRANT 'usuario'@'localhost' TO 'juan_perez'@'localhost';
 SET DEFAULT ROLE ALL TO 'juan_perez'@'localhost';
-
