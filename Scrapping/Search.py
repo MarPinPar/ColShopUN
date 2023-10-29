@@ -31,6 +31,6 @@ chromedriver_path = '/Users/knsmolina.28/Desktop/Scrapping/chromedriver'
 output_csv_path = 'products.csv'
 
 
-product_to_search = "Nevecón Samsung Side By Side 628 Litros Rs22t5200s9/co"
+product_to_search = "JBL Go Essential"
 result = unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 print(result)
