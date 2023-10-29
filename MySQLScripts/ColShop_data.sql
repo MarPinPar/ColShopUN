@@ -106,52 +106,46 @@ INSERT INTO LISTA (lis_nombre, lis_fechaCreacion, lis_fechaUltAct, USUARIO_us_us
 ('Lista de maria_lopez', '2023-10-25 15:53:00', '2023-10-31 17:00:00', 'maria_lopez'),
 ('Lista de juan_hernandez', '2023-10-25 15:54:00', '2023-10-31 18:00:00', 'juan_hernandez');
 
--- SELECT * FROM LISTA;
+SELECT * FROM LISTA;
 
 
 -- -----------------------------------------------------
 -- Llenado de LISTA_has_PRODUCTO
 -- -----------------------------------------------------
-INSERT INTO LISTA_has_PRODUCTO (LISTA_lis_nombre, LISTA_USUARIO_us_username, PRODUCTO_pro_ID) VALUES
-('Lista de juan_perez', 'juan_perez', 17),
-('Lista de maria_gomez', 'maria_gomez', 2),
-('Lista de maria_gomez', 'maria_gomez', 3),
-('Lista de roberto_jimenez', 'roberto_jimenez', 4),
-('Lista de roberto_jimenez', 'roberto_jimenez', 5),
-('Lista de roberto_jimenez', 'roberto_jimenez', 6),
-('Lista de susana_rodriguez', 'susana_rodriguez', 7),
-('Lista de david_lopez', 'david_lopez', 18),
-('Lista de laura_sanchez', 'laura_sanchez', 1),
-('Lista de laura_sanchez', 'laura_sanchez', 24),
-('Lista de carlos_martin', 'carlos_martin', 12),
-('Lista de carlos_martin', 'carlos_martin', 3),
-('Lista de carlos_martin', 'carlos_martin', 21),
-('Lista de isabel_hernandez', 'isabel_hernandez', 15),
-('Lista de jose_luis', 'jose_luis', 19),
-('Lista de ana_garcia', 'ana_garcia', 16),
-('Lista de pedro_ruiz', 'pedro_ruiz', 17),
-('Lista de teresa_martinez', 'teresa_martinez', 4),
-('Lista de teresa_martinez', 'teresa_martinez', 17),
-('Lista de teresa_martinez', 'teresa_martinez', 11),
-('Lista de raul_gonzalez', 'raul_gonzalez', 21),
-('Lista de luis_fernandez', 'luis_fernandez', 22),
-('Lista de carmen_lopez', 'carmen_lopez', 23),
-('Lista de javier_molina', 'javier_molina', 24),
-('Lista de patricia_santos', 'patricia_santos', 5),
-('Lista de manuel_ramirez', 'manuel_ramirez', 6),
-('Lista de rosa_gutierrez', 'rosa_gutierrez', 18),
-('Lista de rosa_gutierrez', 'rosa_gutierrez', 12),
-('Lista de sergio_diaz', 'sergio_diaz', 13),
-('Lista de sergio_diaz', 'sergio_diaz', 20),
-('Lista de sergio_diaz', 'sergio_diaz', 22),
-('Lista de luis_gomez', 'luis_gomez', 10),
-('Lista de ana_perez', 'ana_perez', 8),
-('Lista de carlos_rodriguez', 'carlos_rodriguez', 4),
-('Lista de maria_lopez', 'maria_lopez', 1),
-('Lista de maria_lopez', 'maria_lopez', 22),
-('Lista de juan_hernandez', 'juan_hernandez', 24);
 
--- SELECT * FROM LISTA_has_PRODUCTO;
+DELETE FROM LISTA_has_PRODUCTO;
+
+INSERT INTO LISTA_has_PRODUCTO (LISTA_lis_nombre, LISTA_USUARIO_us_username, PRODUCTO_pro_ID) VALUES
+('Lista de juan_perez', 'juan_perez', 'MCO1991235718'),
+('Lista de maria_gomez', 'maria_gomez', 'MCO1991235660'),
+('Lista de maria_gomez', 'maria_gomez', '194253488224'),
+('Lista de roberto_jimenez', 'roberto_jimenez', '194253486770'),
+('Lista de roberto_jimenez', 'roberto_jimenez', '102378158'),
+('Lista de roberto_jimenez', 'roberto_jimenez', '3103350'),
+('Lista de susana_rodriguez', 'susana_rodriguez', 'MCO1134011449'),
+('Lista de david_lopez', 'david_lopez', 'MCO1897008752'),
+('Lista de laura_sanchez', 'laura_sanchez', '197497202632'),
+('Lista de laura_sanchez', 'laura_sanchez', '197497272383'),
+('Lista de carlos_martin', 'carlos_martin', 'MCO18518359'),
+('Lista de carlos_martin', 'carlos_martin', 'MCO21817325'),
+('Lista de carlos_martin', 'carlos_martin', '8806095058290'),
+('Lista de isabel_hernandez', 'isabel_hernandez', 'MCO18577601'),
+('Lista de jose_luis', 'jose_luis', 'MCO811229346'),
+('Lista de ana_garcia', 'ana_garcia', '8806092234468'),
+('Lista de pedro_ruiz', 'pedro_ruiz', '3103340'),
+('Lista de teresa_martinez', 'teresa_martinez', 'MCO1931313794'),
+('Lista de teresa_martinez', 'teresa_martinez', 'MCO1960108692'),
+('Lista de teresa_martinez', 'teresa_martinez', '6925281995613'),
+('Lista de raul_gonzalez', 'raul_gonzalez', '6925281995637'),
+('Lista de luis_fernandez', 'luis_fernandez', '3043574'),
+('Lista de carmen_lopez', 'carmen_lopez', '3043573'),
+('Lista de javier_molina', 'javier_molina', 'MCO1940674356'),
+('Lista de patricia_santos', 'patricia_santos', 'MCO1268357573'),
+('Lista de manuel_ramirez', 'manuel_ramirez', '711719566625'),
+('Lista de rosa_gutierrez', 'rosa_gutierrez', '101112640');
+
+
+SELECT * FROM LISTA_has_PRODUCTO;
 
 
 -- -----------------------------------------------------
@@ -201,7 +195,7 @@ VALUES
   ('101112640', 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p')
   ;
 
--- SELECT * FROM PRECIO;
+SELECT * FROM PRECIO;
 
 
 ------------------------------------------------
@@ -237,46 +231,35 @@ SELECT * FROM CATEGORIA;
 -- -----------------------------------------------------
 
 INSERT INTO PRODUCTO_has_CATEGORIA (PRODUCTO_pro_ID, CATEGORIA_cat_ID) VALUES
-(1, 1), -- Producto 1 pertenece a la categoría Celulares
-(2, 1), -- Producto 2 pertenece a la categoría Celulares
-(3, 1), -- Producto 3 pertenece a la categoría Celulares
-(4, 1), -- Producto 4 pertenece a la categoría Celulares
-(5, 1), -- Producto 5 pertenece a la categoría Celulares
-(6, 1), -- Producto 6 pertenece a la categoría Celulares
-(7, 1), -- Producto 7 pertenece a la categoría Celulares
-(8, 1), -- Producto 8 pertenece a la categoría Celulares
-(9, 1), -- Producto 9 pertenece a la categoría Celulares
-(10, 1), -- Producto 10 pertenece a la categoría Celulares
-(11, 2), -- Producto 11 pertenece a la categoría Computadores
-(12, 2), -- Producto 12 pertenece a la categoría Computadores
-(13, 2), -- Producto 13 pertenece a la categoría Computadores
-(14, 2), -- Producto 14 pertenece a la categoría Computadores
-(15, 2), -- Producto 15 pertenece a la categoría Computadores
-(16, 2), -- Producto 16 pertenece a la categoría Computadores
-(17, 2), -- Producto 17 pertenece a la categoría Computadores
-(18, 2), -- Producto 18 pertenece a la categoría Computadores
-(19, 3), -- Producto 19 pertenece a la categoría Televisores
-(20, 3), -- Producto 20 pertenece a la categoría Televisores
-(21, 3), -- Producto 21 pertenece a la categoría Televisores
-(22, 2), -- Producto 22 pertenece a la categoría Computadores
-(23, 2), -- Producto 23 pertenece a la categoría Computadores
-(24, 2), -- Producto 24 pertenece a la categoría Computadores
-(25, 4), -- Producto 25 pertenece a la categoría Electrodomésticos
-(26, 4), -- Producto 26 pertenece a la categoría Electrodomésticos
-(27, 3), -- Producto 27 pertenece a la categoría Televisores
-(28, 4), -- Producto 28 pertenece a la categoría Electrodomésticos
-(29, 4), -- Producto 29 pertenece a la categoría Electrodomésticos
-(30, 4), -- Producto 30 pertenece a la categoría Electrodomésticos
-(31, 5), -- Producto 31 pertenece a la categoría Audio
-(32, 5), -- Producto 32 pertenece a la categoría Audio
-(33, 5), -- Producto 33 pertenece a la categoría Audio
-(34, 6), -- Producto 34 pertenece a la categoría Videojuegos
-(35, 6), -- Producto 35 pertenece a la categoría Videojuegos
-(36, 6), -- Producto 36 pertenece a la categoría Videojuegos
-(37, 7), -- Producto 37 pertenece a la categoría Tablets
-(38, 7); -- Producto 38 pertenece a la categoría Tablets
+  ('MCO1991235718', 1),   -- Apple iPhone 14 Pro Max (256 GB) - Morado oscuro pertenece a la categoría 'Celulares'
+  ('MCO1991235660', 1),   -- Apple iPhone 14 Pro Max 128 GB Morado oscuro pertenece a la categoría 'Celulares'
+  ('194253488224', 1),   -- iPhone 14 128 GB Azul Medianoche pertenece a la categoría 'Celulares'
+  ('194253486770', 1),   -- iPhone 14 Pro Max 128 GB Morado Oscuro pertenece a la categoría 'Celulares'
+  ('102378158', 1),      -- Iphone 14 Pro Max 128Gb 5G Negro pertenece a la categoría 'Celulares'
+  ('3103350', 1),        -- iPhone 14 128 GB Medianoche pertenece a la categoría 'Celulares'
+  ('MCO1134011449', 2),  -- Computador Gamer Hp Victus Core I5 32gb 512gb Gtx 1650 W11 pertenece a la categoría 'Computadores'
+  ('MCO1897008752', 2),  -- Computador Gamer Hp Victus Core I5 36gb 2tb Gtx 1650 W11 pertenece a la categoría 'Computadores'
+  ('197497202632', 2),   -- Computador Portátil Gamer Victus HP 15,6" Pulgadas Intel Core I5 pertenece a la categoría 'Computadores'
+  ('197497272383', 2),   -- Computador Portátil Gamer Victus HP 15.6" Pulgadas AMD Ryzen 5 pertenece a la categoría 'Computadores'
+  ('MCO18518359', 3),    -- Smart TV Samsung The Frame QN55LS03AAGXZD pertenece a la categoría 'Televisores'
+  ('MCO21817325', 3),    -- Televisor Samsung Smart 55 The Frame Qled 4k 55ls03b pertenece a la categoría 'Televisores'
+  ('8806095058290', 3),  -- TV SAMSUNG 55" Pulgadas 4K-UHD QLED THE FRAME Smart TV pertenece a la categoría 'Televisores'
+  ('MCO18577601', 4),    -- Nevecón inverter no frost Samsung RS22T5200 refined inox con freezer pertenece a la categoría 'Electrodomésticos'
+  ('MCO811229346', 4),   -- Nevecón Samsung Side By Side 628 Litros pertenece a la categoría 'Electrodomésticos'
+  ('8806092234468', 4),  -- Nevecón SAMSUNG Side by Side 628 Litros RS22T5200B1/CO pertenece a la categoría 'Electrodomésticos'
+  ('3103340', 4),        -- Nevecón SAMSUNG Side By Side 628 litros RS22T5200S9/CO pertenece a la categoría 'Electrodomésticos'
+  ('MCO1931313794', 5),  -- Parlante JBL Go Essential JBL-GOESBLK pertenece a la categoría 'Audio'
+  ('MCO1960108692', 5),  -- Parlante JBL Go Essential JBL-GOESBLK pertenece a la categoría 'Audio'
+  ('6925281995613', 5),   -- Parlante JBL Inalámbrico Bluetooth GO Essential Negro pertenece a la categoría 'Audio'
+  ('6925281995637', 5),   -- Parlante JBL Inalámbrico Bluetooth GO Essential Rojo pertenece a la categoría 'Audio'
+  ('3043574', 5),        -- Parlante Go 3 BT Neg JBL JBLGO3BLKAM pertenece a la categoría 'Audio'
+  ('3043573', 5),        -- Parlante Go 3 BT Azul JBL JBLGO3BLUAM pertenece a la categoría 'Audio'
+  ('MCO1940674356', 6),  -- Sony PlayStation 5 825GB Marvel’s Spider Man 2 Limited Edition pertenece a la categoría 'Videojuegos'
+  ('MCO1268357573', 6),  -- Control Ps5 Negro Midnight Black Original + Cable Usb pertenece a la categoría 'Videojuegos'
+  ('711719566625', 6),   -- Consola PS5 Estándar 825GB + 1 Control Dualsense pertenece a la categoría 'Videojuegos'
+  ('101112640', 6);      -- Consola Playstation 5 Ps5 Digital Edition 825Gb pertenece a la categoría 'Videojuegos'
 
--- SELECT * FROM PRODUCTO_has_CATEGORIA;
+SELECT * FROM PRODUCTO_has_CATEGORIA;
 -- -----------------------------------------------------
 -- Llenado de SESION
 -- -----------------------------------------------------
