@@ -51,9 +51,7 @@ def searchProduct(keyWord, data_product : dict, driver : webdriver.Chrome) -> di
               'Moto', 'Apple', 'Nintendo', 'Microsoft', 'Sony']
 
     for product in product_total:
-
         article = product.find_element(By.TAG_NAME, 'article')
-        print(article.text)
         id_product = article.get_attribute('data-fs-product-card-sku')
 
         title_products = product.find_element(By.CLASS_NAME, value = 'vtex-store-components-3-x-productBrand')
