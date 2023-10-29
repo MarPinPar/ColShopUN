@@ -43,9 +43,6 @@ DELETE FROM PRECIO WHERE PRODUCTO_pro_ID IN (SELECT pro_ID FROM PRODUCTO);
 -- -----------------------------------------------------
 -- Llenado de PRODUCTO
 -- -----------------------------------------------------
--- Modificar la columna pro_nombre a VARCHAR(100)
-ALTER TABLE PRODUCTO MODIFY COLUMN pro_nombre VARCHAR(300);
-ALTER TABLE PRODUCTO AUTO_INCREMENT = 1;
 ALTER TABLE PRODUCTO MODIFY pro_ID VARCHAR(20);
 
 
@@ -178,8 +175,6 @@ SELECT * FROM TIENDA;
 -- -----------------------------------------------------
 -- Llenado de PRECIO
 -- -----------------------------------------------------
-
-
 INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pre_URL, pre_imagen)
 VALUES
   ('MCO1991235718', 2, '2023-10-28 20:40:02.364496', 5590000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-max-256-gb-morado-oscuro/p/MCO19615354?pdp_filters=category:MCO1055#searchVariation=MCO19615354&position=1&search_layout=stack&type=product&tracking_id=d7425eed-0e49-4618-9917-21be614a5b12', 'placeholder_image_url1'),
@@ -190,7 +185,7 @@ VALUES
   ('3103350', 3, '2023-10-28 20:41:05.259697', 4889900, 'https://exitocol.vtexassets.com/arquivos/ids/19708177-500-auto?v=638304163880600000&width=500&height=auto&aspect=true', 'placeholder_image_url6'),
   ('MCO1134011449', 2, '2023-10-28 21:03:48.646819', 3699999, 'https://articulo.mercadolibre.com.co/MCO-1134011449-computador-gamer-hp-victus-core-i5-32gb-512gb-gtx-1650-w11-_JM#position=4&search_layout=stack&type=item&tracking_id=51be0221-73cc-42d6-9d7b-99f4fe0201bf', 'https://http2.mlstatic.com/D_NQ_NP_962770-MLM54029806942_022023-V.webp'),
   ('MCO1897008752', 2, '2023-10-28 21:03:48.646819', 4099900, 'https://articulo.mercadolibre.com.co/MCO-1897008752-computador-gamer-hp-victus-core-i5-36gb-2tb-gtx-1650-w11-_JM#position=5&search_layout=stack&type=item&tracking_id=51be0221-73cc-42d6-9d7b-99f4fe0201bf', 'https://http2.mlstatic.com/D_NQ_NP_962770-MLM54029806942_022023-V.webp'),
-  ('MCO197497202632', 1, '2023-10-28 21:04:07.612527', 4149000, 'https://www.ktronix.com/computador-portatil-gamer-victus-hp-156-pulgadas-fa0000la-intel-core-i5-ram-16gb-disco-ssd-512gb-azul/p/197497202632', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  ('197497202632', 1, '2023-10-28 21:04:07.612527', 4149000, 'https://www.ktronix.com/computador-portatil-gamer-victus-hp-156-pulgadas-fa0000la-intel-core-i5-ram-16gb-disco-ssd-512gb-azul/p/197497202632', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
   ('197497272383', 1, '2023-10-28 21:04:07.612527', 3399000, 'https://www.ktronix.com/computador-portatil-gamer-victus-hp-156-pulgadas-fb0102la-amd-ryzen-5-ram-8gb-disco-ssd-512-gb-gris/p/197497272383', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
   ('MCO18518359', 2, '2023-10-28 21:13:43.155206', 3999900, 'https://www.mercadolibre.com.co/smart-tv-samsung-the-frame-qn55ls03aagxzd-qled-tizen-4k-55-100v240v/p/MCO18518359#searchVariation=MCO18518359&position=1&search_layout=stack&type=product&tracking_id=34a23d45-f7a9-4728-bd10-9718a38ef233', 'https://http2.mlstatic.com/D_NQ_NP_602843-MLA48624638731_122021-V.webp'),
   ('MCO21817325', 2, '2023-10-28 21:13:43.155206', 3699900, 'https://www.mercadolibre.com.co/televisor-samsung-smart-55-the-frame-qled-4k-55ls03b/p/MCO21817325#searchVariation=MCO21817325&position=2&search_layout=stack&type=product&tracking_id=34a23d45-f7a9-4728-bd10-9718a38ef233', 'https://http2.mlstatic.com/D_NQ_NP_602843-MLA48624638731_122021-V.webp'),
@@ -208,7 +203,8 @@ VALUES
   ('MCO1940674356', 2, '2023-10-28 21:46:43.485171', 3057221, 'https://www.mercadolibre.com.co/sony-playstation-5-825gb-marvels-spider-man-2-limited-edition-color-rojo-y-negro/p/MCO26081587#searchVariation=MCO26081587&position=1&search_layout=stack&type=product&tracking_id=e18dd6a8-e621-420c-b834-568e2e6d2d9f', 'https://http2.mlstatic.com/D_NQ_NP_983860-MLA71086105152_082023-V.webp'),
   ('MCO1268357573',2, '2023-10-28 21:46:43.485171', 357900, 'https://articulo.mercadolibre.com.co/MCO-1268357573-control-ps5-negro-midnight-black-original-cable-usb-_JM#position=23&search_layout=stack&type=item&tracking_id=e18dd6a8-e621-420c-b834-568e2e6d2d9f', 'https://http2.mlstatic.com/D_NQ_NP_983860-MLA71086105152_082023-V.webp'),
   ('711719566625', 1, '2023-10-28 21:47:00.348019', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-  ('101112640', 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p');
+  ('101112640', 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p')
+  ;
   
 
 
