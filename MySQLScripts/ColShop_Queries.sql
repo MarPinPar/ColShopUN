@@ -1,12 +1,12 @@
 
--- Consulta para un ADMINISTRADOR que busca el recuento de Usuarios Registrados por Mes:
+-- 1. Consulta para un ADMINISTRADOR que busca el recuento de Usuarios Registrados por Mes:
 SELECT DATE_FORMAT(us_fechaReg, '%Y-%m') AS Mes_Registro, COUNT(*) AS Total_Usuarios
 FROM 
 	USUARIO
 GROUP BY 
 	Mes_Registro;
 
--- Consulta para un COMPRADOR que busca productos por nombre y marca con un rango de precios:
+-- 2. Consulta para un COMPRADOR que busca productos por nombre y marca con un rango de precios:
 SELECT 
 	pro_nombre, pro_marca
 FROM 
@@ -26,7 +26,8 @@ WHERE
       AND 
 		pre_valor <= 6000000
   );
--- Consulta para un COMPRADOR que busca el precio más bajo de un producto y en que tienda esta
+  
+-- 3. Consulta para un COMPRADOR que busca el precio más bajo de un producto y en que tienda esta
 
 SELECT
     MIN(pre_valor) AS Precio_Más_Bajo,
