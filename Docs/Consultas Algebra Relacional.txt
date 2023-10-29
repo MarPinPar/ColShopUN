@@ -1,0 +1,25 @@
+1.
+2.
+3.
+4.
+
+5. Consulta para un ADMINISTRADOR que quiere ver las estadísticas de precios por tienda
+t1 ← γ tie_nombre; max(pre_valor) → maximum (precio ⨝ tienda (TIENDA_tie_ID = tie_ID))
+t2 ← γ tie_nombre; min(pre_valor) → minimum (precio ⨝ tienda (TIENDA_tie_ID = tie_ID))
+t3 ← γ tie_nombre; avg(pre_valor) → average (precio ⨝ tienda (TIENDA_tie_ID = tie_ID))
+
+π t1.tie_nombre, maximum, minimum, average (t1⨝t2⨝t3)
+
+6. Consulta para un USUARIO que quiere ver las listas que tienen al menos un producto que contengan "Iphone"
+t1 = γ Nombre; COUNT (`Nombre Producto`) → Cantidad (σ `Nombre Producto` = 'iphone'(contenidolistas))
+t2 = π Nombre (σ Cantidad > 1 (t1))
+contenidolistas ⨝ t2
+
+7. Consulta de un USUARIO que quiere ver el comentario mas antiguo de cada producto
+
+8. Consulta de un USUARIO que quiere ver la calificacion promedio por producto
+
+9.
+10.
+11.
+12.

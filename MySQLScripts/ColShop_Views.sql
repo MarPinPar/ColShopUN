@@ -133,7 +133,8 @@ SELECT
 -- CREACION ROLES
 -- -----------------------------------------------------------------------
 
--- USUARIO
+-- ------------------- USUARIO ------------------------------------
+
 DROP ROLE IF EXISTS 'usuario'@'localhost';
 CREATE ROLE 'usuario'@'localhost';
 
@@ -164,7 +165,9 @@ GRANT SELECT ON tienda TO 'usuario'@'localhost';
 
 GRANT CREATE, UPDATE, DELETE ON reseña TO 'usuario'@'localhost';
 
--- ADMIN
+
+-- ------------------- ADMIN ------------------------------------
+
 DROP ROLE IF EXISTS 'admin'@'localhost';
 CREATE ROLE 'admin'@'localhost';
 

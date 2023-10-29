@@ -46,5 +46,22 @@ ORDER BY
     Precio_Más_Bajo;
 
 
+-- 5. Consulta para un ADMINISTRADOR que quiere ver las estadísticas de precios por tienda
+SELECT tie_nombre, MAX(pre_valor), MIN(pre_valor), AVG(pre_valor)
+FROM TIENDA JOIN PRECIO ON tie_ID = TIENDA_tie_ID
+GROUP BY tie_ID;
 
+-- 6. Consulta para un USUARIO que quiere ver las listas que tienen al menos un producto que contengan "Iphone"
+SELECT * FROM contenidolistas WHERE Nombre in
+(SELECT Nombre FROM (SELECT Nombre, COUNT(`Nombre Producto`) c
+FROM contenidolistas
+WHERE LOWER(`Nombre Producto`) LIKE '%iphone%'
+GROUP BY Nombre
+HAVING c > 1) AS t);
 
+-- 7. Consulta de un USUARIO que quiere ver el comentario mas antiguo de cada producto
+SELECT * FROM comentariosProducto WHERE Fecha IN 
+(SELECT MIN(FECHA) FROM comentariosProducto GROUP BY Nombre);
+
+-- 8. Consulta de un USUARIO que quiere ver la calificacion promedio por producto
+SELECT Nombre, AVG(Calificacion) AS 'Puntaje Promedio' FROM comentariosProducto GROUP BY Nombre;
