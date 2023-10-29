@@ -37,13 +37,13 @@ CREATE VIEW contenidoListas AS
     FROM LISTA JOIN lista_has_producto ON LISTA_lis_nombre = lis_nombre AND LISTA_USUARIO_us_username = USUARIO_us_username
     JOIN PRODUCTO ON pro_ID = PRODUCTO_pro_ID
     WHERE USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1) OR lis_esPublica = 0;
-
--- Vista de listas de otros usuarios
-DROP VIEW IF EXISTS listasVisibles;
-CREATE VIEW listasVisibles AS
-	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
-		USUARIO_us_username AS 'Autor'
-    FROM LISTA WHERE USUARIO_us_username != SUBSTRING_INDEX(USER(), '@', 1);
+    
+-- Historial de Búsqueda
+DROP VIEW IF EXISTS historialBusqueda;
+CREATE VIEW historialBusqueda AS
+	SELECT ac_fechaHora AS 'Fecha', bus_palabrasClave AS 'Palabras Clave'
+    FROM sesion_has_accion S JOIN accion ON ac_ID = S.ACCION_ac_ID JOIN busqueda B ON ac_ID = B.ACCION_ac_ID
+    WHERE SESION_USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
 
 
 /*----------------------- ADMIN ------------------------*/
@@ -142,6 +142,8 @@ GRANT SELECT ON listasVisibles TO 'usuario'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
 GRANT SELECT ON contenidoListas TO 'usuario'@'localhost';
 GRANT CREATE ON lista_has_producto TO 'usuario'@'localhost';
+GRANT SELECT ON historialBusqueda TO 'usuario'@'localhost';
+
 
 -- -----------------------------------------------------------------------
 -- CREACION USUARIOS
