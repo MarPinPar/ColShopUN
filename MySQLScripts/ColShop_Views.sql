@@ -15,6 +15,13 @@ DROP VIEW IF EXISTS perfiles;
 CREATE VIEW perfiles AS
 	SELECT us_username, us_alias, us_correo, us_fechaReg FROM USUARIO WHERE us_username != SUBSTRING_INDEX(USER(), '@', 1);
 
+-- Vista de listas de otros usuarios
+DROP VIEW IF EXISTS listasVisibles;
+CREATE VIEW listasVisibles AS
+	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
+		USUARIO_us_username AS 'Autor'
+    FROM LISTA WHERE USUARIO_us_username != SUBSTRING_INDEX(USER(), '@', 1);
+
 
 /*----------------------- ADMIN ------------------------*/
 
@@ -95,12 +102,7 @@ SELECT
 
 SELECT * FROM Vista_EstadisticasSistema ;
 
--- Vista de listas de otros usuarios
-DROP VIEW IF EXISTS listasVisibles;
-CREATE VIEW listasVisibles AS
-	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
-		USUARIO_us_username AS 'Autor'
-    FROM LISTA WHERE USUARIO_us_username != SUBSTRING_INDEX(USER(), '@', 1);
+
 -- -----------------------------------------------------------------------
 -- CREACION ROLES
 -- -----------------------------------------------------------------------
