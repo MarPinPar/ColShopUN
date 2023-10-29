@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS SESION ;
 CREATE TABLE IF NOT EXISTS SESION (
   `ses_fechaHoraIn` DATETIME NOT NULL,
   `ses_fechaHoraOut` DATETIME NOT NULL,
-  `USUARIO_us_username` VARCHAR(30) NOT NULL,
+  `USUARIO_us_username` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ses_fechaHoraIn`, `ses_fechaHoraOut`, `USUARIO_us_username`),
   FOREIGN KEY (`USUARIO_us_username`) REFERENCES USUARIO (`us_username`)
   );
@@ -225,7 +225,7 @@ DROP TABLE IF EXISTS RESEÑA ;
 
 CREATE TABLE IF NOT EXISTS RESEÑA (
   `res_comentario` VARCHAR(120) NULL,
-  `res_calificación` TINYINT(5) NOT NULL,
+  `res_calificacion` TINYINT(5) NOT NULL,
   `ACCION_ac_ID` INT,
   `PRODUCTO_pro_ID` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ACCION_ac_ID`),
