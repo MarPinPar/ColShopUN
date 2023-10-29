@@ -45,6 +45,20 @@ GROUP BY
 ORDER BY
     Precio_Más_Bajo;
 
+-- 4. Consulta para un COMPRADOR que busca la última actualizaciòn de algún producto
+
+SELECT 
+	pro_nombre AS Producto, pre_fechaHora AS Ultima_Actualizacion, pre_valor AS Precio
+FROM 
+	PRODUCTO 
+INNER JOIN 
+	PRECIO ON pro_ID = PRODUCTO_pro_ID
+WHERE 
+	pro_ID = 'MCO1940674356'
+ORDER BY 
+	pre_fechaHora DESC
+LIMIT 
+	1;
 
 -- 5. Consulta para un ADMINISTRADOR que quiere ver las estadísticas de precios por tienda
 SELECT tie_nombre, MAX(pre_valor), MIN(pre_valor), AVG(pre_valor)
