@@ -1,6 +1,7 @@
 -- -----------------------------------------------------------------------
 -- CREACION VISTAS
 -- -----------------------------------------------------------------------
+/*----------------------- USER ------------------------*/
 
 -- Vista del perfil del propio usuario, incluye contraseña
 DROP VIEW IF EXISTS miPerfil;
@@ -10,8 +11,40 @@ CREATE VIEW miPerfil AS
 -- Vista del perfil de otros usuarios, no incluye contraseñas
 DROP VIEW IF EXISTS perfiles;
 CREATE VIEW perfiles AS
-	SELECT us_username AS 'Nombre de Usuario', us_alias AS 'Alias', us_correo AS 'Correo', us_fechaReg AS 'Fecha Registro'
-    FROM USUARIO WHERE us_username != SUBSTRING_INDEX(USER(), '@', 1);
+	SELECT us_username, us_alias, us_correo, us_fechaReg FROM USUARIO WHERE us_username != SUBSTRING_INDEX(USER(), '@', 1);
+
+
+/*----------------------- ADMIN ------------------------*/
+
+
+-- Vista de Usuarios Registrados
+CREATE VIEW Vista_UsuariosRegistrados AS
+SELECT us_username, us_alias, us_correo, us_fechaReg
+FROM USUARIO;
+
+-- Vista de Acciones de Usuarios:
+
+
+
+-- Vista de Tiendas Registradas:
+CREATE VIEW Vista_TiendasRegistradas AS
+SELECT tie_ID AS Tienda_ID, tie_nombre AS Nombre_Tienda, tie_URL AS URL
+FROM TIENDA;
+SELECT * FROM Vista_TiendasRegistradas;
+
+-- Vista de categorías registradas:
+CREATE VIEW Vista_CategoriasProductos AS
+SELECT cat_ID AS Categoria_ID, cat_nombre AS Nombre_Categoria
+FROM CATEGORIA;
+SELECT * FROM Vista_CategoriasProductos;
+
+-- Vista de estadisticas:
+CREATE VIEW Vista_EstadisticasSistema AS
+SELECT
+    (SELECT COUNT(*) FROM USUARIO) AS Total_Usuarios,
+    (SELECT COUNT(*) FROM PRODUCTO) AS Total_Productos;
+
+SELECT * FROM Vista_EstadisticasSistema ;
 
 -- -----------------------------------------------------------------------
 -- CREACION ROLES
