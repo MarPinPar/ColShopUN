@@ -51,7 +51,6 @@ ORDER BY
 
 
 -- 4. Consulta para un COMPRADOR que busca la última actualizaciòn de algún producto
-
 SELECT 
 	pro_nombre AS Producto, pre_fechaHora AS Ultima_Actualizacion, pre_valor AS Precio
 FROM 
@@ -64,7 +63,7 @@ ORDER BY
 	pre_fechaHora DESC
 LIMIT 
 	1;
-	
+
 
 -- 5. Consulta para un ADMINISTRADOR que quiere ver las estadísticas de precios por tienda
 SELECT tie_nombre, MAX(pre_valor), MIN(pre_valor), AVG(pre_valor)
@@ -88,3 +87,31 @@ SELECT * FROM comentariosProducto WHERE Fecha IN
 
 -- 8. Consulta de un USUARIO que quiere ver la calificacion promedio por producto
 SELECT Nombre, AVG(Calificacion) AS 'Puntaje Promedio' FROM comentariosProducto GROUP BY Nombre;
+
+-- 9. Consulta de todos los productos con la misma marca que un producto determinado
+SELECT * FROM PRODUCTO
+WHERE pro_marca = (SELECT pro_marca FROM PRODUCTO WHERE pro_ID = 'id_deseado');
+
+-- 10. Seleccionar las reseñas de un producto que tengan una calificación mayor a 3
+SELECT
+    p.pro_nombre AS 'Nombre del Producto',
+    r.res_calificacion AS 'Calificacion',
+    r.res_comentario AS 'Comentario'
+FROM reseña r
+JOIN
+    producto p ON r.PRODUCTO_pro_ID = p.pro_ID
+JOIN
+    accion a ON r.ACCION_ac_ID = a.ac_ID
+JOIN
+    sesion_has_accion s ON a.ac_ID = s.ACCION_ac_ID
+WHERE
+    r.res_calificacion > 3 AND p.pro_ID = 'Product_ID';
+
+-- 11. Consulta todas las reseñas de un producto determinado
+SELECT * FROM comentariosProducto
+WHERE Nombre = 'NOMBRE_PRODUCTO';
+
+-- 12. Consulta los productos que cuentan con una imagen
+SELECT DISTINCT p.* FROM PRODUCTO p
+JOIN PRECIO pr ON p.pro_ID = pr.PRODUCTO_pro_ID
+WHERE pr.pre_imagen IS NOT NULL

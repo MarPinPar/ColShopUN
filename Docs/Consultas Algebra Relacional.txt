@@ -1,30 +1,45 @@
-1.
-2.
-3.
-4.
 
-5. Consulta para un ADMINISTRADOR que quiere ver las estadísticas de precios por tienda
+Consultas en Algebra Relacional (para ver los scripts 
+de SQL vea ColShop_Queries.sql)
+
+- 1.
+
+- 2.
+
+- 3.
+
+- 4.
+
+- 5. Consulta para un ADMINISTRADOR que quiere ver las estadísticas de precios por tienda
 t1 ← γ tie_nombre; max(pre_valor) → maximum (precio ⨝ tienda (TIENDA_tie_ID = tie_ID))
 t2 ← γ tie_nombre; min(pre_valor) → minimum (precio ⨝ tienda (TIENDA_tie_ID = tie_ID))
 t3 ← γ tie_nombre; avg(pre_valor) → average (precio ⨝ tienda (TIENDA_tie_ID = tie_ID))
 
 π t1.tie_nombre, maximum, minimum, average (t1⨝t2⨝t3)
 
-6. Consulta para un USUARIO que quiere ver las listas que tienen al menos un producto que contengan "Iphone"
+- 6. Consulta para un USUARIO que quiere ver las listas que tienen al menos un producto que contengan "Iphone"
 t1 = γ Nombre; COUNT (`Nombre Producto`) → Cantidad (σ `Nombre Producto` = 'iphone'(contenidolistas))
 t2 = π Nombre (σ Cantidad > 1 (t1))
 contenidolistas ⨝ t2
 
-7. Consulta de un USUARIO que quiere ver el comentario mas antiguo de cada producto
-
+- 7. Consulta de un USUARIO que quiere ver el comentario mas antiguo de cada producto
 t1 = γ Nombre; min (`Fecha`) → fecha_minima (comentariosProducto)
 comentariosProducto ⨝ t1
 
-8. Consulta de un USUARIO que quiere ver la calificacion promedio por producto
-
+- 8. Consulta de un USUARIO que quiere ver la calificacion promedio por producto
 γ Nombre; avg (Calificacion) → 'Puntaje Promedio' (comentariosProducto)
 
-9.
-10.
-11.
-12.
+- 9. Consulta de todos los productos con la misma marca que un producto determinado
+marca = π pro_marca (σ pro_ID = '-ID DEL PRODUCTO-' (PRODUCTO))
+resultado = σ pro_marca = marca (PRODUCTO)
+π pro_ID, pro_nombre (resultado)
+
+- 10. Seleccionar las reseñas de un producto que tengan una calificación mayor a 3
+comentariosProducto ← π pro_nombre as Nombre, res_calificacion as Calificacion, res_comentario as Comentario (S ⨝ ACCION_ac_ID = ac_ID( R ⨝ PRODUCTO_pro_ID = pro_ID( PRODUCTO ⨝ pro_ID = 'PRODUCTO_ID')))
+π Name, Calificacion, Comentario (σ Calificacion > 3 ∧ PRODUCTO_pro_ID = 'PRODUCTO_ID' (V))
+
+- 11. Consulta todas las reseñas de un producto determinado
+σ(Nombre = 'NOMBRE_PRODUCTO')(comentariosProducto)
+
+- 12. Consulta los productos que cuentan con una imagen
+π pro_ID (σ pre_imagen IS NOT NULL (PRECIO ⨝ (PRODUCTO_pro_ID = pro_ID) PRODUCTO))
