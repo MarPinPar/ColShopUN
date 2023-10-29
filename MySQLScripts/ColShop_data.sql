@@ -32,14 +32,8 @@ INSERT INTO USUARIO (us_username, us_alias, us_correo, us_contraseña, us_fechaR
 ('maria_lopez', 'Maria', 'maria@example.com', 'mariapass123', '2023-10-25 15:53:00'),
 ('juan_hernandez', 'Juan', 'juan@example.com', 'juanpass', '2023-10-25 15:54:00');
 
-SELECT * FROM USUARIO;
+-- SELECT* FROM USUARIO;
 
-DELETE FROM CATEGORIA;
-DELETE FROM PRODUCTO;
-DELETE FROM USUARIO;
-DELETE FROM TIENDA;
-DELETE FROM PRECIO;
-DELETE FROM PRECIO WHERE PRODUCTO_pro_ID IN (SELECT pro_ID FROM PRODUCTO);
 -- -----------------------------------------------------
 -- Llenado de PRODUCTO
 -- -----------------------------------------------------
@@ -74,7 +68,7 @@ VALUES
   ('101112640', 'Consola Playstation 5 Ps5 Digital Edition 825Gb Sony', 'Sony');
 
   
-SELECT * FROM PRODUCTO;
+-- SELECT* FROM PRODUCTO;
 
 -- -----------------------------------------------------
 -- Llenado de LISTA
@@ -106,14 +100,12 @@ INSERT INTO LISTA (lis_nombre, lis_fechaCreacion, lis_fechaUltAct, USUARIO_us_us
 ('Lista de maria_lopez', '2023-10-25 15:53:00', '2023-10-31 17:00:00', 'maria_lopez'),
 ('Lista de juan_hernandez', '2023-10-25 15:54:00', '2023-10-31 18:00:00', 'juan_hernandez');
 
-SELECT * FROM LISTA;
+-- SELECT* FROM LISTA;
 
 
 -- -----------------------------------------------------
 -- Llenado de LISTA_has_PRODUCTO
 -- -----------------------------------------------------
-
-DELETE FROM LISTA_has_PRODUCTO;
 
 INSERT INTO LISTA_has_PRODUCTO (LISTA_lis_nombre, LISTA_USUARIO_us_username, PRODUCTO_pro_ID) VALUES
 ('Lista de juan_perez', 'juan_perez', 'MCO1991235718'),
@@ -145,7 +137,7 @@ INSERT INTO LISTA_has_PRODUCTO (LISTA_lis_nombre, LISTA_USUARIO_us_username, PRO
 ('Lista de rosa_gutierrez', 'rosa_gutierrez', '101112640');
 
 
-SELECT * FROM LISTA_has_PRODUCTO;
+-- SELECT* FROM LISTA_has_PRODUCTO;
 
 
 -- -----------------------------------------------------
@@ -158,7 +150,7 @@ INSERT INTO TIENDA (tie_nombre, tie_URL) VALUES
 ('Mercadolibre', 'https://www.mercadolibre.com.co/'),
 ('Éxito', 'https://www.exito.com/');
 
-SELECT * FROM TIENDA;
+-- SELECT* FROM TIENDA;
 
 
 -- -----------------------------------------------------
@@ -195,7 +187,7 @@ VALUES
   ('101112640', 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p')
   ;
 
-SELECT * FROM PRECIO;
+-- SELECT* FROM PRECIO;
 
 
 ------------------------------------------------
@@ -223,7 +215,7 @@ INSERT INTO CATEGORIA (cat_nombre) VALUES
 ('Instalaciones'),
 ('Seguros');
 
-SELECT * FROM CATEGORIA;
+-- SELECT* FROM CATEGORIA;
 
 
 -- -----------------------------------------------------
@@ -259,7 +251,7 @@ INSERT INTO PRODUCTO_has_CATEGORIA (PRODUCTO_pro_ID, CATEGORIA_cat_ID) VALUES
   ('711719566625', 6),   -- Consola PS5 Estándar 825GB + 1 Control Dualsense pertenece a la categoría 'Videojuegos'
   ('101112640', 6);      -- Consola Playstation 5 Ps5 Digital Edition 825Gb pertenece a la categoría 'Videojuegos'
 
-SELECT * FROM PRODUCTO_has_CATEGORIA;
+-- SELECT* FROM PRODUCTO_has_CATEGORIA;
 -- -----------------------------------------------------
 -- Llenado de SESION
 -- -----------------------------------------------------
@@ -290,7 +282,7 @@ INSERT INTO SESION (ses_fechaHoraIn, ses_fechaHoraOut, USUARIO_us_username) VALU
 ('2023-10-25 15:53:00', '2023-10-25 16:53:00', 'maria_lopez'),
 ('2023-10-25 15:54:00', '2023-10-25 16:54:00', 'juan_hernandez');
 
--- SELECT * FROM SESION;
+-- -- SELECT* FROM SESION;
 
 -- -----------------------------------------------------
 -- Llenado de  ACCIONES
@@ -323,7 +315,7 @@ INSERT INTO ACCION (ac_fechaHora) VALUES
 ('2023-10-25 15:54:10')
 ;
 
-SELECT * FROM ACCION;
+-- SELECT* FROM ACCION;
 
 -- -----------------------------------------------------
 -- Table SESION_has_ACCION

@@ -6,7 +6,9 @@
 -- Vista del perfil del propio usuario, incluye contraseña
 DROP VIEW IF EXISTS miPerfil;
 CREATE VIEW miPerfil AS
-	SELECT * FROM USUARIO WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1);
+	SELECT us_username AS 'Nombre de Usuario', us_alias AS 'Alias', us_correo AS 'Correo', 
+		us_contraseña AS 'Contraseña', us_fechaReg AS 'Fecha Registro'
+    FROM USUARIO WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1);
 
 -- Vista del perfil de otros usuarios, no incluye contraseñas
 DROP VIEW IF EXISTS perfiles;
@@ -46,14 +48,21 @@ SELECT
 
 SELECT * FROM Vista_EstadisticasSistema ;
 
+-- Vista de listas de otros usuarios
+DROP VIEW IF EXISTS listasVisibles;
+CREATE VIEW listasVisibles AS
+	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
+		USUARIO_us_username AS 'Autor'
+    FROM LISTA WHERE USUARIO_us_username != SUBSTRING_INDEX(USER(), '@', 1);
 -- -----------------------------------------------------------------------
 -- CREACION ROLES
 -- -----------------------------------------------------------------------
 
 DROP ROLE IF EXISTS 'usuario'@'localhost';
 CREATE ROLE 'usuario'@'localhost';
-GRANT SELECT ON miPerfil TO 'usuario'@'localhost';
+GRANT SELECT, UPDATE ON miPerfil TO 'usuario'@'localhost';
 GRANT SELECT ON perfiles TO 'usuario'@'localhost';
+GRANT SELECT ON listasVisibles TO 'usuario'@'localhost';
 
 -- -----------------------------------------------------------------------
 -- CREACION USUARIOS
