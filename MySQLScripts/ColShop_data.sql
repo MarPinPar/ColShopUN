@@ -205,11 +205,6 @@ VALUES
   ('711719566625', 1, '2023-10-28 21:47:00.348019', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
   ('101112640', 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p')
   ;
-  
-
-
-
-
 
 -- SELECT * FROM PRECIO;
 
@@ -386,12 +381,50 @@ INSERT INTO SESION_has_ACCION VALUES
 -- -----------------------------------------------------
 -- Llenado de BUSQUEDA
 -- -----------------------------------------------------
-
+INSERT INTO BUSQUEDA VALUES
+(1, 'IPhone 14'),
+(2, 'Computador Gamer'),
+(3, 'Smart TV'),
+(4, 'TV Samsung'),
+(5, 'Nevecón'),
+(6, 'Parlante'),
+(7, 'Control'),
+(8, 'Playstation')
+;
 
 -- -----------------------------------------------------
 -- Llenado de BUSQUEDA_has_PRODUCTO
 -- -----------------------------------------------------
-
+INSERT INTO BUSQUEDA_has_PRODUCTO VALUES
+(1, 'MCO1991235718'),
+(1, 'MCO1991235660'),
+(1, '194253488224'),
+(1, '194253486770'),
+(1, '102378158'),
+(1, '3103350'),
+(2, 'MCO1134011449'),
+(2, 'MCO1897008752'),
+(2, '197497202632'),
+(2, '197497272383'),
+(3, 'MCO18518359'),
+(3, '8806095058290'),
+(4, 'MCO18518359'),
+(4, '8806095058290'),
+(5, 'MCO18577601'),
+(5, 'MCO811229346'),
+(5, '8806092234468'),
+(5, '3103340'),
+(6, 'MCO1931313794'),
+(6, 'MCO1960108692'),
+(6, '6925281995613'),
+(6, '6925281995637'),
+(6, '3043574'),
+(6, '3043573'),
+(7, 'MCO1268357573'),
+(7, '711719566625'),
+(8, 'MCO1940674356'),
+(8, '101112640')
+;
 
 -- -----------------------------------------------------
 -- Llenado de COMPARACION
