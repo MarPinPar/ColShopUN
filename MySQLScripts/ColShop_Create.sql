@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS LISTA (
   `lis_fechaCreacion` DATETIME NOT NULL,
   `lis_esPublica` TINYINT(1) NOT NULL DEFAULT 0,
   `lis_fechaUltAct` DATETIME NOT NULL,
-  `USUARIO_us_username` VARCHAR(30) NOT NULL,
+  `USUARIO_us_username` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`lis_nombre`, `USUARIO_us_username`),
   FOREIGN KEY (`USUARIO_us_username`) REFERENCES USUARIO (`us_username`)
   );
@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS LISTA_has_PRODUCTO ;
 
 CREATE TABLE IF NOT EXISTS LISTA_has_PRODUCTO (
   `LISTA_lis_nombre` VARCHAR(30) NOT NULL,
-  `LISTA_USUARIO_us_username` VARCHAR(30) NOT NULL,
+  `LISTA_USUARIO_us_username` VARCHAR(45) NOT NULL,
   `PRODUCTO_pro_ID` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`LISTA_lis_nombre`, `LISTA_USUARIO_us_username`, `PRODUCTO_pro_ID`),
   FOREIGN KEY (`LISTA_lis_nombre` , `LISTA_USUARIO_us_username`) REFERENCES LISTA (`lis_nombre` , `USUARIO_us_username`),
