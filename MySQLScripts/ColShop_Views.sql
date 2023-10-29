@@ -38,6 +38,13 @@ CREATE VIEW contenidoListas AS
     JOIN PRODUCTO ON pro_ID = PRODUCTO_pro_ID
     WHERE USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1) OR lis_esPublica = 0;
 
+-- Vista de listas de otros usuarios
+DROP VIEW IF EXISTS listasVisibles;
+CREATE VIEW listasVisibles AS
+	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
+		USUARIO_us_username AS 'Autor'
+    FROM LISTA WHERE USUARIO_us_username != SUBSTRING_INDEX(USER(), '@', 1);
+
 
 /*----------------------- ADMIN ------------------------*/
 
