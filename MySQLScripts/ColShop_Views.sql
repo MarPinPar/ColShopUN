@@ -15,51 +15,82 @@ DROP VIEW IF EXISTS perfiles;
 CREATE VIEW perfiles AS
 	SELECT us_username, us_alias, us_correo, us_fechaReg FROM USUARIO WHERE us_username != SUBSTRING_INDEX(USER(), '@', 1);
 
+
+/*----------------------- ADMIN ------------------------*/
+
+
+-- Vista de Usuarios Registrados
+CREATE VIEW Vista_UsuariosRegistrados AS
+SELECT us_username, us_alias, us_correo, us_fechaReg
+FROM USUARIO;
+
+-- Vista de Acciones de Usuarios:
+CREATE VIEW AccionesDeUsuarios AS
+SELECT
+    A.ac_ID AS ID_Accion,
+    U.us_username AS Nombre_Usuario,
+    A.ac_fechaHora AS Fecha_Hora_Accion,
+    'Busqueda' AS Tipo_Accion,
+    B.bus_palabrasClave AS Detalles
+FROM ACCION A
+JOIN SESION_has_ACCION SA ON A.ac_ID = SA.ACCION_ac_ID
+JOIN USUARIO U ON SA.SESION_USUARIO_us_username = U.us_username
+LEFT JOIN BUSQUEDA B ON A.ac_ID = B.ACCION_ac_ID
+
+UNION
+
+SELECT
+    A.ac_ID AS ID_Accion,
+    U.us_username AS Nombre_Usuario,
+    A.ac_fechaHora AS Fecha_Hora_Accion,
+    'Comparacion' AS Tipo_Accion,
+    NULL AS Detalles
+FROM ACCION A
+JOIN SESION_has_ACCION SA ON A.ac_ID = SA.ACCION_ac_ID
+JOIN USUARIO U ON SA.SESION_USUARIO_us_username = U.us_username
+LEFT JOIN COMPARACION C ON A.ac_ID = C.ACCION_ac_ID
+
+UNION
+
+SELECT
+    A.ac_ID AS ID_Accion,
+    U.us_username AS Nombre_Usuario,
+    A.ac_fechaHora AS Fecha_Hora_Accion,
+    'Reseña' AS Tipo_Accion,
+    NULL AS Detalles
+FROM ACCION A
+JOIN SESION_has_ACCION SA ON A.ac_ID = SA.ACCION_ac_ID
+JOIN USUARIO U ON SA.SESION_USUARIO_us_username = U.us_username
+LEFT JOIN RESEÑA R ON A.ac_ID = R.ACCION_ac_ID;
+SELECT * FROM AccionesDeUsuarios;
+
+
+-- Vista de Tiendas Registradas:
+CREATE VIEW Vista_TiendasRegistradas AS
+SELECT tie_ID AS Tienda_ID, tie_nombre AS Nombre_Tienda, tie_URL AS URL
+FROM TIENDA;
+SELECT * FROM Vista_TiendasRegistradas;
+
+-- Vista de categorías registradas:
+CREATE VIEW Vista_CategoriasProductos AS
+SELECT cat_ID AS Categoria_ID, cat_nombre AS Nombre_Categoria
+FROM CATEGORIA;
+SELECT * FROM Vista_CategoriasProductos;
+
+-- Vista de estadisticas:
+CREATE VIEW Vista_EstadisticasSistema AS
+SELECT
+    (SELECT COUNT(*) FROM USUARIO) AS Total_Usuarios,
+    (SELECT COUNT(*) FROM PRODUCTO) AS Total_Productos;
+
+SELECT * FROM Vista_EstadisticasSistema ;
+
 -- Vista de listas de otros usuarios
 DROP VIEW IF EXISTS listasVisibles;
 CREATE VIEW listasVisibles AS
 	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
 		USUARIO_us_username AS 'Autor'
     FROM LISTA WHERE USUARIO_us_username != SUBSTRING_INDEX(USER(), '@', 1);
-
--- Vista de listas propias
-DROP VIEW IF EXISTS misListas;
-CREATE VIEW misListas AS
-	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
-		USUARIO_us_username AS 'Autor'
-    FROM LISTA WHERE USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
-/*----------------------- ADMIN ------------------------*/
-
-
--- Vista de Usuarios Registrados
-DROP VIEW IF EXISTS Vista_UsuariosRegistrados;
-CREATE VIEW Vista_UsuariosRegistrados AS
-SELECT us_username, us_alias, us_correo, us_fechaReg
-FROM USUARIO;
-
--- Vista de Acciones de Usuarios:
-
-
-
--- Vista de Tiendas Registradas:
-DROP VIEW IF EXISTS Vista_TiendasRegistradas;
-CREATE VIEW Vista_TiendasRegistradas AS
-SELECT tie_ID AS Tienda_ID, tie_nombre AS Nombre_Tienda, tie_URL AS URL
-FROM TIENDA;
-
--- Vista de categorías registradas:
-DROP VIEW IF EXISTS Vista_CategoriasProductos;
-CREATE VIEW Vista_CategoriasProductos AS
-SELECT cat_ID AS Categoria_ID, cat_nombre AS Nombre_Categoria
-FROM CATEGORIA;
-
--- Vista de estadisticas:
-DROP VIEW IF EXISTS Vista_EstadisticasSistema;
-CREATE VIEW Vista_EstadisticasSistema AS
-SELECT
-    (SELECT COUNT(*) FROM USUARIO) AS Total_Usuarios,
-    (SELECT COUNT(*) FROM PRODUCTO) AS Total_Productos;
-
 -- -----------------------------------------------------------------------
 -- CREACION ROLES
 -- -----------------------------------------------------------------------
@@ -69,7 +100,6 @@ CREATE ROLE 'usuario'@'localhost';
 GRANT SELECT, UPDATE ON miPerfil TO 'usuario'@'localhost';
 GRANT SELECT ON perfiles TO 'usuario'@'localhost';
 GRANT SELECT ON listasVisibles TO 'usuario'@'localhost';
-GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
 
 -- -----------------------------------------------------------------------
 -- CREACION USUARIOS
