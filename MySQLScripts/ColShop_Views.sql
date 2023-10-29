@@ -10,7 +10,8 @@ CREATE VIEW miPerfil AS
 -- Vista del perfil de otros usuarios, no incluye contraseñas
 DROP VIEW IF EXISTS perfiles;
 CREATE VIEW perfiles AS
-	SELECT us_username, us_alias, us_correo, us_fechaReg FROM USUARIO WHERE us_username != SUBSTRING_INDEX(USER(), '@', 1);
+	SELECT us_username AS 'Nombre de Usuario', us_alias AS 'Alias', us_correo AS 'Correo', us_fechaReg AS 'Fecha Registro'
+    FROM USUARIO WHERE us_username != SUBSTRING_INDEX(USER(), '@', 1);
 
 -- -----------------------------------------------------------------------
 -- CREACION ROLES
