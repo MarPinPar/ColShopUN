@@ -472,3 +472,13 @@ INSERT INTO COMPARACION_has_PRODUCTO VALUES
 -- -----------------------------------------------------
 -- Llenado de RESEÑA
 -- -----------------------------------------------------
+INSERT INTO RESEÑA VALUES
+  ('MCO1991235718', 18, 3, 'Otro Iphone sin innovación.'),
+  ('194253488224', 19, 5, 'Excelente'),
+  ('194253486770', 20, 5, 'Excelente'),
+  ('3103350', 21, 4, 'Un poco caro'),
+  ('MCO1897008752', 22, 2, 'No comprar'),
+  ('MCO18518359', 23, 5, 'Excelente'),
+  ('MCO21817325', 24, 4, 'Ya puedo ver el partido'),
+  ('8806095058290', 25, 5, 'Excelente')
+  ;
