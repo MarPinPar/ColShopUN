@@ -32,7 +32,7 @@ INSERT INTO USUARIO (us_username, us_alias, us_correo, us_contraseña, us_fechaR
 ('maria_lopez', 'Maria', 'maria@example.com', 'mariapass123', '2023-10-25 15:53:00'),
 ('juan_hernandez', 'Juan', 'juan@example.com', 'juanpass', '2023-10-25 15:54:00');
 
--- SELECT * FROM USUARIO;
+SELECT * FROM USUARIO;
 
 
 -- -----------------------------------------------------
@@ -41,50 +41,43 @@ INSERT INTO USUARIO (us_username, us_alias, us_correo, us_contraseña, us_fechaR
 -- Modificar la columna pro_nombre a VARCHAR(100)
 ALTER TABLE PRODUCTO MODIFY COLUMN pro_nombre VARCHAR(300);
 ALTER TABLE PRODUCTO AUTO_INCREMENT = 1;
+ALTER TABLE PRODUCTO MODIFY pro_ID VARCHAR(20);
+
+
 
 -- Insertar nuevos productos
-INSERT INTO PRODUCTO (pro_nombre, pro_marca) VALUES
-('Apple iPhone 14 Pro (128 GB) - Morado oscuro', 'iPhone'),
-('Apple iPhone 14 Pro Max (256 GB) - Morado oscuro', 'iPhone'),
-('Apple iPhone 14 (512 GB) - Morado', 'iPhone'),
-('Apple iPhone 14 Plus (512 GB) - Azul', 'iPhone'),
-('Apple iPhone 14 (128 GB) - Medianoche', 'iPhone'),
-('Iphone 14 Pro Max 128Gb 5G Negro', 'iPhone'),
-('iPhone 14 128 GB Medianoche', 'iPhone'),
-('iPhone 14 128 GB Azul', 'iPhone'),
-('iPhone 14 Pro Max 128 GB Morado', 'iPhone'),
-('Apple Iphone 14 Pro Max 128Gb Space Black (Nuevo)', 'iPhone'),
-('iPhone 14 128 GB Azul Medianoche', 'iPhone'),
-('iPhone 14 128 GB Morado', 'iPhone'),
-('iPhone 14 Pro Max 128 GB Morado Oscuro', 'iPhone'),
-('iPhone 14 Pro 128 GB Negro Espacial', 'iPhone'),
-('iPhone 14 128 GB Azul', 'iPhone'),
-('Portátil gamer Asus TUF Gaming F15 FX506HC eclipse gray 15.6 Intel Core i5', 'Asus'),
-('Portatil Gamer Asus Tuf Gaming A15 Fa507xv-bs93 Mecha Gray 15.6, Amd Ryzen 9 7940hs, 16gb De Ram, 512gb Ssd, Nvidia Geforce Rtx 4060 8gb, 144hz 1920x1080px Windows 11 Home', 'Asus'),
-('Computador Portátil Asus Gamer Fx516pc Corei7 16gb Ssd 1tb', 'Asus'),
-('Computador ASUS Vivobook 16 Intel Core i5 1135G7 RAM 8 GB 1 TB SSD X1605EAMB186W', 'Asus'),
-('Computador ASUS Intel Core i3 1115G4 RAM 12 GB 512 GB SSD X515EABR3779W', 'Asus'),	
-('Computador ASUS Vivobook Go 15 AMD Ryzen 5 7520U RAM 8 GB 512 GB SSD E1504FANJ475W', 'Asus'),
-('Computador Portátil Gamer ASUS TUF 15,6" Pulgadas FX506 - Intel Core i5 - RAM 8GB - Disco SSD 512 GB - Negro', 'LG'),
-('Computador Portátil Gamer ASUS TUF A15 15.6" Pulgadas FA507NU - AMD Ryzen 7 - RAM 16GB - Disco SSD 512 GB - Gris', 'LG'),
-('Computador Portátil Gamer ASUS TUF Dash 15.6" Pulgadas FX517ZM - Intel Core i7 - RAM 16GB - Disco SSD 512 GB - Negro', 'LG'),
-('Televisor Samsung Smart 55 The Frame Qled 4k 55ls03b', 'Samsung'),
-('Televisor SAMSUNG 55 Pulgadas QLED Uhd4K Smart TV QN55Q60CAKXZL', 'Samsung'),
-('TV SAMSUNG 55" Pulgadas 139,7 cm QN55Q60C 4K-UHD QLED Smart TV', 'Samsung'),
-('Nevecón Samsung Side By Side 628 Litros Rs22t5200s9/co Gris', 'Samsung'),
-('Nevecón SAMSUNG Side By Side 628 Litros RS22T5200B1/CO', 'Samsung'),
-('Nevecón SAMSUNG Side by Side 628 Litros RS22T5200B1/CO Grafito', 'Samsung'),
-('Parlante Jbl Bluetooth Charge 5 Color Red 110V/220V', 'JBL'),
-('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Negro', 'JBL'),
-('Parlante JBL Inalámbrico Bluetooth Charge 5 40W Azul', 'JBL'),
-('Playstation 5', 'Otra'),
-('Consola Playstation Ps5 Estándar 825Gb + 2 Juegos', 'Otra'),
-('Consola PS5 Estándar 825GB + 1 Control Dualsense + Voucher de descarga Juego FC24', 'Otra'),
-('iPad Air 10,9 Pulgadas 256 Gb Wifi 5ta Gen', 'Apple'),
-('iPad Air 10,9" Pulgadas 256 GB Wifi 5ta Gen - Gris Espacial', 'Apple');
-
-
-
+INSERT INTO PRODUCTO (pro_ID, pro_nombre, pro_marca)
+VALUES 
+  ('MCO1991235718', 'Apple iPhone 14 Pro Max (256 GB) - Morado oscuro', 'iPhone'),
+  ('MCO1991235660', 'Apple iPhone 14 Pro Max 128 GB Morado oscuro', 'iPhone'),
+  (194253488224, 'iPhone 14 128 GB Azul Medianoche', 'iPhone'),
+  (194253486770, 'iPhone 14 Pro Max 128 GB Morado Oscuro', 'iPhone'),
+  (102378158, 'Iphone 14 Pro Max 128Gb 5G Negro', 'iPhone'),
+  (3103350, 'iPhone 14 128 GB Medianoche', 'iPhone'),
+  ('MCO1134011449', 'Computador Gamer Hp Victus Core I5 32gb 512gb Gtx 1650 W11', 'HP'),
+  ('MCO1897008752', 'Computador Gamer Hp Victus Core I5 36gb 2tb Gtx 1650 W11', 'HP'),
+  (197497202632, 'Computador Portátil Gamer Victus HP 15,6" Pulgadas Fa0000la Intel Core I5- RAM 16GB - Disco SSD 512GB - Azul', 'HP'),
+  (197497272383, 'Computador Portátil Gamer Victus HP 15.6" Pulgadas fb0102la - AMD Ryzen 5 - RAM 8GB- Disco SSD 512 GB - Gris', 'HP'),
+  ('MCO18518359', 'Smart TV Samsung The Frame QN55LS03AAGXZD QLED Tizen 4K 55" 100V/240V', 'Samsung'),
+  ('MCO21817325', 'Televisor Samsung Smart 55 The Frame Qled 4k 55ls03b', 'Samsung'),
+  (8806095058290, 'TV SAMSUNG 55" Pulgadas 139.7 cm F-QN55LS03BAK1 4K-UHD QLED THE FRAME Smart TV (Incluye marco color caoba VG-SCFA55TKBRU)', 'Samsung'),
+  (8806095058290, 'TV SAMSUNG 55" Pulgadas 139.7 cm F-QN55LS03BAK1 4K-UHD QLED THE FRAME Smart TV (Incluye marco color caoba VG-SCFA55TKBRU)', 'Samsung'),
+  ('MCO18577601', 'Nevecón inverter no frost Samsung RS22T5200 refined inox con freezer 623L 127V', 'Samsung'),
+  ('MCO811229346','Nevecón Samsung Side By Side 628 Litros Rs22t5200s9/co Gris', 'Samsung'),
+  (8806092234468, 'Nevecón SAMSUNG Side by Side 628 Litros RS22T5200B1/CO Grafito', 'Samsung'),
+  (3103340, 'Nevecón SAMSUNG Side By Side 628 litros RS22T5200S9/CO', 'Samsung'),
+  (3103340, 'Nevecón SAMSUNG Side By Side 628 litros RS22T5200S9/CO', 'Samsung'),
+  ('MCO1931313794', 'Parlante JBL Go Essential JBL-GOESBLK portátil con bluetooth waterproof negra 110V/220V', 'Otra'),
+  ('MCO1960108692', 'Parlante JBL Go Essential JBL-GOESBLK portátil con bluetooth waterproof roja 110V/220V', 'Otra'),
+  (6925281995613, 'Parlante JBL Inalámbrico Bluetooth GO Essential 3.1W Negro', 'Otra'),
+  (6925281995637, 'Parlante JBL Inalámbrico Bluetooth GO Essential 3.1W Rojo', 'Otra'),
+  (3043574, 'Parlante Go 3 BT Neg JBL JBLGO3BLKAM', 'JBL'),
+  (3043573, 'Parlante Go 3 BT Azul JBL JBLGO3BLUAM', 'JBL'),
+  ('MCO1940674356', 'Sony PlayStation 5 825GB Marvel’s Spider Man 2 Limited Edition color rojo y negro', 'Sony'),
+  ('MCO1268357573', 'Control Ps5 Negro Midnight Black Original + Cable Usb', 'Otra'),
+  (711719566625, 'Consola PS5 Estándar 825GB + 1 Control Dualsense + Voucher de descarga Juego FC24', 'Otra'),
+  (101112640, 'Consola Playstation 5 Ps5 Digital Edition 825Gb Sony', 'Sony');
+  
 -- SELECT * FROM PRODUCTO;
 
 -- -----------------------------------------------------
@@ -187,49 +180,45 @@ INSERT INTO TIENDA (tie_nombre, tie_URL) VALUES
 ('Mercadolibre', 'https://www.mercadolibre.com.co/'),
 ('Éxito', 'https://www.exito.com/');
 
--- SELECT * FROM TIENDA;
+SELECT * FROM TIENDA;
 -- -----------------------------------------------------
 -- Llenado de PRECIO
 -- -----------------------------------------------------
-INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pre_URL,pre_imagen) VALUES
-(1, 2, '2023-10-25 15:46:57.848482', 4960000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-128-gb-morado-oscuro/p/MCO19615353?pdp_filters=category:MCO1055#searchVariation=MCO19615353&position=1&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598', 'https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
-(2, 2, '2023-10-25 15:46:57.848482', 5780000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-max-256-gb-morado-oscuro/p/MCO19615354?pdp_filters=category:MCO1055#searchVariation=MCO19615354&position=2&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598', 'https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
-(3, 2, '2023-10-25 15:46:57.848482', 4479000, 'https://www.mercadolibre.com.co/apple-iphone-14-512-gb-morado/p/MCO19615374?pdp_filters=category:MCO1055#searchVariation=MCO19615374&position=3&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598','https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
-(4, 2, '2023-10-25 15:46:57.848482', 4499900, 'https://www.mercadolibre.com.co/apple-iphone-14-plus-512-gb-azul/p/MCO19615368?pdp_filters=category:MCO1055#searchVariation=MCO19615368&position=4&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598', 'https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
-(5, 2, '2023-10-25 15:46:57.848482', 3490000, 'https://www.mercadolibre.com.co/apple-iphone-14-128-gb-medianoche/p/MCO19615360?pdp_filters=category:MCO1055#searchVariation=MCO19615360&position=5&search_layout=stack&type=product&tracking_id=6ef7b206-05b1-4608-a826-bd0db409f598','https://http2.mlstatic.com/D_NQ_NP_726811-MLM51559388195_092022-V.webp'),
-(6, 3, '2023-10-25 15:47:46.173929', 5869600, 'https://tienda.exito.com/iphone-14-pro-max-128gb-5g-negro-102378158-mp/p', 'https://exitocol.vtexassets.com/arquivos/ids/15562745-500-auto?v=638043813455730000&width=500&height=auto&aspect=true'),
-(7, 3, '2023-10-25 15:47:46.173929', 4889900, 'https://tienda.exito.com/celular-apple-mpuf3bea-128-gb-medianoche-3103350/p', 'https://exitocol.vtexassets.com/arquivos/ids/19708177-500-auto?v=638304163880600000&width=500&height=auto&aspect=true'),
-(8, 3, '2023-10-25 15:47:46.173929', 4889900, 'https://tienda.exito.com/celular-apple-mpvn3bea-128-gb-azul-3103354/p', 'https://exitocol.vtexassets.com/arquivos/ids/19707953-500-auto?v=638304159981700000&width=500&height=auto&aspect=true'),
-(9, 3, '2023-10-25 15:47:46.173929', 6859900, 'https://tienda.exito.com/celular-apple-mq9t3bea-128-gb-morado-3103338/p', 'https://exitocol.vtexassets.com/arquivos/ids/19715930-500-auto?v=638306373877570000&width=500&height=auto&aspect=true'),
-(10, 3, '2023-10-25 15:47:46.173929', 6099900, 'https://tienda.exito.com/apple-iphone-14-pro-max-128gb-space-black-nuevo-102440347-mp/p', 'https://exitocol.vtexassets.com/arquivos/ids/16304461-500-auto?v=638098326936600000&width=500&height=auto&aspect=true'),
-(11, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-azul-medianoche/p/194253488224', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(12, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-morado/p/194253488248', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(13, 1, '2023-10-25 15:48:07.566115', 6099000, 'https://www.ktronix.com/iphone-14-pro-max-128gb-morado-oscuro/p/194253486770', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(14, 1, '2023-10-25 15:48:07.566115', 5579000, 'https://www.ktronix.com/iphone-14-pro-128gb-negro-espacial/p/194253488378', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(15, 1, '2023-10-25 15:48:07.566115', 4029000, 'https://www.ktronix.com/iphone14-128gb-azul/p/194253488262', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(16, 2, '2023-10-28 11:14:43.800826', 4149950, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-f15-fx506hc-eclipse-gray-156-intel-core-i5-11400h-16gb-de-ram-1512gb-ssd-nvidia-geforce-rtx-3050-144-hz-1920x1080px-windows-10-home/p/MCO20885775?pdp_filters=category:MCO1648#searchVariation=MCO20885775&position=1&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
-(17, 2, '2023-10-28 11:14:43.800826', 6699999, 'https://www.mercadolibre.com.co/portatil-gamer-asus-tuf-gaming-a15-fa507xv-bs93-mecha-gray-156-amd-ryzen-9-7940hs-16gb-de-ram-512gb-ssd-nvidia-geforce-rtx-4060-8gb-144hz-1920x1080px-windows-11-home/p/MCO24345264?pdp_filters=category:MCO1648#searchVariation=MCO24345264&position=2&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
-(18, 2, '2023-10-28 11:14:43.800826', 5559900, 'https://www.mercadolibre.com.co/computador-portatil-asus-gamer-fx516pc-corei7-16gb-ssd-1tb/p/MCO23285860?pdp_filters=category:MCO1648#searchVariation=MCO23285860&position=3&search_layout=stack&type=product&tracking_id=8267d836-ddc5-4ef2-90f9-8d343accdaa9', 'https://http2.mlstatic.com/D_NQ_NP_944371-MLA53084324269_122022-V.webp'),
-(19, 3, '2023-10-28 11:15:34.762263', 4299000, 'https://exitocol.vtexassets.com/arquivos/ids/20066698-500-auto?v=638339279637930000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-16-intel-core-i5-4-nucleos-8-gb-ram-1-tb-ssd-3128849/p'),
-(20, 3, '2023-10-28 11:15:34.762263', 3499000, 'https://exitocol.vtexassets.com/arquivos/ids/20069135-500-auto?v=638339383263070000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-intel-core-i3-1115g4-12-gb-512-gb-ssd-x515ea-br3779w-3116530/p'),
-(21, 3, '2023-10-28 11:15:34.762263', 3599000, 'https://exitocol.vtexassets.com/arquivos/ids/20066705-500-auto?v=638339279763000000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/computador-asus-vivobook-go-15-amd-ryzen-5-4-nucleos-8-gb-ram-512-gb-ssd-3128850/p'),
-(22, 1, '2023-10-28 11:15:50.063743', 3599000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-156-pulgadas-fx506-intel-core-i5-ram-8gb-disco-ssd-512-gb-negro/p/4711387063491', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(23, 1, '2023-10-28 11:15:50.063743', 5999000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-a15-156-pulgadas-fa507nu-amd-ryzen-7-ram-16gb-disco-ssd-512-gb-gris/p/4711387204382', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(24, 1, '2023-10-28 11:15:50.063743', 6799000, 'https://www.ktronix.com/computador-portatil-gamer-asus-tuf-dash-156-pulgadas-fx517zm-intel-core-i7-ram-16gb-disco-ssd-512-gb-negro/p/4711081739487', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(25, 2, '2023-10-28 13:09:21.958796', 3699900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris-_JM#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_660321-MLU71662728070_092023-V.webp'),
-(26, 3, '2023-10-28 13:19:56.145947', 3699900, 'https://exitocol.vtexassets.com/arquivos/ids/19798792-500-auto?v=638318759457870000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/televisor-samsung-55-pulgadas-qled-uhd-4k-smart-tv-qn55q60cakxzl-3130970/p'),
-(27, 1, '2023-10-28 13:20:12.005191', 2399900, 'https://www.ktronix.com/tv-samsung-55-pulgadas-1397-cm-qn55q60c-4k-uhd-qled-smart-tv/p/8806094783889', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(28, 1, '2023-10-28 13:33:18.837504', 6009900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris#position=4&search_layout=stack&type=item&tracking_id=4dfaf2cf-6444-4524-a4e8-98cd72630a3a', 'https://http2.mlstatic.com/D_NQ_NP_940993-MLA48256464464_112021-V.webp'),
-(29, 3, '2023-10-28 13:33:55.705196', 9299900, 'https://tienda.exito.com/nevecon-649litros-brutos-black-samsung-rs22t5200b1co-3034390/p', 'https://exitocol.vtexassets.com/arquivos/ids/20007002-500-auto?v=638333518046470000&width=500&height=auto&aspect=true'),
-(30, 1, '2023-10-28 13:34:11.338318', 6099900, 'https://www.ktronix.com/nevecon-samsung-side-by-side-628-litros-rs22t5200b1-co-grafito/p/8806092234468', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(31, 2, '2023-10-28 14:25:01.710322', 673900, 'https://www.mercadolibre.com.co/parlante-jbl-bluetooth-charge-5-color-red-110v220v/p/MCO18060987#searchVariation=MCO18060987&position=1&search_layout=stack&type=product&tracking_id=b2e3098e-2369-44e4-8579-5d9960a9ba49', 'https://http2.mlstatic.com/D_NQ_NP_616671-MLA46509924671_062021-V.webp'),
-(32, 1, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-negro/p/6925281982163', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(33, 1, '2023-10-28 14:25:55.037832', 939900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-charge-5-40w-azul/p/6925281982170', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(34, 2, '2023-10-28 14:35:00.419906', 2850000, 'https://articulo.mercadolibre.com.co/MCO-1965054870-playstation-5-_JM#position=14&search_layout=stack&type=item&tracking_id=9bda2cb0-e7df-41eb-b5e8-2a9aa2be0e60', 'https://http2.mlstatic.com/D_NQ_NP_875179-MCO71808719229_092023-V.webp'),
-(35, 3, '2023-10-28 14:35:46.055831', 2999997, 'https://exitocol.vtexassets.com/arquivos/ids/11010896-500-auto?v=637733054436400000&width=500&height=auto&aspect=true', NULL),
-(36, 1, '2023-10-28 14:36:02.605185', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-(37, 2, '2023-10-28 14:51:26.074661', 4300000, 'https://articulo.mercadolibre.com.co/MCO-1895720592-ipad-air-109-pulgadas-256-gb-wifi-5ta-gen-_JM#position=1&search_layout=stack&type=item&tracking_id=de1632be-506f-4387-ab38-2d34966afaa5', 'https://http2.mlstatic.com/D_NQ_NP_741049-MCO71541041196_092023-V.webp'),
-(38, 1, '2023-10-28 14:52:18.883596', 4539000, 'https://www.ktronix.com/ipadair-109-pulgadas-256gb-wifi-5ta-gen-gris-espacial/p/194252796764', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
+INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pre_URL, pre_imagen)
+VALUES
+  ('MCO1991235718', 2, '2023-10-28 20:40:02.364496', 5590000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-max-256-gb-morado-oscuro/p/MCO19615354?pdp_filters=category:MCO1055#searchVariation=MCO19615354&position=1&search_layout=stack&type=product&tracking_id=d7425eed-0e49-4618-9917-21be614a5b12', 'placeholder_image_url1'),
+  ('MCO1991235660', 2, '2023-10-28 20:40:02.364496', 5490000, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-max-128-gb-morado-oscuro/p/MCO19615329?pdp_filters=category:MCO1055#searchVariation=MCO19615329&position=3&search_layout=stack&type=product&tracking_id=d7425eed-0e49-4618-9917-21be614a5b12', 'placeholder_image_url2'),
+  (194253488224, 1, '2023-10-28 20:40:23.774478', 4029000, 'https://www.ktronix.com/iphone14-128gb-azul-medianoche/p/194253488224', 'placeholder_image_url3'),
+  (194253486770, 1, '2023-10-28 20:40:23.774478', 6099000, 'https://www.ktronix.com/iphone-14-pro-max-128gb-morado-oscuro/p/194253486770', 'placeholder_image_url4'),
+  (102378158, 3, '2023-10-28 20:41:05.259697', 5859900, 'https://exitocol.vtexassets.com/arquivos/ids/15562745-500-auto?v=638043813455730000&width=500&height=auto&aspect=true', 'placeholder_image_url5'),
+  (3103350, 3, '2023-10-28 20:41:05.259697', 4889900, 'https://exitocol.vtexassets.com/arquivos/ids/19708177-500-auto?v=638304163880600000&width=500&height=auto&aspect=true', 'placeholder_image_url6'),
+  ('MCO1134011449', 2, '2023-10-28 21:03:48.646819', 3699999, 'https://articulo.mercadolibre.com.co/MCO-1134011449-computador-gamer-hp-victus-core-i5-32gb-512gb-gtx-1650-w11-_JM#position=4&search_layout=stack&type=item&tracking_id=51be0221-73cc-42d6-9d7b-99f4fe0201bf', 'https://http2.mlstatic.com/D_NQ_NP_962770-MLM54029806942_022023-V.webp'),
+  ('MCO1897008752', 2, '2023-10-28 21:03:48.646819', 4099900, 'https://articulo.mercadolibre.com.co/MCO-1897008752-computador-gamer-hp-victus-core-i5-36gb-2tb-gtx-1650-w11-_JM#position=5&search_layout=stack&type=item&tracking_id=51be0221-73cc-42d6-9d7b-99f4fe0201bf', 'https://http2.mlstatic.com/D_NQ_NP_962770-MLM54029806942_022023-V.webp'),
+  ('MCO197497202632', 1, '2023-10-28 21:04:07.612527', 4149000, 'https://www.ktronix.com/computador-portatil-gamer-victus-hp-156-pulgadas-fa0000la-intel-core-i5-ram-16gb-disco-ssd-512gb-azul/p/197497202632', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  (197497272383, 1, '2023-10-28 21:04:07.612527', 3399000, 'https://www.ktronix.com/computador-portatil-gamer-victus-hp-156-pulgadas-fb0102la-amd-ryzen-5-ram-8gb-disco-ssd-512-gb-gris/p/197497272383', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  ('MCO18518359', 2, '2023-10-28 21:13:43.155206', 3999900, 'https://www.mercadolibre.com.co/smart-tv-samsung-the-frame-qn55ls03aagxzd-qled-tizen-4k-55-100v240v/p/MCO18518359#searchVariation=MCO18518359&position=1&search_layout=stack&type=product&tracking_id=34a23d45-f7a9-4728-bd10-9718a38ef233', 'https://http2.mlstatic.com/D_NQ_NP_602843-MLA48624638731_122021-V.webp'),
+  ('MCO21817325', 2, '2023-10-28 21:13:43.155206', 3699900, 'https://www.mercadolibre.com.co/televisor-samsung-smart-55-the-frame-qled-4k-55ls03b/p/MCO21817325#searchVariation=MCO21817325&position=2&search_layout=stack&type=product&tracking_id=34a23d45-f7a9-4728-bd10-9718a38ef233', 'https://http2.mlstatic.com/D_NQ_NP_602843-MLA48624638731_122021-V.webp'),
+  (8806095058290, 1, '2023-10-28 21:12:04.851788', 3899900, 'https://www.ktronix.com/tv-samsung-55-pulgadas-1397-cm-f-qn55ls03bak1-4k-uhd-qled-the-frame-smart-tv-incluye-marco-color-caoba-vg-scfa55tkbru/p/8806095058290', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  (8806095058290, 1, '2023-10-28 21:13:57.530012', 3899900, 'https://www.ktronix.com/tv-samsung-55-pulgadas-1397-cm-f-qn55ls03bak1-4k-uhd-qled-the-frame-smart-tv-incluye-marco-color-caoba-vg-scfa55tkbru/p/8806095058290', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  ('MCO18577601', 2, '2023-10-28 21:25:00.610739', 6009900, 'https://www.mercadolibre.com.co/nevecon-inverter-no-frost-samsung-rs22t5200-refined-inox-con-freezer-623l-127v/p/MCO18577601?pdp_filters=category:MCO115334#searchVariation=MCO18577601&position=1&search_layout=stack&type=product&tracking_id=7fe0438a-9173-479d-a28c-d1b23443a380', 'https://http2.mlstatic.com/D_NQ_NP_940993-MLA48256464464_112021-V.webp'),
+  ('MCO811229346', 2, '2023-10-28 21:25:00.610739', 6009900, 'https://articulo.mercadolibre.com.co/MCO-811229346-nevecon-samsung-side-by-side-628-litros-rs22t5200s9co-gris/_JM#position=4&search_layout=stack&type=item&tracking_id=7fe0438a-9173-479d-a28c-d1b23443a380', 'https://http2.mlstatic.com/D_NQ_NP_940993-MLA48256464464_112021-V.webp'),
+  (8806092234468, 1, '2023-10-28 21:25:14.822621', 6099900, 'https://www.ktronix.com/nevecon-samsung-side-by-side-628-litros-rs22t5200b1-co-grafito/p/8806092234468', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  (3103340, 3, '2023-10-28 21:25:56.216440', 6629000, 'https://exitocol.vtexassets.com/arquivos/ids/20006994-500-auto?v=638333517823030000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/nevecon-649litros-brutos-silve-samsung-rs22t5200s9co-3034389/p'),
+  (3103340, 3, '2023-10-28 21:25:56.216440', 6629000, 'https://exitocol.vtexassets.com/arquivos/ids/20006994-500-auto?v=638333517823030000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/nevecon-649litros-brutos-silve-samsung-rs22t5200s9co-3034389/p'),
+  ('MCO1931313794', 2, '2023-10-28 21:35:20.802840', 144000, 'https://www.mercadolibre.com.co/parlante-jbl-go-essential-jbl-goesblk-portatil-con-bluetooth-waterproof-negra-110v220v/p/MCO19561887?pdp_filters=category:MCO3835#searchVariation=MCO19561887&position=1&search_layout=stack&type=product&tracking_id=1087432b-55cd-4879-bf18-6c9884e01e04', 'https://http2.mlstatic.com/D_NQ_NP_718513-MLA51457677647_092022-V.webp'),
+  ('MCO1960108692', 2, '2023-10-28 21:35:20.802840', 179900, 'https://www.mercadolibre.com.co/parlante-jbl-go-essential-jbl-goesblk-portatil-con-bluetooth-waterproof-roja-110v220v/p/MCO19561890?pdp_filters=category:MCO3835#searchVariation=MCO19561890&position=2&search_layout=stack&type=product&tracking_id=1087432b-55cd-4879-bf18-6c9884e01e04', 'https://http2.mlstatic.com/D_NQ_NP_718513-MLA51457677647_092022-V.webp'),
+  (6925281995613, 1, '2023-10-28 21:35:39.930595', 189900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-go-essential-31w-negro/p/6925281995613', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  (6925281995637, 1, '2023-10-28 21:35:39.930595', 189900, 'https://www.ktronix.com/parlante-jbl-inalambrico-bluetooth-go-essential-31w-rojo/p/6925281995637', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  (3043574, 3, '2023-10-28 21:36:43.322452', 362900, 'https://exitocol.vtexassets.com/arquivos/ids/19579248-500-auto?v=638289502403400000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/parlante-go-3-bt-neg-jbl-jblgo3blkam-3043574/p'),
+  (3043573, 3, '2023-10-28 21:36:43.322452', 362900, 'https://exitocol.vtexassets.com/arquivos/ids/19579243-500-auto?v=638289502362400000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/parlante-go-3-bt-azu-jbl-jblgo3bluam-3043573/p'),
+  ('MCO1940674356', 2, '2023-10-28 21:46:43.485171', 3057221, 'https://www.mercadolibre.com.co/sony-playstation-5-825gb-marvels-spider-man-2-limited-edition-color-rojo-y-negro/p/MCO26081587#searchVariation=MCO26081587&position=1&search_layout=stack&type=product&tracking_id=e18dd6a8-e621-420c-b834-568e2e6d2d9f', 'https://http2.mlstatic.com/D_NQ_NP_983860-MLA71086105152_082023-V.webp'),
+  ('MCO1268357573',2, '2023-10-28 21:46:43.485171', 357900, 'https://articulo.mercadolibre.com.co/MCO-1268357573-control-ps5-negro-midnight-black-original-cable-usb-_JM#position=23&search_layout=stack&type=item&tracking_id=e18dd6a8-e621-420c-b834-568e2e6d2d9f', 'https://http2.mlstatic.com/D_NQ_NP_983860-MLA71086105152_082023-V.webp'),
+  (711719566625, 1, '2023-10-28 21:47:00.348019', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
+  (101112640, 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p');
+  
+
+
+
 
 
 -- SELECT * FROM PRECIO;
@@ -260,7 +249,7 @@ INSERT INTO CATEGORIA (cat_nombre) VALUES
 ('Instalaciones'),
 ('Seguros');
 
--- SELECT * FROM CATEGORIA;
+SELECT * FROM CATEGORIA;
 
 
 -- -----------------------------------------------------
