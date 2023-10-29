@@ -24,6 +24,16 @@ CREATE VIEW Vista_UsuariosRegistrados AS
 SELECT us_username, us_alias, us_correo, us_fechaReg
 FROM USUARIO;
 
+-- Vista de sesión:
+CREATE VIEW Sesiones_De_Usuario AS
+SELECT
+    S.USUARIO_us_username AS Username,
+    S.ses_fechaHoraIn AS SesionIniciada,
+    S.ses_fechaHoraOut AS SesionFinalizada,
+    TIMESTAMPDIFF(SECOND, S.ses_fechaHoraIn, S.ses_fechaHoraOut) AS SessionDurationInSeconds
+FROM SESION S;
+SELECT * FROM Sesiones_De_Usuario;
+
 -- Vista de Acciones de Usuarios:
 CREATE VIEW AccionesDeUsuarios AS
 SELECT
