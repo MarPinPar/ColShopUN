@@ -1,3 +1,9 @@
+-- -----------------------------------------------------------------------
+--    		Ejemplo actualizaciones y borrados
+-- -----------------------------------------------------------------------
+--   (Algunos de estos ejemplos se explican en el vídeo de la entrega 
+--     con mayor profundidad y probándolos desde varios usuarios)
+
 USE ColShop ;
 SELECT * FROM Sesiones_De_Usuario;
 SELECT * FROM Vista_UsuariosRegistrados;
@@ -29,3 +35,14 @@ WHERE us_username IN (
 UPDATE SESION
 SET ses_fechaHoraIn = '2023-10-29 19:59:39.821854'
 WHERE USUARIO_us_username = 'juan_perez';
+
+
+-- Ejemplos adicionales
+
+INSERT INTO PRODUCTO (pro_ID, pro_nombre, pro_marca) VALUES ('TEST_ID', 'Test_NOMBRE', 'TEST_MARCA');
+
+DELETE FROM PRODUCTO WHERE pro_ID = "TEST_ID";
+
+SELECT * FROM miPerfil;
+
+SELECT * FROM USUARIO;

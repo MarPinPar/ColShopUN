@@ -83,7 +83,6 @@ CREATE USER 'juan_perez'@'localhost' IDENTIFIED BY 'Cl4v3#123';
 GRANT 'usuario'@'localhost' TO 'juan_perez'@'localhost';
 SET DEFAULT ROLE ALL TO 'juan_perez'@'localhost';
 
-<<<<<<< Updated upstream
 -- -----------------------------------------------------------------------
 -- CREACION MODERADOR
 -- -----------------------------------------------------------------------
@@ -91,19 +90,11 @@ DROP USER IF EXISTS 'mod_test'@'localhost';
 CREATE USER 'mod_test'@'localhost' IDENTIFIED BY 'key_test';
 GRANT 'moderador'@'localhost' TO 'mod_test'@'localhost';
 SET DEFAULT ROLE ALL TO 'mod_test'@'localhost';
-=======
 
 -- -----------------------------------------------------------------------
--- CREACION USUARIOS
+-- CREACION ADMIN
 -- -----------------------------------------------------------------------
 DROP USER IF EXISTS 'admin1'@'localhost';
--- Crea un nuevo usuario llamado 'admin1' con la contraseña 'Uno2tres**'
 CREATE USER 'admin1'@'localhost' IDENTIFIED BY 'Uno2tres**';
-
--- Otorga al usuario 'admin1' el rol 'admin'
 GRANT 'admin'@'localhost' TO 'admin1'@'localhost';
-
--- Establece 'admin' como el rol predeterminado para el usuasrio 'admin1'
 SET DEFAULT ROLE ALL TO 'admin1'@'localhost';
-
->>>>>>> Stashed changes

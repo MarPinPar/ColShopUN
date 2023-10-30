@@ -114,4 +114,4 @@ WHERE Nombre = 'NOMBRE_PRODUCTO';
 -- 12. Consulta los productos que cuentan con una imagen
 SELECT DISTINCT p.* FROM PRODUCTO p
 JOIN PRECIO pr ON p.pro_ID = pr.PRODUCTO_pro_ID
-WHERE pr.pre_imagen IS NOT NULL
+WHERE pr.pre_imagen IS NOT NULL;
