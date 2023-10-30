@@ -2,13 +2,17 @@
 Consultas en Algebra Relacional (para ver los scripts 
 de SQL vea ColShop_Queries.sql)
 
-- 1.
+- 1.UsuariosRegistradosPorMes ← π Mes_Registro, Total_Usuarios(ρ Mes_Registro ← DATE_FORMAT(us_fechaReg, '%Y-%m'), Total_Usuarios ← COUNT(*) (USUARIO ⨝ True))
+Resultado: UsuariosRegistradosPorMes
 
-- 2.
 
-- 3.
+- 2.ProductosDeseados ← π pro_nombre, pro_marca (PRODUCTO ⨝ (pro_ID IN (π PRODUCTO_pro_ID (σ pre_valor >= 4000000 AND pre_valor <= 6000000 (PRECIO)))))
+Resultado: ProductosDeseados
 
-- 4.
+
+- 3. PrecioMásBajoPorTienda ← π MIN(pre_valor) AS Precio_Más_Bajo, tie_nombre AS Tienda ((PRODUCTO ⨝ PRECIO) ⨝ TIENDA) ⨝ (pro_nombre = 'Parlante JBL Go')
+
+- 4. ÚltimaActualizaciónProducto ← π pro_nombre AS Producto, pre_fechaHora AS Ultima_Actualizacion, pre_valor AS Precio ((PRODUCTO ⨝ PRECIO) ⨝ (pro_ID = 'MCO1940674356')) ⨝ (pre_fechaHora = MAX(pre_fechaHora) (σ pro_ID = 'MCO1940674356' (PRODUCTO ⨝ PRECIO)))
 
 - 5. Consulta para un ADMINISTRADOR que quiere ver las estadísticas de precios por tienda
 t1 ← γ tie_nombre; max(pre_valor) → maximum (precio ⨝ tienda (TIENDA_tie_ID = tie_ID))
