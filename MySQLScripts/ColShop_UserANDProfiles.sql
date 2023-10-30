@@ -1,10 +1,9 @@
 -- -----------------------------------------------------------------------
---                  !!! CREACION ROLES !!!!
+-- CREACION ROLES
 -- -----------------------------------------------------------------------
 
--- -----------------------------------------------------------------------
--- Rol USUARIO
--- -----------------------------------------------------------------------
+-- ------------------- USUARIO(Comprador) ------------------------------------
+
 DROP ROLE IF EXISTS 'usuario'@'localhost';
 CREATE ROLE 'usuario'@'localhost';
 
@@ -32,11 +31,12 @@ GRANT SELECT ON producto TO 'usuario'@'localhost';
 GRANT SELECT ON precio TO 'usuario'@'localhost';
 GRANT SELECT ON tienda TO 'usuario'@'localhost';
 
+
 GRANT CREATE, UPDATE, DELETE ON reseña TO 'usuario'@'localhost';
 
--- -----------------------------------------------------------------------
--- Rol ADMINISTRADOR
--- -----------------------------------------------------------------------
+
+-- ------------------- ADMIN ------------------------------------
+
 DROP ROLE IF EXISTS 'admin'@'localhost';
 CREATE ROLE 'admin'@'localhost';
 
@@ -60,43 +60,22 @@ GRANT SELECT, UPDATE, DELETE, INSERT ON sesion TO 'admin'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON sesion_has_accion TO 'admin'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON tienda TO 'admin'@'localhost';
 
--- -----------------------------------------------------------------------
--- Rol MODERADOR
--- -----------------------------------------------------------------------
-DROP ROLE IF EXISTS 'moderador'@'localhost';
-CREATE ROLE 'moderador'@'localhost';
-
-GRANT SELECT ON categoria TO 'moderador'@'localhost';
-GRANT SELECT ON producto_has_categoria TO 'moderador'@'localhost';
-GRANT SELECT ON producto TO 'moderador'@'localhost';
-GRANT SELECT ON precio TO 'moderador'@'localhost';
-GRANT SELECT ON tienda TO 'moderador'@'localhost';
-GRANT SELECT, UPDATE, DELETE, INSERT ON comentariosProducto TO 'moderador'@'localhost';
-GRANT SELECT, UPDATE, DELETE, INSERT ON reseña TO 'moderador'@'localhost';
-
 
 -- -----------------------------------------------------------------------
 -- CREACION USUARIOS
 -- -----------------------------------------------------------------------
+
 DROP USER IF EXISTS 'juan_perez'@'localhost';
 CREATE USER 'juan_perez'@'localhost' IDENTIFIED BY 'Cl4v3#123';
 GRANT 'usuario'@'localhost' TO 'juan_perez'@'localhost';
 SET DEFAULT ROLE ALL TO 'juan_perez'@'localhost';
 
-<<<<<<< Updated upstream
 -- -----------------------------------------------------------------------
--- CREACION MODERADOR
+-- CREACION ADMIN
 -- -----------------------------------------------------------------------
-DROP USER IF EXISTS 'mod_test'@'localhost';
-CREATE USER 'mod_test'@'localhost' IDENTIFIED BY 'key_test';
-GRANT 'moderador'@'localhost' TO 'mod_test'@'localhost';
-SET DEFAULT ROLE ALL TO 'mod_test'@'localhost';
-=======
-
--- -----------------------------------------------------------------------
--- CREACION USUARIOS
--- -----------------------------------------------------------------------
+-- Elimina el usuario 'admin1' si ya existe, sin generar errores si no existe
 DROP USER IF EXISTS 'admin1'@'localhost';
+
 -- Crea un nuevo usuario llamado 'admin1' con la contraseña 'Uno2tres**'
 CREATE USER 'admin1'@'localhost' IDENTIFIED BY 'Uno2tres**';
 
@@ -106,4 +85,3 @@ GRANT 'admin'@'localhost' TO 'admin1'@'localhost';
 -- Establece 'admin' como el rol predeterminado para el usuasrio 'admin1'
 SET DEFAULT ROLE ALL TO 'admin1'@'localhost';
 
->>>>>>> Stashed changes
