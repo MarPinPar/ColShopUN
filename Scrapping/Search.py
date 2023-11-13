@@ -30,7 +30,6 @@ def reload_driver(chromedriver_path):
 chromedriver_path = '/Users/knsmolina.28/Desktop/Scrapping/chromedriver'
 output_csv_path = 'products.csv'
 
-
 product_to_search = "Iphone 14"
 result = unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 print(result)

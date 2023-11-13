@@ -13,7 +13,7 @@ async def root():
     # This is the root endpoint of the FastAPI application, which returns a welcome message when accessed.
 
 @app.get("/search_product")
-def search_product(product_to_search: str):
+async def search_product(product_to_search: str):
     chromedriver_path = '/Users/knsmolina.28/Desktop/Scrapping/chromedriver'  # Path to ChromeDriver executable
     output_csv_path = 'products.csv'  # Path to the output CSV file
 
