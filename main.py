@@ -5,7 +5,7 @@ import pandas as pd
 from Scrapping import Exito, Ktronix, MercadoLibre  # Importing custom scraping modules
 
 app = FastAPI()  # Create a FastAPI application
-app.title = "ColShop Database"  #  application title
+app.title = "ColShop Database, Nataly"  #  application title
 
 @app.get("/")
 async def root():
