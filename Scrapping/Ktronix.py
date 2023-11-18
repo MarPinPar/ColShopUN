@@ -39,6 +39,8 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
               'Philips', 'Acer', 'Acros', 'vivo', 'Motorola', 'Wahl', 'Fujifilm', 'GoPro', 'Google Home', 'Tecno',
               'Legion', 'Moto', 'Apple', 'Nintendo', 'Microsoft', 'Sony']
 
+    products_added = 0
+
     for product in product_total:
 
         id_products = product.find_element(by=By.CLASS_NAME, value='js-view-details')
@@ -68,6 +70,13 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
         links.append(product_link_element)
         images.append(product_image_element)
         identificador_producto.append(id_products)
+
+        # Increment the count of products added
+        products_added += 1
+
+        # Break the loop if three products are added
+        if products_added == 4:
+            break
 
     driver.close()
 

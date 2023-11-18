@@ -3,6 +3,8 @@ import undetected_chromedriver as uc
 from selenium import webdriver
 import pandas as pd
 from Scrapping import Exito, Ktronix, MercadoLibre  # Importing custom scraping modules
+import sqlite3
+
 
 app = FastAPI()  # Create a FastAPI application
 app.title = "ColShop Database, Nataly"  #  application title

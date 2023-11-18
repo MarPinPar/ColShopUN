@@ -66,8 +66,6 @@ def searchProduct(keyWord, data_product : dict, driver : webdriver.Chrome) -> di
         link = product.find_element(By.CLASS_NAME, 'vtex-product-summary-2-x-clearLink')
         link = link.get_attribute("href")
 
-
-
         marca_encontrada = False
         for marca in marcas:
             if marca.lower() in title_products.lower():
