@@ -5,9 +5,16 @@ import pandas as pd
 from Scrapping import Exito, Ktronix, MercadoLibre  # Importing custom scraping modules
 import sqlite3
 
-
 app = FastAPI()  # Create a FastAPI application
 app.title = "ColShop Database, Nataly"  #  application title
+
+# MySQL database connection configuration
+mysql_config = {
+    "host": "your_host",
+    "user": "your_user",
+    "password": "your_password",
+    "database": "your_database",
+}
 
 @app.get("/")
 async def root():
@@ -44,7 +51,6 @@ def unified_product_search(product_to_search, chromedriver_path, output_csv_path
     # Loop through the search functions and perform product searches for each
     for search_function in search_functions:
         search_and_merge(search_function, data_product, product_to_search)
-
     df = pd.DataFrame(data_product)  # Create a Pandas DataFrame from the collected data
     df.to_csv(output_csv_path, index=False)  # Save the data to a CSV file
     return df  # Return the DataFrame
