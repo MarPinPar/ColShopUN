@@ -1,6 +1,7 @@
 USE ColShop;
 
 -- 1. This procedure retrieves the  lowest price of a product 
+
 DELIMITER $$
 
 CREATE PROCEDURE GetLowestPriceByProductName
@@ -41,4 +42,6 @@ END $$
 DELIMITER ;
 
 CALL GetPricesForProductsBySearch('iPhone 14');
+
+
 
