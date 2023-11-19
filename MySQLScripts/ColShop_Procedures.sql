@@ -24,9 +24,6 @@ DELIMITER ;
 
 CALL GetLowestPriceByProductName('Parlante JBL Go');
 
-
-
-
 -- 2. This procedure retrieves prices for all products that match a given search term in their names
 DELIMITER $$
 
@@ -42,6 +39,28 @@ END $$
 DELIMITER ;
 
 CALL GetPricesForProductsBySearch('iPhone 14');
+
+-- 3. This procedure retrieve the price history of a specific product in a particular store,
+
+DELIMITER $$
+
+CREATE PROCEDURE GetPriceHistoryForProductInStore
+(
+    IN p_ProductID VARCHAR(45),
+    IN p_StoreID INT
+)
+BEGIN
+    SELECT pre_valor, pre_fechaHora
+    FROM PRECIO
+    WHERE PRODUCTO_pro_ID = p_ProductID AND TIENDA_tie_ID = p_StoreID
+    ORDER BY pre_fechaHora DESC;
+END $$
+
+DELIMITER ;
+
+CALL GetPriceHistoryForProductInStore('194253488224', 1);
+
+-- 
 
 
 
