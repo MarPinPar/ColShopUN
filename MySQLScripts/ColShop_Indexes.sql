@@ -57,6 +57,6 @@ SELECT * FROM PRODUCTO
 -- 6. Index on a each product's review scores
 CREATE INDEX idx_reseña_calificacion ON RESEÑA (PRODUCTO_pro_ID, res_calificacion);
 -- Query for reviews with a score lower than 3 for a specific product
-
- 
-SET profiling = 0;
+SELECT * FROM RESEÑA
+	WHERE PRODUCTO_pro_ID LIKE 'MCO%' 
+    AND res_calificacion < 3;
