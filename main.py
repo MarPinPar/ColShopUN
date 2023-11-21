@@ -6,7 +6,7 @@ from Scrapping import Exito, Ktronix, MercadoLibre  # Importing custom scraping 
 import sqlite3
 
 app = FastAPI()  # Create a FastAPI application
-app.title = "ColShop Database, Nataly"  #  application title
+app.title = "ColShop Database 2023-2"  #  application title
 
 # MySQL database connection configuration
 mysql_config = {
