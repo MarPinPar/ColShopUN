@@ -65,7 +65,8 @@ VALUES
   ('MCO1940674356', 'Sony PlayStation 5 825GB Marvel’s Spider Man 2 Limited Edition color rojo y negro', 'Sony'),
   ('MCO1268357573', 'Control Ps5 Negro Midnight Black Original + Cable Usb', 'Otra'),
   ('711719566625', 'Consola PS5 Estándar 825GB + 1 Control Dualsense + Voucher de descarga Juego FC24', 'Otra'),
-  ('101112640', 'Consola Playstation 5 Ps5 Digital Edition 825Gb Sony', 'Sony');
+  ('101112640', 'Consola Playstation 5 Ps5 Digital Edition 825Gb Sony', 'Sony'),
+  ('194253488224','iPhone 14 128 GB Azul Medianoche','iPhone');
 
   
 -- SELECT* FROM PRODUCTO;
@@ -184,8 +185,8 @@ VALUES
   ('MCO1940674356', 2, '2023-10-28 21:46:43.485171', 3057221, 'https://www.mercadolibre.com.co/sony-playstation-5-825gb-marvels-spider-man-2-limited-edition-color-rojo-y-negro/p/MCO26081587#searchVariation=MCO26081587&position=1&search_layout=stack&type=product&tracking_id=e18dd6a8-e621-420c-b834-568e2e6d2d9f', 'https://http2.mlstatic.com/D_NQ_NP_983860-MLA71086105152_082023-V.webp'),
   ('MCO1268357573',2, '2023-10-28 21:46:43.485171', 357900, 'https://articulo.mercadolibre.com.co/MCO-1268357573-control-ps5-negro-midnight-black-original-cable-usb-_JM#position=23&search_layout=stack&type=item&tracking_id=e18dd6a8-e621-420c-b834-568e2e6d2d9f', 'https://http2.mlstatic.com/D_NQ_NP_983860-MLA71086105152_082023-V.webp'),
   ('711719566625', 1, '2023-10-28 21:47:00.348019', 3599900, 'https://www.ktronix.com/consola-ps5-estandar-825gb-1-control-dualsense-voucher-descarga-juego-fc24/p/711719566625', 'https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg'),
-  ('101112640', 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p')
-  ;
+  ('101112640', 3, '2023-10-28 21:47:48.28766', 2279889, 'https://exitocol.vtexassets.com/arquivos/ids/9154831-500-auto?v=637631028265630000&width=500&height=auto&aspect=true', 'https://tienda.exito.com/consola-playstation-5-ps5-digital-edition-sony-101112640-mp/p'),
+  ('194253488224','1','2023-11-19 13:49:35.084343','4029000','https://www.ktronix.com/iphone14-128gb-azul-medianoche/p/194253488224','https://www.ktronix.com/_ui/responsive/theme-ktronix/images/missing_product_EN_300x300.jpg');
 
 -- SELECT* FROM PRECIO;
 
