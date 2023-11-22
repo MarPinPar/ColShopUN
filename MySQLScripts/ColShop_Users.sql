@@ -8,6 +8,7 @@
 DROP ROLE IF EXISTS 'usuario'@'localhost';
 CREATE ROLE 'usuario'@'localhost';
 
+-- Permisos sobre tablas/vistas
 GRANT SELECT, UPDATE ON miPerfil TO 'usuario'@'localhost';
 GRANT SELECT ON perfiles TO 'usuario'@'localhost';
 GRANT SELECT ON listasVisibles TO 'usuario'@'localhost';
@@ -17,7 +18,6 @@ GRANT SELECT ON historialComparaciones TO 'usuario'@'localhost';
 GRANT SELECT ON comentariosProducto TO 'usuario'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
 
-GRANT CREATE ON lista_has_producto TO 'usuario'@'localhost';
 GRANT CREATE ON sesion TO 'usuario'@'localhost';
 GRANT CREATE ON sesion_has_accion TO 'usuario'@'localhost';
 GRANT CREATE ON accion TO 'usuario'@'localhost';
@@ -32,7 +32,29 @@ GRANT SELECT ON producto TO 'usuario'@'localhost';
 GRANT SELECT ON precio TO 'usuario'@'localhost';
 GRANT SELECT ON tienda TO 'usuario'@'localhost';
 
+GRANT CREATE, DELETE ON lista_has_producto TO 'usuario'@'localhost';
 GRANT CREATE, UPDATE, DELETE ON reseña TO 'usuario'@'localhost';
+
+-- Permisos sobre procedimientos/funciones
+GRANT EXECUTE ON PROCEDURE sp_create_action TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_create_busqueda TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_create_comparacion TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_create_list TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_create_reseña TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_create_session TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_from_comparacion TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_list TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_product_from_list TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_reseña TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_fill_comparacion TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_list TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_GetLowestPriceByProductName TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_GetPriceHistoryForProductInStore TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_GetPricesForProductsBySearch TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_insert_product_into_list TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_modify_user TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_set_session_end TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_view_list TO 'usuario'@'localhost';
 
 -- -----------------------------------------------------------------------
 -- Rol ADMINISTRADOR
@@ -60,6 +82,21 @@ GRANT SELECT, UPDATE, DELETE, INSERT ON sesion TO 'admin'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON sesion_has_accion TO 'admin'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON tienda TO 'admin'@'localhost';
 
+-- Permisos sobre procedimientos/funciones
+GRANT EXECUTE ON PROCEDURE sp_delete_list TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_product_from_list TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_reseña TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_list TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_GetLowestPriceByProductName TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_GetPriceHistoryForProductInStore TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_GetPricesForProductsBySearch TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_set_session_end TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_view_list TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_add_product_category TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_create_category TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_product_category TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_create_user TO 'admin'@'localhost';
+
 -- -----------------------------------------------------------------------
 -- Rol MODERADOR
 -- -----------------------------------------------------------------------
@@ -74,6 +111,11 @@ GRANT SELECT ON tienda TO 'moderador'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON comentariosProducto TO 'moderador'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON reseña TO 'moderador'@'localhost';
 
+-- Permisos sobre procedimientos/funciones
+GRANT EXECUTE ON PROCEDURE sp_delete_list TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_delete_reseña TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_list TO 'admin'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_view_list TO 'admin'@'localhost';
 
 -- -----------------------------------------------------------------------
 -- CREACION USUARIOS
