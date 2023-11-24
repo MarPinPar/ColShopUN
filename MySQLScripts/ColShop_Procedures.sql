@@ -22,7 +22,7 @@ DELIMITER ;
 
 --  Call the lowest prices 
 
-CALL sp_GetLowestPriceByProductName('Parlante JBL Go');
+-- CALL sp_GetLowestPriceByProductName('Parlante JBL Go');
 
 -- 2. This procedure retrieves prices for all products that match a given search term in their names
 DROP PROCEDURE IF EXISTS sp_GetPricesForProductsBySearch;
@@ -38,7 +38,7 @@ END $$
 
 DELIMITER ;
 
-CALL sp_GetPricesForProductsBySearch('iPhone 14');
+-- CALL sp_GetPricesForProductsBySearch('iPhone 14');
 
 -- 3. This procedure retrieve the price history of a specific product in a particular store
 DROP PROCEDURE IF EXISTS sp_GetPriceHistoryForProductInStore;
@@ -365,32 +365,3 @@ BEGIN
 END $$
 
 DELIMITER ;
-
--- 25. This procedure retrieves the most recent price of a product in each store
-DROP PROCEDURE IF EXISTS sp_getMostRecentPriceByProductName;
-DELIMITER $$
-
-CREATE PROCEDURE sp_getMostRecentPriceByProductName
-(
-    IN p_PartialProductName VARCHAR(45)
-)
-BEGIN
-    SELECT P.pro_nombre, TI.tie_nombre, PR.pre_valor, PR.pre_fechaHora
-    FROM TIENDA TI
-    INNER JOIN PRECIO PR ON TI.tie_ID = PR.TIENDA_tie_ID
-    INNER JOIN (
-			SELECT PRODUCTO_pro_ID, MAX(pre_fechaHora) as fh, TIENDA_tie_ID FROM PRECIO GROUP BY PRODUCTO_pro_ID, TIENDA_tie_ID)
-            AS maxP ON maxP.PRODUCTO_pro_ID = PR.PRODUCTO_pro_ID
-    INNER JOIN PRODUCTO P ON maxP.PRODUCTO_pro_ID = P.pro_ID
-    WHERE P.pro_nombre LIKE CONCAT('%', p_PartialProductName, '%')
-		AND maxP.fh = PR.pre_fechaHora;
-END $$
-
-DELIMITER ;
-
---  Call the most recent prices 
--- INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pre_URL, pre_imagen)
--- VALUES
--- ('MCO1991235718', 2, '2023-11-28 20:41:02.364496', 2, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-max-256-gb-morado-oscuro/p/MCO19615354?pdp_filters=category:MCO1055#searchVariation=MCO19615354&position=1&search_layout=stack&type=product&tracking_id=d7425eed-0e49-4618-9917-21be614a5b12', 'placeholder_image_url1');
-
--- CALL sp_getMostRecentPriceByProductName('Iphone');
