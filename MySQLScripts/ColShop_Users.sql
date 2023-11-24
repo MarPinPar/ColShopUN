@@ -55,6 +55,7 @@ GRANT EXECUTE ON PROCEDURE sp_insert_product_into_list TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_modify_user TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_set_session_end TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_view_list TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_getMostRecentPriceByProductName TO 'usuario'@'localhost';
 
 -- -----------------------------------------------------------------------
 -- Rol ADMINISTRADOR
