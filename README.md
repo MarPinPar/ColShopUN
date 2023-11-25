@@ -6,16 +6,17 @@ Python 3.x
 
 ## Virtual Environment Setup
 
-python3.9 -m venv fastapi-env \\
-source fastapi-env/bin/activate\\
-pip install -r requirements.txt\\
+python3.9 -m venv fastapi-env 
+source fastapi-env/bin/activate
+pip install -r requirements.txt
 
-## Ensure a MySQL server is running.\\
-Configure environment variables in a .env file: \\
 
-MYSQL_HOST=your_host \\
-MYSQL_USER=your_user \\
-MYSQL_PASSWORD=your_password \\
+## Ensure a MySQL server is running.
+Configure environment variables in a .env file: 
+
+MYSQL_HOST=your_host 
+MYSQL_USER=your_user 
+MYSQL_PASSWORD=your_password 
 MYSQL_DATABASE=your_database
 SECRET_KEY=your_secret_key
 
