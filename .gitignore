@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
 # .gitignore
-=======
 .env
->>>>>>> Stashed changes
 __pycache__
 *.pyc
 *.pyo
