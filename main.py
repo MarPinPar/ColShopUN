@@ -61,7 +61,7 @@ async def root():
 
 @app.get("/search_product")
 async def search_product(product_to_search: str):
-    chromedriver_path = '/Users/knsmolina.28/Desktop/Scrapping/chromedriver'  # Path to ChromeDriver executable
+    chromedriver_path = config('CHROME_DRIVER')  # Path to ChromeDriver executable
     output_csv_path = 'products.csv'  # Path to the output CSV file
 
     # Call the unified_product_search function to perform product search and save results to a CSV
