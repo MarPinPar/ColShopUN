@@ -1,5 +1,19 @@
 USE ColShop;
 
+-- Inserting data to product:
+DELIMITER //
+
+CREATE PROCEDURE sp_InsertDataIntoProducto(
+    IN pro_id_param VARCHAR(45),
+    IN pro_nombre_param VARCHAR(300),
+    IN pro_marca_param VARCHAR(45)
+)
+BEGIN
+    INSERT INTO PRODUCTO (pro_ID, pro_nombre, pro_marca)
+    VALUES (pro_id_param, pro_nombre_param, pro_marca_param);
+END //
+
+DELIMITER ;
 
 select * from producto;
 DELIMITER //

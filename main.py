@@ -10,13 +10,9 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from decouple import config
 
-<<<<<<< Updated upstream
-SECRET_KEY = config('SECRET_KEY')
-
-=======
 
 SECRET_KEY = config('SECRET_KEY')
->>>>>>> Stashed changes
+
 ALGORITHM = 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -152,9 +148,4 @@ def reload_driver(chromedriver_path):
     options = uc.ChromeOptions()
     options.add_argument("--headless")  # Configure Chrome to run in headless mode (without GUI)
     driver = uc.Chrome(executable_path=chromedriver_path, options=options)  # Initialize ChromeDriver
-<<<<<<< Updated upstream
     return driver
-
-=======
-    return driver
->>>>>>> Stashed changes
