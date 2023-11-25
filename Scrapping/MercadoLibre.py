@@ -66,7 +66,7 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
         products_added += 1
 
         # Break the loop if three products are added
-        if products_added == 4:
+        if products_added == 2:
             break
 
     data_product['titulo'].extend(titles_products)

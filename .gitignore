@@ -1,0 +1,15 @@
+# .gitignore
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite
+*.log
+*.csv
+/venv/
+/env/
+/__pycache__/
+/.vscode/
+/logs/
+.DS_Store  # Add this line to ignore .DS_Store files
