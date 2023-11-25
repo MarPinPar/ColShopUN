@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 # .gitignore
+=======
+.env
+>>>>>>> Stashed changes
 __pycache__
 *.pyc
 *.pyo
@@ -12,4 +16,8 @@ __pycache__
 /__pycache__/
 /.vscode/
 /logs/
+<<<<<<< Updated upstream
 .DS_Store  # Add this line to ignore .DS_Store files
+=======
+.DS_Store
+>>>>>>> Stashed changes
