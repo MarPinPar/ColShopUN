@@ -1,21 +1,21 @@
 USE ColShop;
-
--- Inserting data to product:
+-- Insertign data to price:
 DELIMITER //
-
-CREATE PROCEDURE sp_InsertDataIntoProducto(
+CREATE PROCEDURE sp_InsertDataIntoPrecio(
     IN pro_id_param VARCHAR(45),
-    IN pro_nombre_param VARCHAR(300),
-    IN pro_marca_param VARCHAR(45)
+    IN tie_id_param INT,
+    IN pre_fechaHora_param DATETIME,
+    IN pre_valor_param INT,
+    IN pre_url_param VARCHAR(2048),
+    IN pre_imagen_param LONGBLOB
 )
 BEGIN
-    INSERT INTO PRODUCTO (pro_ID, pro_nombre, pro_marca)
-    VALUES (pro_id_param, pro_nombre_param, pro_marca_param);
+    INSERT INTO PRECIO (PRODUCTO_pro_ID, TIENDA_tie_ID, pre_fechaHora, pre_valor, pre_URL, pre_imagen)
+    VALUES (pro_id_param, tie_id_param, pre_fechaHora_param, pre_valor_param, pre_url_param, pre_imagen_param);
 END //
-
 DELIMITER ;
 
-select * from producto;
+-- Inserting data to product:
 DELIMITER //
 
 CREATE PROCEDURE sp_InsertDataIntoProducto(
