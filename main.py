@@ -61,7 +61,7 @@ async def root():
 
 @app.get("/search_product")
 async def search_product(product_to_search: str):
-    chromedriver_path = config('CHROME_DRIVER')  # Path to ChromeDriver executable
+    chromedriver_path = config('CHROMEDRIVER_PATH')  # Path to ChromeDriver executable
     output_csv_path = 'products.csv'  # Path to the output CSV file
 
     # Call the unified_product_search function to perform product search and save results to a CSV
@@ -123,12 +123,23 @@ def insert_data_into_database(df):
         pro_nombre = row['titulo']
         pro_marca = row['marca']
         # Insert data into PRODUCTO table
+
+
         cursor.callproc('sp_InsertDataIntoProducto', (pro_ID, pro_nombre, pro_marca))
+        tie_ID = row['idTienda']
+        pre_fechaHora = row['fecha']
+        pre_valor = row['precio']
+        pre_URL = row['link']
+        pre_imagen = row['imagen']
+        cursor.callproc('sp_InsertDataIntoPrecio', (pro_ID, tie_ID, pre_fechaHora, pre_valor, pre_URL, pre_imagen))
+
+    conn.commit()
+    cursor.close()
     conn.commit()
     cursor.close()
 
 def unified_product_search(product_to_search, chromedriver_path, output_csv_path):
-    data_product = {"titulo": [], "precio": [], "link": [], "marca": [], "imagen": [], "empresa": [], "fecha": [], 'id': []}
+    data_product = {"titulo": [], "precio": [], "link": [], "marca": [], "imagen": [], "empresa": [], "fecha": [], 'id': [],'idTienda':[]}
     # Initialize a dictionary to store product data
     def search_and_merge(search_function, data_product, product_to_search):
         driver = reload_driver(chromedriver_path)  # Reload the ChromeDriver with undetected-chromedriver

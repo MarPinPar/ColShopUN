@@ -66,9 +66,8 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
         products_added += 1
 
         # Break the loop if three products are added
-        if products_added == 2:
+        if products_added == 3:
             break
-
     data_product['titulo'].extend(titles_products)
     data_product['precio'].extend(prices)
     data_product['link'].extend(links_products)
@@ -77,18 +76,24 @@ def searchProduct(keyWord, data_product: dict, driver: webdriver.Chrome) -> dict
     data_product['empresa'].extend(["Mercado Libre"] * len(titles_products))
     data_product['fecha'].extend([datetime.datetime.today()] * len(titles_products))
     data_product['id'].extend(identificador_producto)
+    data_product['idTienda'].extend([2] * len(titles_products))  # Corregido aquí
 
     # Initialize a CSV file for writing
     with open('products.csv', 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
-
-
         # Write the CSV header
-        csv_writer.writerow(['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha','Identificador'])
+        csv_writer.writerow(
+            ['Titulo', 'Precio', 'Link', 'Marca', 'Imagen', 'Empresa', 'Fecha', 'Identificador', 'id_tienda'])
 
         # Write the data to the CSV file
-        for title, price, link, marca, imagen, empresa, id in zip(titles_products, prices, links_products, marcas_productos, image_urls, ["Mercado Libre"] * len(titles_products), identificador_producto):
-            csv_writer.writerow([title, price, link, marca, imagen, empresa])
+        for title, price, link, marca, imagen, empresa, id, idTienda in zip(titles_products, prices, links_products,
+                                                                            marcas_productos, image_urls,
+                                                                            ["Mercado Libre"] * len(titles_products),
+                                                                            identificador_producto,
+                                                                            [2] * len(titles_products)):
+            csv_writer.writerow([title, price, link, marca, imagen, empresa, idTienda])
             fecha = datetime.datetime.today()
-            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha, id])
+            csv_writer.writerow([title, price, link, marca, imagen, empresa, fecha, id, idTienda])
+
     return data_product
+
