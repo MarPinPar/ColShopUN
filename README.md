@@ -14,11 +14,11 @@ Ensure you have the following prerequisites installed before starting:
 ## Ensure a MySQL server is running.
 Configure environment variables in a .env file: 
 
-	MYSQL_HOST=your_host 
-	MYSQL_USER=your_user 
-	MYSQL_PASSWORD=your_password 
-	MYSQL_DATABASE=your_database
-	SECRET_KEY=your_secret_key
+	MYSQL_HOST="your_host" 
+	MYSQL_USER="your_user" 
+	MYSQL_PASSWORD="your_password" 
+	MYSQL_DATABASE="your_database"
+	SECRET_KEY="your_secret_key"
 
 
 ##Execute the project:
