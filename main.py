@@ -166,6 +166,21 @@ async def get_most_recent_price(partial_product_name: str):
         print(f"Error: {e}")
 
 
+@app.delete("/delete_review")
+async def delete_review(pro_id: int, id_autoinc: int):
+    try:
+        cursor = conn.cursor()
+        # Call the stored procedure
+        cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
+
+        # Commit the changes to the database
+        conn.commit()
+        return {"message": "Review deleted successfully"}
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+
 
 def insert_data_into_database(df):
     cursor = conn.cursor()
