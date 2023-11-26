@@ -115,6 +115,73 @@ async def get_prices_by_search(search_term: str):
     except Exception as e:
         print(f"Error: {e}")
 
+
+@app.get("/get_prices_by_history")
+async def get_prices_by_search_history(product_id: str, store_id: int):
+    try:
+        # Assuming you have 'conn' as the database connection
+        cursor = conn.cursor()
+        print(f"Searching for products with term: {product_id}")
+        print(f"Searching for products with term: {store_id}")
+        # Call the stored procedure
+        cursor.callproc('sp_GetPriceHistoryForProductInStore', [product_id, store_id])
+
+        # Fetch the results from the stored procedure
+        for result in cursor.stored_results():
+            price_history = result.fetchall()
+
+        # Check if there are results
+        if price_history:
+            response = [{"pre_valor": row[0], "pre_fechaHora": row[1]} for row in price_history]
+        else:
+            response = {"message": "No se encontró información para el término de búsqueda."}
+
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+@app.get("/get_most_recent_price")
+async def get_most_recent_price(partial_product_name: str):
+    try:
+
+        cursor = conn.cursor()
+        print(f"Searching for products with term: {partial_product_name}")
+
+        # Call the stored procedure
+        cursor.callproc('sp_getMostRecentPriceByProductName', [partial_product_name])
+
+        # Fetch the results from the stored procedure
+        for result in cursor.stored_results():
+            recent_prices = result.fetchall()
+
+        # Check if there are results
+        if recent_prices:
+            response = [{"pro_nombre": row[0], "tie_nombre": row[1], "pre_valor": row[2], "pre_fechaHora": row[3]} for row in recent_prices]
+        else:
+            response = {"message": "No se encontró información para el término de búsqueda."}
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+@app.delete("/delete_review")
+async def delete_review(pro_id: int, id_autoinc: int):
+    try:
+        cursor = conn.cursor()
+        # Call the stored procedure
+        cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
+
+        # Commit the changes to the database
+        conn.commit()
+        return {"message": "Review deleted successfully"}
+
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+
 def insert_data_into_database(df):
     cursor = conn.cursor()
     # Loop through the DataFrame and insert data into the PRODUCTO table
@@ -154,6 +221,8 @@ def unified_product_search(product_to_search, chromedriver_path, output_csv_path
     df = pd.DataFrame(data_product)  # Create a Pandas DataFrame from the collected data
     df.to_csv(output_csv_path, index=False)  # Save the data to a CSV file
     return df  # Return the DataFrame
+
+
 
 def reload_driver(chromedriver_path):
     options = uc.ChromeOptions()
