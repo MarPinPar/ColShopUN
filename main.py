@@ -180,6 +180,25 @@ async def delete_review(pro_id: int, id_autoinc: int):
     except Exception as e:
         print(f"Error: {e}")
 
+@app.post("/create_review")
+async def create_review(pro_id: int, calificacion: int, comentario: str):
+    try:
+        cursor = conn.cursor()
+
+        # Call the stored procedure
+        cursor.callproc('sp_create_reseña', [pro_id, calificacion, comentario])
+
+        # Fetch the OUT parameter value
+        for result in cursor.stored_results():
+            id_autoinc = result.fetchone()[0]
+
+        # Commit the changes to the database
+        conn.commit()
+
+        return {"message": "Review created successfully", "id_autoinc": id_autoinc}
+
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 def insert_data_into_database(df):
