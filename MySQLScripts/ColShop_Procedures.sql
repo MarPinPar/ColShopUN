@@ -1,5 +1,6 @@
 USE ColShop;
--- Insertign data to price:
+-- Insert data into precio:
+DROP PROCEDURE IF EXISTS sp_InsertDataIntoPrecio;
 DELIMITER //
 CREATE PROCEDURE sp_InsertDataIntoPrecio(
     IN pro_id_param VARCHAR(45),
@@ -15,7 +16,8 @@ BEGIN
 END //
 DELIMITER ;
 
--- Inserting data to product:
+-- Insert data into producto:
+DROP PROCEDURE IF EXISTS sp_InsertDataIntoProducto;
 DELIMITER //
 
 CREATE PROCEDURE sp_InsertDataIntoProducto(
