@@ -5,13 +5,17 @@ import mysql.connector
 from sqlalchemy import create_engine, outparam
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from decouple import config
 
 
 SECRET_KEY = config('SECRET_KEY')
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 ALGORITHM = 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
@@ -200,6 +204,18 @@ async def create_review(pro_id: int, calificacion: int, comentario: str):
     except Exception as e:
         print(f"Error: {e}")
 
+@app.post("/create_user")
+async def create_user(username: str, alias: str, correo: str, pswd: str):
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('sp_create_user', [username, alias, correo, pswd])
+        conn.commit()
+        return {"message": "User created successfully"}
+    except Exception as e:
+        return {"error": str(e)}
+    finally:
+        cursor.close()
+
 
 def insert_data_into_database(df):
     cursor = conn.cursor()
@@ -240,7 +256,6 @@ def unified_product_search(product_to_search, chromedriver_path, output_csv_path
     df = pd.DataFrame(data_product)  # Create a Pandas DataFrame from the collected data
     df.to_csv(output_csv_path, index=False)  # Save the data to a CSV file
     return df  # Return the DataFrame
-
 
 
 def reload_driver(chromedriver_path):
