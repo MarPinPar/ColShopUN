@@ -1,4 +1,6 @@
 USE ColShop;
+
+select  * from usuario;
 -- Insert data into precio:
 DROP PROCEDURE IF EXISTS sp_InsertDataIntoPrecio;
 DELIMITER //
