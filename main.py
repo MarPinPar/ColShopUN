@@ -180,9 +180,8 @@ async def create_list(list_name: str, privada: int):
    try:
        cursor = conn.cursor()
        print(f"Creating list: {list_name}")
-       # Correct procedure name here
        cursor.callproc('sp_create_list', [list_name, privada])
-       conn.commit()  # Make sure to commit the changes
+       conn.commit()
        response = {"message": "List created successfully."}
        return response
 
