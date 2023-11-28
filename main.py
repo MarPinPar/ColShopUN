@@ -1,6 +1,22 @@
 from user_login import *
 from upload_data import *
 
+# MySQL database connection configuration
+mysql_config = {
+    "host": config('MYSQL_HOST'),
+    "user": config('MYSQL_USER'),
+    "password": config('MYSQL_PASSWORD'),
+    "database": config('MYSQL_DATABASE'),
+}
+
+# Establish a MySQL connection
+conn = mysql.connector.connect(**mysql_config)
+
+# Function to get a MySQL connection
+def get_mysql_connection():
+    return mysql.connector.connect(**mysql_config)
+
+
 app = FastAPI()  # Create a FastAPI application
 app.title = "ColShop Database 2023-2"  #  application title
 

@@ -13,6 +13,16 @@ from passlib.context import CryptContext
 from decouple import config
 from user_login import *
 
+# MySQL database connection configuration
+mysql_config = {
+    "host": config('MYSQL_HOST'),
+    "user": config('MYSQL_USER'),
+    "password": config('MYSQL_PASSWORD'),
+    "database": config('MYSQL_DATABASE'),
+}
+
+# Establish a MySQL connection
+conn = mysql.connector.connect(**mysql_config)
 def insert_data_into_database(df):
     cursor = conn.cursor()
     # Loop through the DataFrame and insert data into the PRODUCTO table
