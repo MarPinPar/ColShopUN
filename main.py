@@ -236,13 +236,25 @@ async def create_user(username: str, alias: str, correo: str, pswd: str):
     try:
         cursor = connection.cursor()
         cursor.callproc('sp_create_user', [username, alias, correo, hashed_password])
+
         connection.commit()
-        return {"message": "User created successfully"}
+
+        # Check if the user was created successfully
+        created_user = get_user(username)
+        if created_user:
+            # Grant 'usuario' role to the user
+            cursor.execute("GRANT usuario@localhost TO '{}'@'localhost'".format(username))
+            return {"message": "User created successfully", "user_info": created_user}
+        else:
+            return {"error": "Failed to retrieve user information after creation"}
+
     except Exception as e:
         return {"error": str(e)}
     finally:
         cursor.close()
         connection.close()
+
+
 #to run this we have first to give permissions and give the
 @app.post("/modify_user")
 async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: str = None):
