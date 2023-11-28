@@ -1,28 +1,36 @@
+import undetected_chromedriver as uc
+import pandas as pd
+from Scrapping import Exito, Ktronix, MercadoLibre  # Importing custom scraping modules
 import mysql.connector
-from passlib.context import CryptContext
-from fastapi import Depends, HTTPException, status
+from sqlalchemy import create_engine, outparam
+from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
+from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
+from passlib.context import CryptContext
+from decouple import config
+from main import *
 
-# MySQL configuration
+SECRET_KEY = config('SECRET_KEY')
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+
+ALGORITHM = 'HS256'
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+# MySQL database connection configuration
 mysql_config = {
-    "host": "your_mysql_host",
-    "user": "your_mysql_user",
-    "password": "your_mysql_password",
-    "database": "your_mysql_database",
+    "host": config('MYSQL_HOST'),
+    "user": config('MYSQL_USER'),
+    "password": config('MYSQL_PASSWORD'),
+    "database": config('MYSQL_DATABASE'),
 }
 
-# Passlib configuration for password handling
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-# JWT configuration
-SECRET_KEY = "your_secret_key"
-ALGORITHM = "HS256"
-
-
-# Establishes a connection to MySQL
+# Establish a MySQL connection
 conn = mysql.connector.connect(**mysql_config)
-
 
 # Function to get a MySQL connection
 def get_mysql_connection():
@@ -33,11 +41,9 @@ def get_mysql_connection():
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
-
 # Gets the hash of a password
 def get_password_hash(password):
     return pwd_context.hash(password)
-
 
 # Gets user data by username from the database
 def get_user(username: str):
@@ -52,7 +58,6 @@ def get_user(username: str):
 
     if user_data:
         return user_data
-
 
 # Authenticates a user by verifying the username and password
 def authenticate_user(username: str, password: str):
@@ -74,7 +79,6 @@ def authenticate_user(username: str, password: str):
 
     return user_data
 
-
 # Creates an access token with the provided data and an optional expiration time
 def create_access_token(data: dict, expires_delta: timedelta or None = None):
     to_encode = data.copy()
@@ -86,7 +90,6 @@ def create_access_token(data: dict, expires_delta: timedelta or None = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
-
 
 # Gets the current user from the access token
 async def get_current_user(token: str = Depends(oauth2_scheme)):
@@ -109,10 +112,13 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
     return user
 
-
 # Gets the current active user from the current user
 async def get_current_active_user(current_user: dict = Depends(get_current_user)):
     if current_user.get("disabled"):
         raise HTTPException(status_code=400, detail="Inactive user")
 
     return current_user
+
+
+
+
