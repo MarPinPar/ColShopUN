@@ -243,7 +243,20 @@ async def create_user(username: str, alias: str, correo: str, pswd: str):
     finally:
         cursor.close()
         connection.close()
-
+#to run this we have first to give permissions and give the
+@app.post("/modify_user")
+async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: str = None):
+    connection = get_mysql_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.callproc('sp_modify_user', [new_alias, new_correo, new_pswd])
+        connection.commit()
+        return {"message": "User modified successfully"}
+    except Exception as e:
+        return {"error": str(e)}
+    finally:
+        cursor.close()
+        connection.close()
 
 
 
