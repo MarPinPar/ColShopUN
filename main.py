@@ -204,6 +204,22 @@ async def create_review(pro_id: int, calificacion: int, comentario: str):
     except Exception as e:
         print(f"Error: {e}")
 
+@app.get("/create_list")
+async def create_list(list_name: str, privada: int):
+   try:
+       cursor = conn.cursor()
+       print(f"Creating list: {list_name}")
+       # Correct procedure name here
+       cursor.callproc('sp_create_list', [list_name, privada])
+       conn.commit()  # Make sure to commit the changes
+       response = {"message": "List created successfully."}
+       return response
+
+   except Exception as e:
+       print(f"Error: {e}")
+       response = {"message": "Error creating the list.Details: {str(e)}"}
+       return response
+
 #user
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
