@@ -270,10 +270,64 @@ async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: s
         connection.commit()
         return {"message": "User modified successfully"}
     except Exception as e:
+
         return {"error": str(e)}
     finally:
+
         cursor.close()
         connection.close()
 
+@app.get("/view_list")
+async def view_list(username: str, list_name: str):
+    try:
+        # Crear un cursor
+        cursor = conn.cursor()
 
+        # Llamar al procedimiento almacenado
+        cursor.callproc('sp_view_list', [username, list_name])
+
+        # Obtener los resultados
+        result = None
+        for answer in cursor.stored_results():
+            result = answer.fetchall()
+
+        # Cerrar el cursor
+        cursor.close()
+
+        # Comprobar si se encontraron resultados
+        if result:
+            # Crear la respuesta
+            response = {"productos": [item[0] for item in result]}
+        else:
+            response = {"message": "No se encontraron productos en la lista."}
+
+        return response
+
+    except Exception as e:
+        # Manejar errores
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+@app.post("/insert_product_into_list")
+async def insert_product_into_list(id: str, list_name: str):
+    try:
+        # Crear un cursor
+        cursor = conn.cursor()
+
+        # Llamar al procedimiento almacenado
+        cursor.callproc('sp_insert_product_into_list', [id, list_name])
+
+        # Confirmar cambios en la base de datos
+        conn.commit()
+
+        # Cerrar el cursor
+        cursor.close()
+
+        # Crear la respuesta
+        response = {"message": "Producto insertado correctamente en la lista."}
+
+        return response
+
+    except Exception as e:
+        # Manejar errores
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
 

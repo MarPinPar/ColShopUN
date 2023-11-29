@@ -1,6 +1,7 @@
 USE ColShop;
 
 select  * from usuario;
+select * from producto ;
 -- Insert data into precio:
 DROP PROCEDURE IF EXISTS sp_InsertDataIntoPrecio;
 DELIMITER //
