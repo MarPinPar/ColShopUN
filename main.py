@@ -307,7 +307,7 @@ async def view_list(username: str, list_name: str):
         # Manejar errores
         raise HTTPException(status_code=500, detail=f"Error: {e}")
 
-@app.post("/insert_product_into_list")
+@app.post("/insert_product_into_list") #check out
 async def insert_product_into_list(id: str, list_name: str):
     try:
         # Crear un cursor
@@ -331,3 +331,32 @@ async def insert_product_into_list(id: str, list_name: str):
         # Manejar errores
         raise HTTPException(status_code=500, detail=f"Error: {e}")
 
+@app.post("/create_category")
+async def create_category(cat_name: str):
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('sp_create_category', [cat_name])
+        conn.commit()
+        cursor.close()
+        response = {"message": f"Categoría '{cat_name}' creada correctamente."}
+        return response
+
+    except Exception as e:
+        # Manejar errores
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+@app.delete("/delete_category")
+async def delete_category(cat_name: str):
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('sp_delete_category', [cat_name])
+        conn.commit()
+        cursor.close()
+
+        response = {"message": f"Categoría '{cat_name}' eliminada correctamente."}
+
+        return response
+
+    except Exception as e:
+        # Manejar errores
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
