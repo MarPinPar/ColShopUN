@@ -403,3 +403,22 @@ async def create_busqueda(palabras: str):
     except Exception as e:
         # Manejar errores
         raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+@app.delete("/delete_list")
+async def delete_list(list_name: str):
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('sp_delete_list', [list_name])
+
+        conn.commit()
+
+        cursor.close()
+
+        response = {"message": f"Lista '{list_name}' eliminada correctamente."}
+
+        return response
+
+    except Exception as e:
+
+
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
