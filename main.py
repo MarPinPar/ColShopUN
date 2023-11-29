@@ -238,12 +238,13 @@ async def create_user(username: str, alias: str, correo: str, pswd: str):
         cursor.callproc('sp_create_user', [username, alias, correo, hashed_password])
 
         connection.commit()
+        print("GRANT usuario@localhost TO '{}'@'localhost'".format(username))
+        cursor.execute("GRANT usuario@localhost TO '{}'@'localhost'".format(username))
 
         # Check if the user was created successfully
         created_user = get_user(username)
         if created_user:
             # Grant 'usuario' role to the user
-            cursor.execute("GRANT usuario@localhost TO '{}'@'localhost'".format(username))
             return {"message": "User created successfully", "user_info": created_user}
         else:
             return {"error": "Failed to retrieve user information after creation"}
