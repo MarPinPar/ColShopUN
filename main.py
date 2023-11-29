@@ -215,6 +215,8 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
                             detail="Incorrect username or password", headers={"WWW-Authenticate": "Bearer"})
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": user["us_username"]}, expires_delta=access_token_expires)
+    # Aqui
+    
     return {"access_token": access_token, "token_type": "bearer"}
 
 
@@ -236,10 +238,8 @@ async def create_user(username: str, alias: str, correo: str, pswd: str):
     try:
         cursor = connection.cursor()
         cursor.callproc('sp_create_user', [username, alias, correo, hashed_password])
-
+        cursor.callproc('sp_createDBuser', [username, pswd])
         connection.commit()
-        print("GRANT usuario@localhost TO '{}'@'localhost'".format(username))
-        cursor.execute("GRANT usuario@localhost TO '{}'@'localhost'".format(username))
 
         # Check if the user was created successfully
         created_user = get_user(username)

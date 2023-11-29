@@ -428,3 +428,30 @@ DELIMITER ;
 -- ('MCO1991235718', 2, '2023-11-28 20:41:02.364496', 2, 'https://www.mercadolibre.com.co/apple-iphone-14-pro-max-256-gb-morado-oscuro/p/MCO19615354?pdp_filters=category:MCO1055#searchVariation=MCO19615354&position=1&search_layout=stack&type=product&tracking_id=d7425eed-0e49-4618-9917-21be614a5b12', 'placeholder_image_url1');
 
 -- CALL sp_getMostRecentPriceByProductName('Iphone');
+
+-- Create DataBase User
+
+DROP PROCEDURE sp_createDBuser;
+DELIMITER $$
+CREATE PROCEDURE sp_createDBuser (IN nombre VARCHAR(45), IN cta VARCHAR(128))
+BEGIN
+    SET @command = CONCAT("CREATE USER '",nombre, "'@'localhost' IDENTIFIED BY '", cta,"'");
+    PREPARE stmt FROM @command;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+    
+    SET @command = CONCAT("GRANT 'usuario'@'localhost' TO '",nombre, "'@'localhost'");
+    PREPARE stmt FROM @command;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+    
+    SET @command = CONCAT("SET DEFAULT ROLE ALL TO '",nombre, "'@'localhost'");
+    PREPARE stmt FROM @command;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END $$
+
+DELIMITER ;
+
+DROP USER 'pruebaUser'@'localhost';
+CALL sp_createDBUser('pruebaUser', '123456');
