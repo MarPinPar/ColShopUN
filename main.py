@@ -194,10 +194,11 @@ async def create_review(pro_id: int, calificacion: int, comentario: str):
 @app.get("/create_list")
 async def create_list(list_name: str, privada: int):
    try:
-       cursor = conn.cursor()
+       connection = get_mysql_connection()
+       cursor = connection.cursor()
        print(f"Creating list: {list_name}")
        cursor.callproc('sp_create_list', [list_name, privada])
-       conn.commit()
+       connection.commit()
        response = {"message": "List created successfully."}
        return response
 
@@ -215,8 +216,11 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
                             detail="Incorrect username or password", headers={"WWW-Authenticate": "Bearer"})
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": user["us_username"]}, expires_delta=access_token_expires)
-    # Aqui
     
+    # Establish connection from authenticated user
+    mysql_config["user"] = form_data.username
+    mysql_config["password"] = form_data.password
+    get_mysql_connection()
     return {"access_token": access_token, "token_type": "bearer"}
 
 
