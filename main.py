@@ -360,3 +360,46 @@ async def delete_category(cat_name: str):
     except Exception as e:
         # Manejar errores
         raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+@app.post("/create_comparacion")
+async def create_comparacion():
+    try:
+        # Crear un cursor
+        cursor = conn.cursor()
+
+        # Llamar al procedimiento almacenado sp_create_comparacion
+        cursor.callproc('sp_create_comparacion')
+
+        # Obtener el resultado del procedimiento almacenado (id_autoinc)
+        id_autoinc = cursor.fetchone()[0]
+
+        # Confirmar cambios en la base de datos
+        conn.commit()
+
+        # Cerrar el cursor
+        cursor.close()
+
+        # Crear la respuesta
+        response = {"message": f"Comparación creada correctamente with id: {id_autoinc}"}
+
+        return response
+
+    except Exception as e:
+        # Manejar errores
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+@app.post("/create_busqueda")
+async def create_busqueda(palabras: str):
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('sp_create_busqueda', [palabras])
+        id_autoinc = cursor.fetchone()[0]
+        conn.commit()
+        cursor.close()
+        response = {"message": f"Búsqueda creada correctamente with id: {id_autoinc}"}
+
+        return response
+
+    except Exception as e:
+        # Manejar errores
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
