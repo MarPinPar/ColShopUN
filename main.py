@@ -220,8 +220,17 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     # Establish connection from authenticated user
     mysql_config["user"] = form_data.username
     mysql_config["password"] = form_data.password
-    get_mysql_connection()
-    return {"access_token": access_token, "token_type": "bearer"}
+    connection = get_mysql_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.callproc('sp_create_session')
+        connection.commit()
+        response = {"message": "Successfully created session"}
+    except Exception as e:
+       print(f"Error: {e}")
+       response = {"message": "Error creating the list.Details: {str(e)}"}
+
+    return {"access_token": access_token, "token_type": "bearer", "message": response}
 
 
 @app.get("/users/me/")
