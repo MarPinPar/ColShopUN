@@ -238,3 +238,7 @@ html, body {
   visibility: visible;
   -webkit-transition: all 0.3s ease;
 }
+.form-title img {
+  width: 20px; /* Ajusta el ancho de la imagen según tus necesidades */
+  margin-right: 10px; /* Ajusta el margen derecho según tus necesidades */
+}
