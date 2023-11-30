@@ -456,3 +456,20 @@ DELIMITER ;
 
 DROP USER 'pruebaUser'@'localhost';
 CALL sp_createDBUser('pruebaUser', '123456');
+
+
+-- Procedure to get the average on specific product
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_GetProductAveragePrice(IN p_ProductID VARCHAR(45), OUT p_AveragePrice DECIMAL(10, 2))
+BEGIN
+    SELECT AVG(pre_valor) INTO p_AveragePrice
+    FROM PRECIO
+    WHERE PRODUCTO_pro_ID = p_ProductID;
+END $$
+
+DELIMITER ;
+
+CALL sp_GetProductAveragePrice('097855137708', @averagePrice);
+SELECT @averagePrice AS 'Promedio de Precios';
