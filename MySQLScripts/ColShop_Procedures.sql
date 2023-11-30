@@ -460,16 +460,20 @@ CALL sp_createDBUser('pruebaUser', '123456');
 
 -- Procedure to get the average on specific product
 
+select * from producto;
 DELIMITER $$
 
-CREATE PROCEDURE sp_GetProductAveragePrice(IN p_ProductID VARCHAR(45), OUT p_AveragePrice DECIMAL(10, 2))
+CREATE FUNCTION fn_GetProductAveragePrice(p_ProductID VARCHAR(45)) RETURNS DECIMAL(10, 2) DETERMINISTIC
 BEGIN
-    SELECT AVG(pre_valor) INTO p_AveragePrice
+    DECLARE averagePrice DECIMAL(10, 2);
+
+    SELECT AVG(pre_valor) INTO averagePrice
     FROM PRECIO
     WHERE PRODUCTO_pro_ID = p_ProductID;
+
+    RETURN averagePrice;
 END $$
-
 DELIMITER ;
+SELECT fn_GetProductAveragePrice('097855137708') AS 'Promedio de Precios';
 
-CALL sp_GetProductAveragePrice('097855137708', @averagePrice);
-SELECT @averagePrice AS 'Promedio de Precios';
+

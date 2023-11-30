@@ -422,3 +422,35 @@ async def delete_list(list_name: str):
 
 
         raise HTTPException(status_code=500, detail=f"Error: {e}")
+
+# Endpoint for the stored procedure sp_GetProductAveragePrice
+@app.get("/get_product_average_price/{product_id}")
+async def get_product_average_price(product_id: str):
+    try:
+        # Create a cursor
+        cursor = conn.cursor()
+
+        # Call the MySQL function fn_GetProductAveragePrice
+        cursor.execute(f"SELECT fn_GetProductAveragePrice('{product_id}') AS average_price")
+
+        # Retrieve the result
+        result = cursor.fetchone()
+
+        # Check if the result is not None
+        if result is not None:
+            average_price = result[0]
+
+            # Close the cursor
+            cursor.close()
+
+            # Create the response
+            response = {"average_price": average_price}
+
+            return response
+        else:
+            # Handle the case where the result is None
+            raise HTTPException(status_code=404, detail="Product not found")
+
+    except Exception as e:
+        # Handle other errors
+        raise HTTPException(status_code=500, detail=f"Error: {e}")
