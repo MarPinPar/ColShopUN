@@ -28,7 +28,7 @@ GRANT CREATE ON busqueda_has_producto TO 'usuario'@'localhost';
 
 GRANT SELECT ON categoria TO 'usuario'@'localhost';
 GRANT SELECT ON producto_has_categoria TO 'usuario'@'localhost';
-GRANT SELECT, INSERT ON producto TO 'usuario'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON producto TO 'usuario'@'localhost';
 GRANT SELECT, INSERT ON precio TO 'usuario'@'localhost';
 GRANT SELECT ON tienda TO 'usuario'@'localhost';
 
