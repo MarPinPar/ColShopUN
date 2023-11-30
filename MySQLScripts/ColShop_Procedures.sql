@@ -122,7 +122,6 @@ BEGIN
 	SET SQL_SAFE_UPDATES = 0;
     
     IF new_alias IS NOT NULL THEN
-		SELECT miperfil.Alias FROM miperfil WHERE `Nombre de Usuario` = 'root';
 		UPDATE miperfil SET Alias = new_alias WHERE `Nombre de Usuario` = us;
     END IF;
     IF new_correo IS NOT NULL THEN
@@ -289,8 +288,9 @@ DROP PROCEDURE IF EXISTS sp_create_session;
 DELIMITER $$
 CREATE PROCEDURE sp_create_session ()
 BEGIN
+    SET @current_session = now();
 	SET SQL_SAFE_UPDATES = 0;
-	INSERT INTO sesion VALUES (now(), now(), SUBSTRING_INDEX(USER(), '@', 1));
+	INSERT INTO sesion VALUES (@current_session, @current_session, SUBSTRING_INDEX(USER(), '@', 1));
 	SET SQL_SAFE_UPDATES = 1;
 END $$
 
@@ -432,7 +432,7 @@ DELIMITER ;
 
 -- Create DataBase User
 
-DROP PROCEDURE sp_createDBuser;
+DROP PROCEDURE IF EXISTS sp_createDBuser;
 DELIMITER $$
 CREATE PROCEDURE sp_createDBuser (IN nombre VARCHAR(45), IN cta VARCHAR(128))
 BEGIN
@@ -454,15 +454,10 @@ END $$
 
 DELIMITER ;
 
-DROP USER 'pruebaUser'@'localhost';
-CALL sp_createDBUser('pruebaUser', '123456');
-
-
 -- Procedure to get the average on specific product
+DROP FUNCTION IF EXISTS fn_GetProductAveragePrice;
 
-select * from producto;
 DELIMITER $$
-
 CREATE FUNCTION fn_GetProductAveragePrice(p_ProductID VARCHAR(45)) RETURNS DECIMAL(10, 2) DETERMINISTIC
 BEGIN
     DECLARE averagePrice DECIMAL(10, 2);
@@ -476,4 +471,11 @@ END $$
 DELIMITER ;
 SELECT fn_GetProductAveragePrice('097855137708') AS 'Promedio de Precios';
 
-
+-- Get Current Sesion
+DROP FUNCTION IF EXISTS fn_getCurrentSession;
+DELIMITER $$
+CREATE FUNCTION fn_getCurrentSession() RETURNS DATETIME DETERMINISTIC
+BEGIN
+	RETURN @current_session;
+END $$
+DELIMITER ;

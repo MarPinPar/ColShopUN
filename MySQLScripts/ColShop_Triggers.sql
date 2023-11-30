@@ -1,6 +1,17 @@
--- Trigger after creating a new review
-
-
+-- Trigger after before a new action
+DROP TRIGGER IF EXISTS tr_before_creacion_accion;
+DELIMITER $$
+CREATE TRIGGER tr_before_creacion_accion
+AFTER INSERT ON ACCION
+FOR EACH ROW
+BEGIN
+	DECLARE ses DATETIME;
+    SET ses = fn_getCurrentSession();
+    IF SUBSTRING_INDEX(USER(), '@', 1) != 'root' THEN
+		INSERT INTO sesion_has_accion VALUES (ses, ses, SUBSTRING_INDEX(USER(), '@', 1), NEW.ac_ID);
+	END IF;
+END $$
+DELIMITER ;
 
 -- Trigger before inserting a new user:
 DROP TRIGGER IF EXISTS tr_before_insert_usuario;
@@ -16,20 +27,6 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
-
--- Trigger to upload "alias" that only contain numbers and letters
-DELIMITER $$
-CREATE TRIGGER tr_before_update_alias_usuario
-BEFORE UPDATE ON USUARIO
-FOR EACH ROW
-BEGIN
-    IF NEW.us_alias REGEXP '[^a-zA-Z0-9]' THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'El alias debe contener solo letras y números.';
-    END IF;
-END $$
-DELIMITER ;
-
 
 -- Trigger only accept possitive values to price
 DELIMITER $$
@@ -51,12 +48,10 @@ CREATE TRIGGER update_average_price_trigger
 AFTER INSERT ON PRECIO
 FOR EACH ROW
 BEGIN
+	DECLARE new_promedio DOUBLE;
+    SET new_promedio = fn_GetProductAveragePrice(NEW.PRODUCTO_pro_ID);
     UPDATE PRODUCTO
-    SET pro_precio_promedio = (
-        SELECT AVG(pre_valor)
-        FROM PRECIO
-        WHERE PRODUCTO_pro_ID = NEW.PRODUCTO_pro_ID
-    )
+    SET pro_precio_promedio = new_promedio
     WHERE pro_ID = NEW.PRODUCTO_pro_ID;
 END $$
 

@@ -65,8 +65,7 @@ VALUES
   ('MCO1940674356', 'Sony PlayStation 5 825GB Marvel’s Spider Man 2 Limited Edition color rojo y negro', 'Sony'),
   ('MCO1268357573', 'Control Ps5 Negro Midnight Black Original + Cable Usb', 'Otra'),
   ('711719566625', 'Consola PS5 Estándar 825GB + 1 Control Dualsense + Voucher de descarga Juego FC24', 'Otra'),
-  ('101112640', 'Consola Playstation 5 Ps5 Digital Edition 825Gb Sony', 'Sony'),
-  ('194253488224','iPhone 14 128 GB Azul Medianoche','iPhone');
+  ('101112640', 'Consola Playstation 5 Ps5 Digital Edition 825Gb Sony', 'Sony');
 
   
 -- SELECT* FROM PRODUCTO;
@@ -313,8 +312,7 @@ INSERT INTO ACCION (ac_fechaHora) VALUES
 ('2023-10-25 15:51:10'),
 ('2023-10-25 15:52:10'),
 ('2023-10-25 15:53:10'),
-('2023-10-25 15:54:10')
-;
+('2023-10-25 15:54:10');
 
 -- SELECT* FROM ACCION;
 

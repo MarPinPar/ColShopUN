@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS PRODUCTO (
   `pro_ID` VARCHAR(45) NOT NULL,
   `pro_nombre` VARCHAR(300) NOT NULL,
   `pro_marca` VARCHAR(45) NOT NULL,
+  `pro_precio_promedio` DOUBLE DEFAULT 0,
   PRIMARY KEY (`pro_ID`)
   );
   
