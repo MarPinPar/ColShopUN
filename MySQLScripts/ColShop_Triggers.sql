@@ -37,11 +37,28 @@ CREATE TRIGGER tr_before_insert_precio
 BEFORE INSERT ON PRECIO
 FOR EACH ROW
 BEGIN
-    -- Asegurarse de que el valor del precio sea positivo
     IF NEW.pre_valor <= 0 THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El valor del precio debe ser positivo.';
     END IF;
 END $$
 
+-- Trigger to update the average of a product;
+
+DELIMITER $$
+
+CREATE TRIGGER update_average_price_trigger
+AFTER INSERT ON PRECIO
+FOR EACH ROW
+BEGIN
+    UPDATE PRODUCTO
+    SET pro_precio_promedio = (
+        SELECT AVG(pre_valor)
+        FROM PRECIO
+        WHERE PRODUCTO_pro_ID = NEW.PRODUCTO_pro_ID
+    )
+    WHERE pro_ID = NEW.PRODUCTO_pro_ID;
+END $$
+
+DELIMITER ;
 
