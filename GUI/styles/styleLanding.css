@@ -94,13 +94,13 @@ ul {
     margin-left: auto;
   }
 }
-.landing-page header .links li:last-child {
+.landing-page header .links li:last-child a{
   border-radius: 20px;
   padding: 10px 20px;
   color: #FFF;
   background-color: #6c63ff;
 }
-.landing-page header .links li:not(:last-child):hover {
+.landing-page header .links li:not(:last-child) a:hover {
   color: #6c63ff;
 }
 .landing-page .content .container {

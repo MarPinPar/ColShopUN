@@ -32,7 +32,6 @@ def insert_data_into_database(df):
         pro_marca = row['marca']
         # Insert data into PRODUCTO table
 
-
         cursor.callproc('sp_InsertDataIntoProducto', (pro_ID, pro_nombre, pro_marca))
         tie_ID = row['idTienda']
         pre_fechaHora = row['fecha']

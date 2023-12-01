@@ -1,0 +1,36 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.btn-primary,
+.btn-success {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#buttonSearch {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#buttonSearch:hover {
+  background-color: #0056b3;
+}
+
+#AllData {
+  margin-top: 20px;
+}

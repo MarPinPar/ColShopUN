@@ -26,12 +26,12 @@ html, body {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: 0 ;
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: 500px;
   filter: brightness(40%);
-  background-image: url("/Users/knsmolina.28/Downloads/WhatsApp Image 2023-11-29 at 11.25.38 PM.jpeg")
+  background-image: url("/images/ImagenLogin.jpeg")
   ;
 }
 .form-structor .signup {

@@ -1,5 +1,8 @@
 from user_login import *
 from upload_data import *
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 # MySQL database connection configuration
 mysql_config = {
@@ -18,7 +21,19 @@ def get_mysql_connection():
 
 
 app = FastAPI()  # Create a FastAPI application
+
 app.title = "ColShop Database 2023-2"  #  application title
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # All products in the database
 @app.get("/get_all_products")
@@ -67,9 +82,7 @@ async def search_product(product_to_search: str):
 
     # Insert the data into the MySQL database
     insert_data_into_database(df)
-
     return {"result": result}  # Return the search results as JSON
-
 
 @app.get("/get_lowest_price")
 async def get_lowest_price(product_name: str):
