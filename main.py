@@ -25,10 +25,11 @@ app.title = "ColShop Database 2023-2"  #  application title
 async def get_all_products():
     try:
         # Crear un cursor para ejecutar consultas SQL
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
         # Ejecutar la consulta SQL
-        cursor.execute("SELECT * FROM PRODUCTO")
+        cursor.execute("SELECT pro_ID, pro_nombre, pro_marca FROM PRODUCTO")
 
         # Obtener todos los resultados
         productos = cursor.fetchall()
@@ -73,7 +74,8 @@ async def search_product(product_to_search: str):
 @app.get("/get_lowest_price")
 async def get_lowest_price(product_name: str):
    try:
-       cursor = conn.cursor()
+       connection = get_mysql_connection()
+       cursor = connection.cursor()
        print(f"Searching for product: {product_name}")
        result = cursor.callproc('sp_GetLowestPriceByProductName',[product_name])
        for answer in cursor.stored_results():
@@ -92,7 +94,8 @@ async def get_lowest_price(product_name: str):
 @app.get("/get_prices_by_search")
 async def get_prices_by_search(search_term: str):
     try:
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
         print(f"Searching for products with term: {search_term}")
         result = cursor.callproc('sp_GetPricesForProductsBySearch', [search_term])
         for answer in cursor.stored_results():
@@ -112,7 +115,9 @@ async def get_prices_by_search(search_term: str):
 async def get_prices_by_search_history(product_id: str, store_id: int):
     try:
         # Assuming you have 'conn' as the database connection
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+        
         print(f"Searching for products with term: {product_id}")
         print(f"Searching for products with term: {store_id}")
         # Call the stored procedure
@@ -136,8 +141,9 @@ async def get_prices_by_search_history(product_id: str, store_id: int):
 @app.get("/get_most_recent_price")
 async def get_most_recent_price(partial_product_name: str):
     try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
-        cursor = conn.cursor()
         print(f"Searching for products with term: {partial_product_name}")
 
         # Call the stored procedure
@@ -159,32 +165,34 @@ async def get_most_recent_price(partial_product_name: str):
 
 
 @app.delete("/delete_review")
-async def delete_review(pro_id: int, id_autoinc: int):
+async def delete_review(pro_id: str, id_autoinc: int):
     try:
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
         # Call the stored procedure
         cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
         # Commit the changes to the database
-        conn.commit()
+        connection.commit()
         return {"message": "Review deleted successfully"}
 
     except Exception as e:
         print(f"Error: {e}")
 
 @app.post("/create_review")
-async def create_review(pro_id: int, calificacion: int, comentario: str):
+async def create_review(pro_id: str, calificacion: int, comentario: str):
     try:
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+        id_autoinc = None
 
         # Call the stored procedure
-        cursor.callproc('sp_create_reseña', [pro_id, calificacion, comentario])
+        result = cursor.callproc('sp_create_reseña', [pro_id, calificacion, comentario, id_autoinc])
 
         # Fetch the OUT parameter value
-        for result in cursor.stored_results():
-            id_autoinc = result.fetchone()[0]
+        id_autoinc = result[3]
 
         # Commit the changes to the database
-        conn.commit()
+        connection.commit()
 
         return {"message": "Review created successfully", "id_autoinc": id_autoinc}
 
@@ -290,7 +298,8 @@ async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: s
 async def view_list(username: str, list_name: str):
     try:
         # Crear un cursor
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
         # Llamar al procedimiento almacenado
         cursor.callproc('sp_view_list', [username, list_name])
@@ -320,13 +329,14 @@ async def view_list(username: str, list_name: str):
 async def insert_product_into_list(id: str, list_name: str):
     try:
         # Crear un cursor
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
         # Llamar al procedimiento almacenado
         cursor.callproc('sp_insert_product_into_list', [id, list_name])
 
         # Confirmar cambios en la base de datos
-        conn.commit()
+        connection.commit()
 
         # Cerrar el cursor
         cursor.close()
@@ -343,9 +353,11 @@ async def insert_product_into_list(id: str, list_name: str):
 @app.post("/create_category")
 async def create_category(cat_name: str):
     try:
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
         cursor.callproc('sp_create_category', [cat_name])
-        conn.commit()
+        connection.commit()
         cursor.close()
         response = {"message": f"Categoría '{cat_name}' creada correctamente."}
         return response
@@ -357,9 +369,11 @@ async def create_category(cat_name: str):
 @app.delete("/delete_category")
 async def delete_category(cat_name: str):
     try:
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
         cursor.callproc('sp_delete_category', [cat_name])
-        conn.commit()
+        connection.commit()
         cursor.close()
 
         response = {"message": f"Categoría '{cat_name}' eliminada correctamente."}
@@ -374,7 +388,8 @@ async def delete_category(cat_name: str):
 async def create_comparacion():
     try:
         # Crear un cursor
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
         # Llamar al procedimiento almacenado sp_create_comparacion
         cursor.callproc('sp_create_comparacion')
@@ -383,7 +398,7 @@ async def create_comparacion():
         id_autoinc = cursor.fetchone()[0]
 
         # Confirmar cambios en la base de datos
-        conn.commit()
+        connection.commit()
 
         # Cerrar el cursor
         cursor.close()
@@ -400,10 +415,12 @@ async def create_comparacion():
 @app.post("/create_busqueda")
 async def create_busqueda(palabras: str):
     try:
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
         cursor.callproc('sp_create_busqueda', [palabras])
         id_autoinc = cursor.fetchone()[0]
-        conn.commit()
+        connection.commit()
         cursor.close()
         response = {"message": f"Búsqueda creada correctamente with id: {id_autoinc}"}
 
@@ -416,10 +433,12 @@ async def create_busqueda(palabras: str):
 @app.delete("/delete_list")
 async def delete_list(list_name: str):
     try:
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
         cursor.callproc('sp_delete_list', [list_name])
 
-        conn.commit()
+        connection.commit()
 
         cursor.close()
 
@@ -437,7 +456,8 @@ async def delete_list(list_name: str):
 async def get_product_average_price(product_id: str):
     try:
         # Create a cursor
-        cursor = conn.cursor()
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
         # Call the MySQL function fn_GetProductAveragePrice
         cursor.execute(f"SELECT fn_GetProductAveragePrice('{product_id}') AS average_price")

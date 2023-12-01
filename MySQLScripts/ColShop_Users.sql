@@ -18,7 +18,7 @@ GRANT SELECT ON historialComparaciones TO 'usuario'@'localhost';
 GRANT SELECT ON comentariosProducto TO 'usuario'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
 
-GRANT CREATE ON sesion TO 'usuario'@'localhost';
+GRANT SELECT, CREATE ON sesion TO 'usuario'@'localhost';
 GRANT CREATE ON sesion_has_accion TO 'usuario'@'localhost';
 GRANT CREATE ON accion TO 'usuario'@'localhost';
 GRANT CREATE ON comparacion TO 'usuario'@'localhost';
@@ -56,6 +56,8 @@ GRANT EXECUTE ON PROCEDURE sp_modify_user TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_set_session_end TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_view_list TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_getMostRecentPriceByProductName TO 'usuario'@'localhost';
+
+GRANT EXECUTE ON FUNCTION fn_getCurrentSession TO 'usuario'@'localhost';
 
 -- -----------------------------------------------------------------------
 -- Rol ADMINISTRADOR

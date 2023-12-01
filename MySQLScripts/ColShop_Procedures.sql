@@ -288,9 +288,8 @@ DROP PROCEDURE IF EXISTS sp_create_session;
 DELIMITER $$
 CREATE PROCEDURE sp_create_session ()
 BEGIN
-    SET @current_session = now();
 	SET SQL_SAFE_UPDATES = 0;
-	INSERT INTO sesion VALUES (@current_session, @current_session, SUBSTRING_INDEX(USER(), '@', 1));
+	INSERT INTO sesion VALUES (now(), now(), SUBSTRING_INDEX(USER(), '@', 1));
 	SET SQL_SAFE_UPDATES = 1;
 END $$
 
@@ -377,7 +376,7 @@ DELIMITER ;
 -- 23. Create Reseña
 DROP PROCEDURE IF EXISTS sp_create_reseña;
 DELIMITER $$
-CREATE PROCEDURE sp_create_reseña(IN pro_id INT, IN calificacion TINYINT(5), IN comentario VARCHAR(120), OUT id_autoinc INT)
+CREATE PROCEDURE sp_create_reseña(IN pro_id VARCHAR(45), IN calificacion TINYINT(5), IN comentario VARCHAR(120), OUT id_autoinc INT)
 BEGIN
     CALL sp_create_action();
     SELECT last_insert_id() INTO id_autoinc;
@@ -392,7 +391,7 @@ DELIMITER ;
 -- 24. Delete Reseña 
 DROP PROCEDURE IF EXISTS sp_delete_reseña;
 DELIMITER $$
-CREATE PROCEDURE sp_delete_reseña(IN pro_id INT, IN id_autoinc INT)
+CREATE PROCEDURE sp_delete_reseña(IN pro_id VARCHAR(45), IN id_autoinc INT)
 BEGIN
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM reseña WHERE PRODUCTO_pro_ID = pro_id AND ACCION_ac_ID = id_autoinc;
@@ -476,6 +475,8 @@ DROP FUNCTION IF EXISTS fn_getCurrentSession;
 DELIMITER $$
 CREATE FUNCTION fn_getCurrentSession() RETURNS DATETIME DETERMINISTIC
 BEGIN
-	RETURN @current_session;
+	DECLARE current_session DATETIME;
+    SELECT MAX(ses_fechaHoraIn) INTO current_session FROM sesion WHERE USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
+	RETURN current_session;
 END $$
 DELIMITER ;
