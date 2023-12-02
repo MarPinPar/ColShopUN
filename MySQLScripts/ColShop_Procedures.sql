@@ -341,11 +341,12 @@ DELIMITER ;
 -- 16. Create Session
 DROP PROCEDURE IF EXISTS sp_create_session;
 DELIMITER $$
-CREATE PROCEDURE sp_create_session ()
+CREATE PROCEDURE sp_create_session (OUT current_session DATETIME)
 BEGIN
+	SET current_session = now();
 START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
-	INSERT INTO sesion VALUES (now(), now(), SUBSTRING_INDEX(USER(), '@', 1));
+	INSERT INTO sesion VALUES (current_session, current_session, SUBSTRING_INDEX(USER(), '@', 1));
 	SET SQL_SAFE_UPDATES = 1;
 COMMIT;
 END $$
