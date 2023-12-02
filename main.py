@@ -126,7 +126,6 @@ async def get_prices_by_search(search_term: str):
         else:
             response = {"message": "No se encontró información para el término de búsqueda."}
         return response
-
     except Exception as e:
         print(f"Error: {e}")
 
@@ -291,14 +290,12 @@ async def read_own_items(current_user: dict = Depends(get_current_active_user)):
 @app.post("/create_user")
 async def create_user(username: str, alias: str, correo: str, pswd: str):
     hashed_password = get_password_hash(pswd)
-
     connection = get_mysql_connection()
     try:
         cursor = connection.cursor()
         cursor.callproc('sp_create_user', [username, alias, correo, hashed_password])
         cursor.callproc('sp_createDBuser', [username, pswd])
         connection.commit()
-
         # Check if the user was created successfully
         created_user = get_user(username)
         if created_user:
