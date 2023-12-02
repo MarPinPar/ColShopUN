@@ -56,6 +56,7 @@ GRANT EXECUTE ON PROCEDURE sp_modify_user TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_set_session_end TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_view_list TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_getMostRecentPriceByProductName TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_mis_listas TO 'usuario'@'localhost';
 
 GRANT EXECUTE ON FUNCTION fn_getCurrentSession TO 'usuario'@'localhost';
 

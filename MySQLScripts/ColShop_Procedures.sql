@@ -552,3 +552,12 @@ BEGIN
 	RETURN current_session;
 END $$
 DELIMITER ;
+
+-- Get MisListas
+DROP PROCEDURE IF EXISTS sp_get_mis_listas;
+DELIMITER $$
+CREATE PROCEDURE sp_get_mis_listas()
+BEGIN
+	CALL sp_get_list(SUBSTRING_INDEX(USER(), '@', 1));
+END $$
+DELIMITER ;
