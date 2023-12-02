@@ -325,7 +325,7 @@ async def logout():
         cursor = connection.cursor()
 
         cursor.callproc('sp_set_session_end',[current_session])
-        globals()["current_session"] = None
+        globals()["current_session"] = "None"
 
         cursor.close()
         connection.close()
