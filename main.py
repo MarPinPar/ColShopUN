@@ -19,6 +19,10 @@ conn = mysql.connector.connect(**mysql_config)
 def get_mysql_connection():
     return mysql.connector.connect(**mysql_config)
 
+def reset_my_sql_connection():
+    mysql_config["user"] = config('MYSQL_USER')
+    mysql_config["password"] = config('MYSQL_PASSWORD')
+
 
 app = FastAPI()  # Create a FastAPI application
 
@@ -74,7 +78,9 @@ async def get_product_info(product_id: str):
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @app.on_event("shutdown")
-def shutdown_event():
+async def shutdown_event():
+    print("hello")
+    await logout()
     # Close the MySQL connection when the application shuts down
     conn.close()
 
@@ -294,8 +300,13 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     mysql_config["password"] = form_data.password
     connection = get_mysql_connection()
     try:
+        global current_session
+        current_session = None
         cursor = connection.cursor()
-        cursor.callproc('sp_create_session')
+        result = cursor.callproc('sp_create_session', [current_session])
+        current_session = result[0]
+        print(current_session)
+
         connection.commit()
         cursor.close()
         response = {"message": "Successfully created session"}
@@ -305,6 +316,25 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     
     connection.close()
     return {"access_token": access_token, "token_type": "bearer", "message": response}
+
+
+@app.post("/logout")
+async def logout():
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
+        cursor.callproc('sp_set_session_end',[current_session])
+        globals()["current_session"] = None
+
+        cursor.close()
+        connection.close()
+    except:
+        return "Not signed in"
+
+
+    reset_my_sql_connection()
+    return "connection closed"
 
 
 @app.get("/users/me/")
