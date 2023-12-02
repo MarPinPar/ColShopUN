@@ -431,12 +431,13 @@ async def create_comparacion():
         # Crear un cursor
         connection = get_mysql_connection()
         cursor = connection.cursor()
+        id_autoinc = None
 
         # Llamar al procedimiento almacenado sp_create_comparacion
-        cursor.callproc('sp_create_comparacion')
+        result = cursor.callproc('sp_create_comparacion', [id_autoinc])
 
         # Obtener el resultado del procedimiento almacenado (id_autoinc)
-        id_autoinc = cursor.fetchone()[0]
+        id_autoinc = result[0]
 
         # Confirmar cambios en la base de datos
         connection.commit()
