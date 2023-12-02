@@ -48,7 +48,6 @@ CREATE PROCEDURE sp_GetLowestPriceByProductName
     IN p_PartialProductName VARCHAR(45)
 )
 BEGIN
-START TRANSACTION;
     SELECT TI.tie_nombre, PR.pre_valor
     FROM TIENDA TI
     INNER JOIN PRECIO PR ON TI.tie_ID = PR.TIENDA_tie_ID
@@ -69,7 +68,6 @@ DROP PROCEDURE IF EXISTS sp_GetPricesForProductsBySearch;
 DELIMITER $$
 CREATE PROCEDURE sp_GetPricesForProductsBySearch(IN p_SearchTerm VARCHAR(255))
 BEGIN
-START TRANSACTION;
     SELECT TI.tie_nombre, P.pro_nombre, PR.pre_valor, PR.pre_fechaHora
     FROM TIENDA TI
     INNER JOIN PRECIO PR ON TI.tie_ID = PR.TIENDA_tie_ID
@@ -91,7 +89,6 @@ CREATE PROCEDURE sp_GetPriceHistoryForProductInStore
     IN p_StoreID INT
 )
 BEGIN
-START TRANSACTION;
     SELECT pre_valor, pre_fechaHora
     FROM PRECIO
     WHERE PRODUCTO_pro_ID = p_ProductID AND TIENDA_tie_ID = p_StoreID
@@ -111,6 +108,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
     INSERT INTO usuario VALUES (username, alias, correo, pswd, NOW());
     SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -124,8 +122,8 @@ DROP PROCEDURE IF EXISTS sp_modify_user;
 DELIMITER $$
 CREATE PROCEDURE sp_modify_user (IN new_alias VARCHAR(45), IN new_correo VARCHAR(320), IN new_pswd VARCHAR(128))
 BEGIN
-START TRANSACTION;
 	DECLARE us VARCHAR(45);
+    START TRANSACTION;
     SET us = SUBSTRING_INDEX(USER(), '@', 1);
     
 	SET SQL_SAFE_UPDATES = 0;
@@ -141,6 +139,7 @@ START TRANSACTION;
     END IF;
     
     SET SQL_SAFE_UPDATES = 1;
+    COMMIT;
 END $$
 
 DELIMITER ;
@@ -154,7 +153,6 @@ DROP PROCEDURE IF EXISTS sp_get_list;
 DELIMITER $$
 CREATE PROCEDURE sp_get_list (IN username VARCHAR(45))
 BEGIN
-START TRANSACTION;
 	IF username = SUBSTRING_INDEX(USER(), '@', 1) THEN
 		SELECT * FROM mislistas;
 	ELSE 
@@ -171,7 +169,6 @@ DROP PROCEDURE IF EXISTS sp_view_list;
 DELIMITER $$
 CREATE PROCEDURE sp_view_list (IN username VARCHAR(45), IN list_name VARCHAR(30))
 BEGIN
-START TRANSACTION;
 	SELECT `Nombre Producto` FROM contenidolistas WHERE Autor = username AND Nombre = list_name;
 END $$
 
@@ -184,8 +181,8 @@ DROP PROCEDURE IF EXISTS sp_insert_product_into_list;
 DELIMITER $$
 CREATE PROCEDURE sp_insert_product_into_list (IN id INT, IN list_name VARCHAR(30))
 BEGIN
-START TRANSACTION;
 	DECLARE flag_list_exists VARCHAR(45);
+START TRANSACTION;
     SELECT Autor INTO flag_list_exists FROM mislistas WHERE Nombre = list_name;
     IF flag_list_exists IS NOT NULL THEN
 		SET SQL_SAFE_UPDATES = 0;
@@ -193,6 +190,7 @@ START TRANSACTION;
         SET SQL_SAFE_UPDATES = 1;
     END IF;
     
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -204,16 +202,16 @@ DROP PROCEDURE IF EXISTS sp_delete_product_from_list;
 DELIMITER $$
 CREATE PROCEDURE sp_delete_product_from_list (IN id INT, IN list_name VARCHAR(30))
 BEGIN
-START TRANSACTION;
 	DECLARE flag_list_exists VARCHAR(45);
     SELECT Autor INTO flag_list_exists FROM mislistas WHERE Nombre = list_name;
     IF flag_list_exists IS NOT NULL THEN
+    START TRANSACTION;
 		SET SQL_SAFE_UPDATES = 0;
         DELETE FROM lista_has_producto WHERE LISTA_lis_nombre=list_name 
 			AND LISTA_USUARIO_us_username = flag_list_exists AND PRODUCTO_pro_ID = id;
         SET SQL_SAFE_UPDATES = 1;
+	COMMIT;
     END IF;
-    
 END $$
 
 DELIMITER ;
@@ -227,6 +225,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM mislistas WHERE Nombre=list_name;
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -240,6 +239,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO mislistas VALUES (list_name, NOW(), privada, NOW(), SUBSTRING_INDEX(USER(), '@', 1));
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -253,6 +253,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO categoria (cat_nombre) VALUES (cat_name);
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -269,6 +270,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM categoria WHERE cat_nombre = cat_name;
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -285,6 +287,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO producto_has_categoria VALUES (pro_id, cat_id);
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -298,6 +301,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM producto_has_categoria WHERE PRODUCTO_pro_ID = pro_id AND CATEGORIA_cat_ID = cat_id;
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -311,6 +315,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO sesion VALUES (now(), now(), SUBSTRING_INDEX(USER(), '@', 1));
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -324,6 +329,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	UPDATE sesion SET ses_fechaHoraOut = now() WHERE ses_fechaHoraIn = fecha_inicio AND ses_fechaHoraOut = fecha_inicio;
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -333,7 +339,6 @@ DROP PROCEDURE IF EXISTS sp_create_action;
 DELIMITER $$
 CREATE PROCEDURE sp_create_action()
 BEGIN
-START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO accion (ac_fechaHora) VALUES (now());
 	SET SQL_SAFE_UPDATES = 1;
@@ -353,6 +358,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO busqueda (ACCION_ac_ID, bus_palabrasClave) VALUES (id_autoinc, palabras);
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -369,6 +375,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO comparacion (ACCION_ac_ID) VALUES (id_autoinc);
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -382,6 +389,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO comparacion_has_producto VALUES (ac_id, pro_id);
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -395,6 +403,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM comparacion_has_producto WHERE COMPARACION_ACCION_ac_ID = ac_id AND PRODUCTO_pro_ID = pro_id;
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -411,6 +420,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	INSERT INTO reseña VALUES (pro_id, id_autoinc, calificacion, comentario);
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -424,6 +434,7 @@ START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM reseña WHERE PRODUCTO_pro_ID = pro_id AND ACCION_ac_ID = id_autoinc;
 	SET SQL_SAFE_UPDATES = 1;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -437,7 +448,6 @@ CREATE PROCEDURE sp_getMostRecentPriceByProductName
     IN p_PartialProductName VARCHAR(45)
 )
 BEGIN
-START TRANSACTION;
     SELECT P.pro_nombre, TI.tie_nombre, PR.pre_valor, PR.pre_fechaHora
     FROM TIENDA TI
     INNER JOIN PRECIO PR ON TI.tie_ID = PR.TIENDA_tie_ID
@@ -479,6 +489,7 @@ START TRANSACTION;
     PREPARE stmt FROM @command;
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
+COMMIT;
 END $$
 
 DELIMITER ;
@@ -489,7 +500,6 @@ DROP FUNCTION IF EXISTS fn_GetProductAveragePrice;
 DELIMITER $$
 CREATE FUNCTION fn_GetProductAveragePrice(p_ProductID VARCHAR(45)) RETURNS DECIMAL(10, 2) DETERMINISTIC
 BEGIN
-START TRANSACTION;
     DECLARE averagePrice DECIMAL(10, 2);
 
     SELECT AVG(pre_valor) INTO averagePrice
@@ -506,7 +516,6 @@ DROP FUNCTION IF EXISTS fn_getCurrentSession;
 DELIMITER $$
 CREATE FUNCTION fn_getCurrentSession() RETURNS DATETIME DETERMINISTIC
 BEGIN
-START TRANSACTION;
 	DECLARE current_session DATETIME;
     SELECT MAX(ses_fechaHoraIn) INTO current_session FROM sesion WHERE USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
 	RETURN current_session;
