@@ -32,7 +32,12 @@ def insert_data_into_database(df):
         pro_marca = row['marca']
         # Insert data into PRODUCTO table
 
-        cursor.callproc('sp_InsertDataIntoProducto', (pro_ID, pro_nombre, pro_marca))
+        print(pro_ID)
+        try:
+            cursor.callproc('sp_InsertDataIntoProducto', (pro_ID, pro_nombre, pro_marca))
+        except:
+            print("Item already exists")
+            
         tie_ID = row['idTienda']
         pre_fechaHora = row['fecha']
         pre_valor = row['precio']
@@ -51,7 +56,7 @@ def unified_product_search(product_to_search, chromedriver_path, output_csv_path
         data_product = search_function.searchProduct(product_to_search, data_product, driver)  # Perform product search
         driver.quit()
 
-    search_functions = [MercadoLibre, Ktronix]  # List of custom scraping modules
+    search_functions = [MercadoLibre]  # List of custom scraping modules
 
     # Loop through the search functions and perform product searches for each
     for search_function in search_functions:

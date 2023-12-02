@@ -472,9 +472,10 @@ async def create_busqueda(palabras: str):
     try:
         connection = get_mysql_connection()
         cursor = connection.cursor()
+        id_autoinc = None
 
-        cursor.callproc('sp_create_busqueda', [palabras])
-        id_autoinc = cursor.fetchone()[0]
+        result = cursor.callproc('sp_create_busqueda', [palabras, id_autoinc])
+        id_autoinc = result[1]
         connection.commit()
         cursor.close()
         connection.close()
@@ -552,7 +553,6 @@ async def get_mis_listas():
 
     for result in cursor.stored_results():
         mis_listas = result.fetchall()
-        print(mis_listas)
 
     cursor.close()
     connection.close()
