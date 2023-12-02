@@ -35,28 +35,43 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # All products in the database
-@app.get("/get_all_products")
-async def get_all_products():
+@app.get("/get_product_info/{product_id}")
+async def get_product_info(product_id: str):
     try:
-        # Crear un cursor para ejecutar consultas SQL
         connection = get_mysql_connection()
         cursor = connection.cursor()
 
-        # Ejecutar la consulta SQL
-        cursor.execute("SELECT pro_ID, pro_nombre, pro_marca FROM PRODUCTO")
+        # Call the stored procedure
+        cursor.callproc('GetProductInfo', [product_id])
 
-        # Obtener todos los resultados
-        productos = cursor.fetchall()
+        # Fetch the results from the stored procedure
+        for result in cursor.stored_results():
+            product_info = result.fetchall()
 
-        # Convertir los resultados a un formato que se puede enviar como respuesta JSON
-        result = [{"pro_ID": pro_ID, "pro_nombre": pro_nombre, "pro_marca": pro_marca} for pro_ID, pro_nombre, pro_marca in productos]
-        return {"productos": result}
-
-    finally:
-        # Cerrar el cursor (la conexión se cerrará en el evento de apagado)
         cursor.close()
         connection.close()
+
+        # Check if there are results
+        if product_info:
+            response = {
+                "pro_ID": product_info[0][0],
+                "pro_nombre": product_info[0][1],
+                "pro_marca": product_info[0][2],
+                "tie_ID": product_info[0][3],
+                "pre_fechaHora": product_info[0][4].strftime("%Y-%m-%d %H:%M:%S"),
+                "pre_valor": product_info[0][5],
+                "pre_URL": product_info[0][6],
+                "pre_imagen": product_info[0][7]
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Product not found.")
+
+        return response
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @app.on_event("shutdown")
 def shutdown_event():
