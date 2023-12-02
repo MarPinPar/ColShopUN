@@ -2,6 +2,37 @@ USE ColShop;
 
 select  * from usuario;
 select * from producto ;
+
+-- View an specifc product:
+-- Procedure to get product price information by ID
+DROP PROCEDURE IF EXISTS GetProductInfo;
+
+DELIMITER //
+
+CREATE PROCEDURE GetProductInfo(IN productID VARCHAR(45))
+BEGIN
+  SELECT
+    P.pro_ID,
+    P.pro_nombre,
+    P.pro_marca,
+    PR.TIENDA_tie_ID,
+    PR.pre_fechaHora,
+    PR.pre_valor,
+    PR.pre_URL,
+    PR.pre_imagen
+  FROM
+    PRODUCTO P
+  LEFT JOIN
+    PRECIO PR ON P.pro_ID = PR.PRODUCTO_pro_ID
+  WHERE
+    P.pro_ID = productID;
+END //
+
+DELIMITER ;
+
+-- CALL GetProductInfo('8806094837995');
+
+
 -- Insert data into precio:
 DROP PROCEDURE IF EXISTS sp_InsertDataIntoPrecio;
 DELIMITER //
