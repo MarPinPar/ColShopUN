@@ -88,17 +88,32 @@ async def search_product(product_to_search: str):
     chromedriver_path = config('CHROMEDRIVER_PATH')  # Path to ChromeDriver executable
     output_csv_path = 'products.csv'  # Path to the output CSV file
 
-    # Call the unified_product_search function to perform product search and save results to a CSV
-    unified_product_search(product_to_search, chromedriver_path, output_csv_path)
+    # Establish a MySQL connection
+    mysql_config = {
+        "host": config('MYSQL_HOST'),
+        "user": config('MYSQL_USER'),
+        "password": config('MYSQL_PASSWORD'),
+        "database": config('MYSQL_DATABASE'),
+    }
 
-    # Read the results from the CSV into a Pandas DataFrame
-    df = pd.read_csv(output_csv_path)
+    # Establish a MySQL connection
+    conn = mysql.connector.connect(**mysql_config)
 
-    result = df.to_dict(orient="records")
+    try:
+        # Call the unified_product_search function to perform product search and save results to a CSV
+        unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 
-    # Insert the data into the MySQL database
-    insert_data_into_database(df)
-    return {"result": result}  # Return the search results as JSON
+        # Read the results from the CSV into a Pandas DataFrame
+        df = pd.read_csv(output_csv_path)
+
+        result = df.to_dict(orient="records")
+
+        # Insert the data into the MySQL database
+        insert_data_into_database(df, conn)
+        return {"result": result}
+    finally:
+        # Close the MySQL connection in a finally block to ensure it gets closed even if an exception occurs
+        conn.close()
 
 @app.get("/get_lowest_price")
 async def get_lowest_price(product_name: str):

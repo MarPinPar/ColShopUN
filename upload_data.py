@@ -23,30 +23,38 @@ mysql_config = {
 
 # Establish a MySQL connection
 conn = mysql.connector.connect(**mysql_config)
-def insert_data_into_database(df):
+def insert_data_into_database(df, conn):
     cursor = conn.cursor()
-    # Loop through the DataFrame and insert data into the PRODUCTO table
+
     for index, row in df.iterrows():
         pro_ID = row['id']
         pro_nombre = row['titulo']
         pro_marca = row['marca']
-        # Insert data into PRODUCTO table
-
-        print(pro_ID)
-        try:
-            cursor.callproc('sp_InsertDataIntoProducto', (pro_ID, pro_nombre, pro_marca))
-        except:
-            print("Item already exists")
-            
         tie_ID = row['idTienda']
         pre_fechaHora = row['fecha']
         pre_valor = row['precio']
         pre_URL = row['link']
         pre_imagen = row['imagen']
-        cursor.callproc('sp_InsertDataIntoPrecio', (pro_ID, tie_ID, pre_fechaHora, pre_valor, pre_URL, pre_imagen))
+
+        try:
+            # Check if the product ID exists in PRODUCTO
+            cursor.execute("SELECT pro_ID FROM PRODUCTO WHERE pro_ID = %s", (pro_ID,))
+            existing_product = cursor.fetchone()
+
+            if existing_product is not None:
+                print(f"Product ID {pro_ID} already exists. Skipping insertion into PRODUCTO.")
+            else:
+                # Insert data into PRODUCTO table
+                cursor.callproc('sp_InsertDataIntoProducto', (pro_ID, pro_nombre, pro_marca))
+
+            # Insert data into PRECIO table
+            cursor.callproc('sp_InsertDataIntoPrecio', (pro_ID, tie_ID, pre_fechaHora, pre_valor, pre_URL, pre_imagen))
+        except Exception as e:
+            print(f"Error inserting data for product ID {pro_ID}: {str(e)}")
 
     conn.commit()
     cursor.close()
+
 
 def unified_product_search(product_to_search, chromedriver_path, output_csv_path):
     data_product = {"titulo": [], "precio": [], "link": [], "marca": [], "imagen": [], "empresa": [], "fecha": [], 'id': [],'idTienda':[]}
