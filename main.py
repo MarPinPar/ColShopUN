@@ -83,8 +83,8 @@ async def root():
     return {"message": "Welcome to Colshop, the best prices online in Colombia."}
     # This is the root endpoint of the FastAPI application, which returns a welcome message when accessed.
 
-@app.get("/search_product_scrapping")
-async def search_product_scrapping(product_to_search: str):
+@app.get("/search_product")
+async def search_product(product_to_search: str):
     chromedriver_path = config('CHROMEDRIVER_PATH')  # Path to ChromeDriver executable
     output_csv_path = 'products.csv'  # Path to the output CSV file
 
