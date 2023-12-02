@@ -2,6 +2,7 @@ USE ColShop;
 
 select  * from usuario;
 select * from producto ;
+select  * from precio;
 
 -- View an specifc product:
 -- Procedure to get product price information by ID
@@ -128,7 +129,7 @@ END $$
 
 DELIMITER ;
 
--- CALL sp_GetPriceHistoryForProductInStore('194253488224', 1);
+CALL sp_GetPriceHistoryForProductInStore('MCO1361345027', 2);
 
 -- 4. CREATE USER
 DROP PROCEDURE IF EXISTS sp_create_user;

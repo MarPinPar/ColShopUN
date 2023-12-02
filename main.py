@@ -23,6 +23,7 @@ def get_mysql_connection():
 app = FastAPI()  # Create a FastAPI application
 
 app.title = "ColShop Database 2023-2"  #  application title
+
 origins = [
     "*",
 ]
