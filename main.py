@@ -56,6 +56,7 @@ async def get_all_products():
     finally:
         # Cerrar el cursor (la conexión se cerrará en el evento de apagado)
         cursor.close()
+        connection.close()
 
 @app.on_event("shutdown")
 def shutdown_event():
@@ -93,6 +94,9 @@ async def get_lowest_price(product_name: str):
        result = cursor.callproc('sp_GetLowestPriceByProductName',[product_name])
        for answer in cursor.stored_results():
            result = answer.fetchall()
+       cursor.close()
+       connection.close()
+
        print(result)
        if result:
            response = {"tie_nombre": result[0][0], "pre_valor": result[0][1]}
@@ -113,6 +117,9 @@ async def get_prices_by_search(search_term: str):
         result = cursor.callproc('sp_GetPricesForProductsBySearch', [search_term])
         for answer in cursor.stored_results():
             result = answer.fetchall()
+        cursor.close()
+        connection.close()
+
         print(result)
         if result:
             response = [{"tie_nombre": row[0], "pro_nombre": row[1], "pre_valor": row[2], "pre_fechaHora": row[3]} for row in result]
@@ -139,6 +146,9 @@ async def get_prices_by_search_history(product_id: str, store_id: int):
         # Fetch the results from the stored procedure
         for result in cursor.stored_results():
             price_history = result.fetchall()
+        
+        cursor.close()
+        connection.close()
 
         # Check if there are results
         if price_history:
@@ -165,6 +175,9 @@ async def get_most_recent_price(partial_product_name: str):
         # Fetch the results from the stored procedure
         for result in cursor.stored_results():
             recent_prices = result.fetchall()
+        
+        cursor.close()
+        connection.close()
 
         # Check if there are results
         if recent_prices:
@@ -186,6 +199,9 @@ async def delete_review(pro_id: str, id_autoinc: int):
         cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
         # Commit the changes to the database
         connection.commit()
+        cursor.close()
+        connection.close()
+
         return {"message": "Review deleted successfully"}
 
     except Exception as e:
@@ -207,6 +223,9 @@ async def create_review(pro_id: str, calificacion: int, comentario: str):
         # Commit the changes to the database
         connection.commit()
 
+        cursor.close()
+        connection.close()
+
         return {"message": "Review created successfully", "id_autoinc": id_autoinc}
 
     except Exception as e:
@@ -220,6 +239,9 @@ async def create_list(list_name: str, privada: int):
        print(f"Creating list: {list_name}")
        cursor.callproc('sp_create_list', [list_name, privada])
        connection.commit()
+       cursor.close()
+       connection.close()
+
        response = {"message": "List created successfully."}
        return response
 
@@ -246,11 +268,13 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         cursor = connection.cursor()
         cursor.callproc('sp_create_session')
         connection.commit()
+        cursor.close()
         response = {"message": "Successfully created session"}
     except Exception as e:
        print(f"Error: {e}")
        response = {"message": "Error creating the list.Details: {str(e)}"}
-
+    
+    connection.close()
     return {"access_token": access_token, "token_type": "bearer", "message": response}
 
 
@@ -324,6 +348,7 @@ async def view_list(username: str, list_name: str):
 
         # Cerrar el cursor
         cursor.close()
+        connection.close()
 
         # Comprobar si se encontraron resultados
         if result:
@@ -353,6 +378,7 @@ async def insert_product_into_list(id: str, list_name: str):
 
         # Cerrar el cursor
         cursor.close()
+        connection.close()
 
         # Crear la respuesta
         response = {"message": "Producto insertado correctamente en la lista."}
@@ -372,6 +398,7 @@ async def create_category(cat_name: str):
         cursor.callproc('sp_create_category', [cat_name])
         connection.commit()
         cursor.close()
+        connection.close()
         response = {"message": f"Categoría '{cat_name}' creada correctamente."}
         return response
 
@@ -388,6 +415,7 @@ async def delete_category(cat_name: str):
         cursor.callproc('sp_delete_category', [cat_name])
         connection.commit()
         cursor.close()
+        connection.close()
 
         response = {"message": f"Categoría '{cat_name}' eliminada correctamente."}
 
@@ -415,6 +443,7 @@ async def create_comparacion():
 
         # Cerrar el cursor
         cursor.close()
+        connection.close()
 
         # Crear la respuesta
         response = {"message": f"Comparación creada correctamente with id: {id_autoinc}"}
@@ -435,6 +464,8 @@ async def create_busqueda(palabras: str):
         id_autoinc = cursor.fetchone()[0]
         connection.commit()
         cursor.close()
+        connection.close()
+
         response = {"message": f"Búsqueda creada correctamente with id: {id_autoinc}"}
 
         return response
@@ -454,6 +485,7 @@ async def delete_list(list_name: str):
         connection.commit()
 
         cursor.close()
+        connection.close()
 
         response = {"message": f"Lista '{list_name}' eliminada correctamente."}
 
@@ -484,6 +516,7 @@ async def get_product_average_price(product_id: str):
 
             # Close the cursor
             cursor.close()
+            connection.close()
 
             # Create the response
             response = {"average_price": average_price}
