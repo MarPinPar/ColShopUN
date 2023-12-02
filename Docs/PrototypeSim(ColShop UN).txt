@@ -1,0 +1,13 @@
+Simulación prototipo (ColShop UN)
+
+
+Para interactuar (a modo de simulación) con los mockups de nuestra interfaz, puede acceder a este link:
+
+https://www.figma.com/proto/PJvF569QbXBzg8MNTNGQeQ/ColShop-MockUps?type=design&node-id=9-4&t=qFP0lRPesa2iL7Xx-0&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=9%3A4
+
+La función de prototipo de Figma permite hacer click en los botones para entender cómo se relacionan las
+ventanas y ver una simulación de la transición entre ellas
+
+
+Además, si desea ver el proyecto en el editor online, use el siguiente link:
+https://www.figma.com/file/PJvF569QbXBzg8MNTNGQeQ/ColShop-MockUps?type=design&node-id=0%3A1&mode=design&t=qFP0lRPesa2iL7Xx-1
