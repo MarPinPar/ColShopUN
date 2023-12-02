@@ -36,7 +36,7 @@ CREATE VIEW misListas AS
 -- Vista de articulos en cada lista
 DROP VIEW IF EXISTS contenidoListas;
 CREATE VIEW contenidoListas AS 
-	SELECT lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
+	SELECT pro_ID AS 'ID', lis_nombre AS 'Nombre', lis_fechaCreacion AS 'Fecha de Creación', lis_fechaUltAct AS 'Última Actualización',
 		USUARIO_us_username AS 'Autor', pro_nombre AS 'Nombre Producto'
     FROM LISTA JOIN lista_has_producto ON LISTA_lis_nombre = lis_nombre AND LISTA_USUARIO_us_username = USUARIO_us_username
     JOIN PRODUCTO ON pro_ID = PRODUCTO_pro_ID

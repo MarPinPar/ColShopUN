@@ -83,8 +83,8 @@ async def root():
     return {"message": "Welcome to Colshop, the best prices online in Colombia."}
     # This is the root endpoint of the FastAPI application, which returns a welcome message when accessed.
 
-@app.get("/search_product")
-async def search_product(product_to_search: str):
+@app.get("/search_product_scrapping")
+async def search_product_scrapping(product_to_search: str):
     chromedriver_path = config('CHROMEDRIVER_PATH')  # Path to ChromeDriver executable
     output_csv_path = 'products.csv'  # Path to the output CSV file
 
@@ -365,7 +365,7 @@ async def view_list(username: str, list_name: str):
         # Comprobar si se encontraron resultados
         if result:
             # Crear la respuesta
-            response = {"productos": [item[0] for item in result]}
+            response = [{"id":item[0], "nombre":item[1]} for item in result]
         else:
             response = {"message": "No se encontraron productos en la lista."}
 
@@ -542,3 +542,25 @@ async def get_product_average_price(product_id: str):
     except Exception as e:
         # Handle other errors
         raise HTTPException(status_code=500, detail=f"Error: {e}")
+    
+@app.get("/get_mis_listas")
+async def get_mis_listas():
+    connection = get_mysql_connection()
+    cursor = connection.cursor()
+
+    cursor.callproc('sp_get_mis_listas')
+
+    for result in cursor.stored_results():
+        mis_listas = result.fetchall()
+        print(mis_listas)
+
+    cursor.close()
+    connection.close()
+
+    if mis_listas:
+        response = [{"lis_nombre": row[0], "lis_fecha_creacion": row[1], "lis_privacidad": row[2], "lis_ultima_act": row[3], "lis_autor": row[4], "lis_contents": await view_list(row[4], row[0])} for row in mis_listas]
+    else:
+        response = {"message": "No se encontraron listas para el usuario."}
+    
+    return response
+    

@@ -32,7 +32,7 @@ GRANT SELECT, INSERT, UPDATE ON producto TO 'usuario'@'localhost';
 GRANT SELECT, INSERT ON precio TO 'usuario'@'localhost';
 GRANT SELECT ON tienda TO 'usuario'@'localhost';
 
-GRANT CREATE, DELETE ON lista_has_producto TO 'usuario'@'localhost';
+GRANT SELECT, CREATE, DELETE ON lista_has_producto TO 'usuario'@'localhost';
 GRANT CREATE, UPDATE, DELETE ON reseña TO 'usuario'@'localhost';
 
 -- Permisos sobre procedimientos/funciones

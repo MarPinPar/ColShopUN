@@ -200,7 +200,7 @@ DROP PROCEDURE IF EXISTS sp_view_list;
 DELIMITER $$
 CREATE PROCEDURE sp_view_list (IN username VARCHAR(45), IN list_name VARCHAR(30))
 BEGIN
-	SELECT `Nombre Producto` FROM contenidolistas WHERE Autor = username AND Nombre = list_name;
+	SELECT ID, `Nombre Producto` FROM contenidolistas WHERE Autor = username AND Nombre = list_name;
 END $$
 
 DELIMITER ;
@@ -210,10 +210,10 @@ DELIMITER ;
 -- 8. Insert product into List
 DROP PROCEDURE IF EXISTS sp_insert_product_into_list;
 DELIMITER $$
-CREATE PROCEDURE sp_insert_product_into_list (IN id INT, IN list_name VARCHAR(30))
+CREATE PROCEDURE sp_insert_product_into_list (IN id VARCHAR(45), IN list_name VARCHAR(30))
 BEGIN
 	DECLARE flag_list_exists VARCHAR(45);
-START TRANSACTION;
+	START TRANSACTION;
     SELECT Autor INTO flag_list_exists FROM mislistas WHERE Nombre = list_name;
     IF flag_list_exists IS NOT NULL THEN
 		SET SQL_SAFE_UPDATES = 0;
@@ -221,7 +221,7 @@ START TRANSACTION;
         SET SQL_SAFE_UPDATES = 1;
     END IF;
     
-COMMIT;
+	COMMIT;
 END $$
 
 DELIMITER ;
