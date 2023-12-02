@@ -544,6 +544,7 @@ async def get_product_average_price(product_id: str):
         # Handle other errors
         raise HTTPException(status_code=500, detail=f"Error: {e}")
     
+
 @app.get("/get_mis_listas")
 async def get_mis_listas():
     connection = get_mysql_connection()
@@ -564,3 +565,22 @@ async def get_mis_listas():
     
     return response
     
+@app.get("/get_reseñas_producto")
+async def get_reseñas_producto(pr_id:str):
+    connection = get_mysql_connection()
+    cursor = connection.cursor()
+
+    cursor.callproc('sp_get_reseñas_producto', [pr_id])
+
+    for result in cursor.stored_results():
+        reseñas = result.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    if reseñas:
+        response = [{'Fecha': row[2], 'Usuario': row[3], 'Calificacion': row[4], 'Comentario': row[5]} for row in reseñas]
+    else:
+        response = {"message": "No se encontraron reseñas para el producto."}
+    
+    return response

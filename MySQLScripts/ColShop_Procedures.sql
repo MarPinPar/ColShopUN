@@ -561,3 +561,12 @@ BEGIN
 	CALL sp_get_list(SUBSTRING_INDEX(USER(), '@', 1));
 END $$
 DELIMITER ;
+
+-- Get comentarios from producto
+DROP PROCEDURE IF EXISTS sp_get_reseñas_producto;
+DELIMITER $$
+CREATE PROCEDURE sp_get_reseñas_producto(IN id VARCHAR(45))
+BEGIN
+	SELECT * FROM comentariosProducto WHERE comentariosProducto.ID = id;
+END $$
+DELIMITER ;

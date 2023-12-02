@@ -60,10 +60,10 @@ CREATE VIEW historialComparaciones AS
 -- Comentarios de Producto
 DROP VIEW IF EXISTS comentariosProducto;
 CREATE VIEW comentariosProducto AS
-	SELECT pro_nombre AS 'Nombre', ac_fechaHora AS 'Fecha', SESION_USUARIO_us_username AS 'Usuario', 
-		res_calificacion AS 'Calificacion', res_comentario AS 'Comentario'
-    FROM sesion_has_accion S JOIN accion ON ac_ID = S.ACCION_ac_ID JOIN reseña R ON ac_ID = S.ACCION_ac_ID 
-    JOIN producto ON R.PRODUCTO_pro_ID = pro_ID;
+	SELECT pro_ID AS ID, pro_nombre AS Nombre, ac_fechaHora AS Fecha, SESION_USUARIO_us_username 
+	AS Username, res_calificacion AS Calificacion, res_comentario AS Comentario
+	FROM producto JOIN reseña ON pro_ID = PRODUCTO_pro_ID JOIN accion ON reseña.ACCION_ac_ID = ac_ID 
+	JOIN sesion_has_accion ON sesion_has_accion.ACCION_ac_ID = ac_ID;
     
 
 -- -----------------------------------------------------------------------
