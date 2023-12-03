@@ -57,3 +57,20 @@ END $$
 
 DELIMITER ;
 
+-- Trigger to allow only users to create review
+
+DELIMITER $$
+
+CREATE TRIGGER tr_before_create_review
+BEFORE INSERT ON reseña
+FOR EACH ROW
+BEGIN
+	IF NOT EXISTS(SELECT us_username FROM vista_usuariosregistrados WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1)) THEN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No está autorizado para crear una reseña';
+    END IF;
+END $$
+
+DELIMITER ;
+
+

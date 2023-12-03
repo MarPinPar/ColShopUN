@@ -16,6 +16,7 @@ GRANT SELECT ON contenidoListas TO 'usuario'@'localhost';
 GRANT SELECT ON historialBusqueda TO 'usuario'@'localhost';
 GRANT SELECT ON historialComparaciones TO 'usuario'@'localhost';
 GRANT SELECT ON comentariosProducto TO 'usuario'@'localhost';
+GRANT SELECT ON vista_usuariosregistrados TO 'usuario'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
 
 GRANT SELECT, CREATE ON sesion TO 'usuario'@'localhost';
@@ -57,7 +58,8 @@ GRANT EXECUTE ON PROCEDURE sp_set_session_end TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_view_list TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_getMostRecentPriceByProductName TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_get_mis_listas TO 'usuario'@'localhost';
-GRANT EXECUTE ON PROCEDURE sp_get_reseñas_producto TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_review_by_product TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE GetProductInfo TO 'usuario'@'localhost';
 
 GRANT EXECUTE ON FUNCTION fn_getCurrentSession TO 'usuario'@'localhost';
 
