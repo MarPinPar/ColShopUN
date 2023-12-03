@@ -153,7 +153,7 @@ DELIMITER ;
 -- 5. Modify an user's information
 DROP PROCEDURE IF EXISTS sp_modify_user;
 DELIMITER $$
-CREATE PROCEDURE sp_modify_user (IN new_alias VARCHAR(45), IN new_correo VARCHAR(320), IN new_pswd VARCHAR(128), IN hashed_pswd VARCHAR(300))
+CREATE PROCEDURE sp_modify_user (IN new_alias VARCHAR(45), IN new_correo VARCHAR(320), IN new_pswd VARCHAR(128))
 BEGIN
 	DECLARE us VARCHAR(45);
     START TRANSACTION;
@@ -170,6 +170,24 @@ BEGIN
     IF new_pswd IS NOT NULL THEN
 		UPDATE miperfil SET Contraseña = new_pswd WHERE `Nombre de Usuario` = us;
     END IF;
+    
+    SET SQL_SAFE_UPDATES = 1;
+    COMMIT;
+END $$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_modify_mysql_user_password;
+DELIMITER $$
+CREATE PROCEDURE sp_modify_mysql_user_password (IN username VARCHAR(45), IN new_pswd VARCHAR(128))
+BEGIN
+    START TRANSACTION;
+    SET SQL_SAFE_UPDATES = 0;
+    
+    SET @command = CONCAT("ALTER USER '", username , "'@'localhost' IDENTIFIED BY '", new_pswd,"'");
+    PREPARE stmt FROM @command;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
     
     SET SQL_SAFE_UPDATES = 1;
     COMMIT;
