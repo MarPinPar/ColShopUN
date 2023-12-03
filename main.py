@@ -286,6 +286,58 @@ async def create_list(list_name: str, privada: int):
        response = {"message": "Error creating the list.Details: {str(e)}"}
        return response
 
+
+@app.delete("/delete_product_from_list")
+async def delete_product_from_list(product_id: int, list_name: str):
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
+        # Llamar al procedimiento almacenado
+        print(f"Deleting product {product_id} from list: {list_name}")
+        cursor.callproc('sp_delete_product_from_list', [product_id, list_name])
+
+        # Commit the changes
+        connection.commit()
+
+        # Close the cursor and connection
+        cursor.close()
+        connection.close()
+
+        response = {"message": f"Product {product_id} deleted from list {list_name} successfully."}
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        response = {"message": f"Error deleting product from list. Details: {str(e)}"}
+        return response
+
+
+@app.delete("/delete_review")
+async def delete_review(pro_id: str, id_autoinc: int):
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
+        # Llamar al procedimiento almacenado
+        print(f"Deleting review with PRODUCTO_pro_ID: {pro_id} and ACCION_ac_ID: {id_autoinc}")
+        cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
+
+        # Commit para confirmar los cambios
+        connection.commit()
+
+        # Cerrar el cursor y la conexión
+        cursor.close()
+        connection.close()
+
+        response = {"message": f"Review deleted successfully for PRODUCTO_pro_ID: {pro_id} and ACCION_ac_ID: {id_autoinc}."}
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        response = {"message": f"Error deleting review. Details: {str(e)}"}
+        return response
+
 #user
 @app.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
