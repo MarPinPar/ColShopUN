@@ -622,27 +622,19 @@ async def get_product_average_price(product_id: str):
         connection = get_mysql_connection()
         cursor = connection.cursor()
 
+        average_price = None
         # Call the MySQL function fn_GetProductAveragePrice
-        cursor.execute(f"SELECT fn_GetProductAveragePrice('{product_id}') AS average_price")
+        result = cursor.callproc('sp_get_avg_price_product', [product_id, average_price])
 
-        # Retrieve the result
-        result = cursor.fetchone()
+        average_price = result[1]
 
-        # Check if the result is not None
-        if result is not None:
-            average_price = result[0]
+        cursor.close()
+        connection.close()
 
-            # Close the cursor
-            cursor.close()
-            connection.close()
+        # Create the response
+        response = {"average_price": average_price}
 
-            # Create the response
-            response = {"average_price": average_price}
-
-            return response
-        else:
-            # Handle the case where the result is None
-            raise HTTPException(status_code=404, detail="Product not found")
+        return response
 
     except Exception as e:
         # Handle other errors
