@@ -1,3 +1,8 @@
+-- -----------------------------------------------------------------------
+--                  !!! TRIGGERS !!!!
+-- -----------------------------------------------------------------------
+
+
 -- Trigger after before a new action
 DROP TRIGGER IF EXISTS tr_before_creacion_accion;
 DELIMITER $$
@@ -41,9 +46,7 @@ BEGIN
 END $$
 
 -- Trigger to update the average of a product;
-
 DELIMITER $$
-
 CREATE TRIGGER update_average_price_trigger
 AFTER INSERT ON PRECIO
 FOR EACH ROW
@@ -58,9 +61,7 @@ END $$
 DELIMITER ;
 
 -- Trigger to allow only users to create review
-
 DELIMITER $$
-
 CREATE TRIGGER tr_before_create_review
 BEFORE INSERT ON reseña
 FOR EACH ROW
@@ -116,7 +117,6 @@ END $$
 DELIMITER ;
 
 -- Trigger to allow only users to create search
-
 DELIMITER $$
 
 CREATE TRIGGER tr_before_create_search

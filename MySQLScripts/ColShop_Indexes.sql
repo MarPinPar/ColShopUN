@@ -1,3 +1,8 @@
+-- -----------------------------------------------------------------------
+--                  !!! INDICES !!!!
+-- -----------------------------------------------------------------------
+
+
 -- 1. Index on user's alias
 CREATE INDEX idx_us_alias ON USUARIO (us_alias);
 -- Query for user alias Octavio
