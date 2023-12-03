@@ -51,10 +51,11 @@ async def get_product_info(product_id: str):
         # Call the stored procedure
         cursor.callproc('GetProductInfo', [product_id])
 
+
         # Fetch the results from the stored procedure
         for result in cursor.stored_results():
             product_info = result.fetchall()
-
+            print(result)
         cursor.close()
         connection.close()
 
