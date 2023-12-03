@@ -1,3 +1,8 @@
+-- -----------------------------------------------------------------------
+--                  !!! TRIGGERS !!!!
+-- -----------------------------------------------------------------------
+
+
 -- Trigger after before a new action
 DROP TRIGGER IF EXISTS tr_before_creacion_accion;
 DELIMITER $$
@@ -41,9 +46,7 @@ BEGIN
 END $$
 
 -- Trigger to update the average of a product;
-
 DELIMITER $$
-
 CREATE TRIGGER update_average_price_trigger
 AFTER INSERT ON PRECIO
 FOR EACH ROW
@@ -56,4 +59,3 @@ BEGIN
 END $$
 
 DELIMITER ;
-
