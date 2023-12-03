@@ -3,6 +3,7 @@ USE ColShop;
 select  * from usuario;
 select * from producto ;
 select  * from precio;
+select * from reseña;
 
 -- View an specifc product:
 -- Procedure to get product price information by ID
@@ -565,10 +566,18 @@ END $$
 DELIMITER ;
 
 -- Get comentarios from producto
-DROP PROCEDURE IF EXISTS sp_get_reseñas_producto;
-DELIMITER $$
-CREATE PROCEDURE sp_get_reseñas_producto(IN id VARCHAR(45))
+
+DROP PROCEDURE IF EXISTS sp_get_review_by_product;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_review_by_product(IN producto_pro_id VARCHAR(255))
 BEGIN
-	SELECT * FROM comentariosProducto WHERE comentariosProducto.ID = id;
-END $$
+    SELECT res_calificacion, res_comentario
+    FROM reseña
+    WHERE PRODUCTO_pro_ID = producto_pro_id;
+END //
 DELIMITER ;
+
+-- CALL sp_get_review_by_product('MCO1319575303');
+
+

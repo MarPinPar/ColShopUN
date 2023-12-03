@@ -663,22 +663,29 @@ async def get_mis_listas():
     
     return response
     
-@app.get("/get_reseñas_producto")
-async def get_reseñas_producto(pr_id:str):
-    connection = get_mysql_connection()
-    cursor = connection.cursor()
+@app.get("/get_reviews_by_product")
+async def get_reviews_by_product(product_id: str):
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
-    cursor.callproc('sp_get_reseñas_producto', [pr_id])
+        cursor.callproc('sp_get_review_by_product', [product_id])
 
-    for result in cursor.stored_results():
-        reseñas = result.fetchall()
+        result = []
+        for review in cursor.stored_results():
+            result.extend(review.fetchall())
 
-    cursor.close()
-    connection.close()
+        cursor.close()
+        connection.close()
 
-    if reseñas:
-        response = [{'Fecha': row[2], 'Usuario': row[3], 'Calificacion': row[4], 'Comentario': row[5]} for row in reseñas]
-    else:
-        response = {"message": "No se encontraron reseñas para el producto."}
-    
-    return response
+        if result:
+            reviews = [{"res_calificacion": row[0], "res_comentario": row[1]} for row in result]
+            response = {"reviews": reviews}
+        else:
+            response = {"message": "No se encontró información de reseñas para el producto."}
+
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "Error en la solicitud."}
