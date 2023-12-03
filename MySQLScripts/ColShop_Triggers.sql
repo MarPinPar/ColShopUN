@@ -58,14 +58,10 @@ BEGIN
     WHERE pro_ID = NEW.PRODUCTO_pro_ID;
 END $$
 
-<<<<<<< HEAD
-=======
 DELIMITER ;
 
 -- Trigger to allow only users to create review
-
 DELIMITER $$
-
 CREATE TRIGGER tr_before_create_review
 BEFORE INSERT ON reseña
 FOR EACH ROW
@@ -121,7 +117,6 @@ END $$
 DELIMITER ;
 
 -- Trigger to allow only users to create search
-
 DELIMITER $$
 
 CREATE TRIGGER tr_before_create_search
@@ -148,5 +143,4 @@ BEGIN
     DELETE FROM lista_has_producto WHERE LISTA_lis_nombre = OLD.lis_nombre AND LISTA_USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
 END $$
 
->>>>>>> 5f943e9ef70f42885c1e807c2ef5a4c909f9b644
 DELIMITER ;
