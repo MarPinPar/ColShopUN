@@ -181,16 +181,20 @@ DROP PROCEDURE IF EXISTS sp_modify_mysql_user_password;
 DELIMITER $$
 CREATE PROCEDURE sp_modify_mysql_user_password (IN username VARCHAR(45), IN new_pswd VARCHAR(128))
 BEGIN
-    START TRANSACTION;
-    SET SQL_SAFE_UPDATES = 0;
+	IF new_pswd != NULL THEN
+		START TRANSACTION;
+		SET SQL_SAFE_UPDATES = 0;
+        ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY  'password';
+		SET @stm = CONCAT("ALTER USER '", username, "'@'localhost' IDENTIFIED BY '", new_pswd,"'");
+        prepare stmt from @stm;
+        execute stmt;
+        deallocate prepare stmt;
+        
+        FLUSH PRIVILEGES;
     
-    SET @command = CONCAT("ALTER USER '", username , "'@'localhost' IDENTIFIED BY '", new_pswd,"'");
-    PREPARE stmt FROM @command;
-    EXECUTE stmt;
-    DEALLOCATE PREPARE stmt;
-    
-    SET SQL_SAFE_UPDATES = 1;
-    COMMIT;
+		SET SQL_SAFE_UPDATES = 1;
+		COMMIT;
+    END IF;
 END $$
 
 DELIMITER ;
@@ -590,15 +594,13 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS sp_get_review_by_product;
 
 DELIMITER //
-CREATE PROCEDURE sp_get_review_by_product(IN producto_pro_id VARCHAR(255))
+CREATE PROCEDURE sp_get_review_by_product(IN pro_id VARCHAR(255))
 BEGIN
     SELECT res_calificacion, res_comentario
     FROM reseña
-    WHERE PRODUCTO_pro_ID = producto_pro_id;
+    WHERE PRODUCTO_pro_ID = pro_id;
 END //
 DELIMITER ;
-
--- CALL sp_get_review_by_product('MCO1319575303');
 
 -- Get comentarios from producto
 

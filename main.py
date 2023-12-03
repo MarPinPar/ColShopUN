@@ -343,6 +343,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     # Establish connection from authenticated user
     mysql_config["user"] = form_data.username
     mysql_config["password"] = form_data.password
+    print(form_data.password)
     connection = get_mysql_connection()
     try:
         global current_session
@@ -418,15 +419,12 @@ async def create_user(username: str, alias: str, correo: str, pswd: str):
 
 #to run this we have first to give permissions and give the
 @app.post("/modify_user")
-async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: str = None):
-    if new_pswd != None:
-        hashed_password = get_password_hash(new_pswd)
-    else:
-        hashed_password = None
+async def modify_user(new_alias: str = None, new_correo: str = None):
+
+    hashed_password = None
 
     connection = get_mysql_connection()
 
-    print(mysql_config["user"])
     try:
         cursor = connection.cursor()
         cursor.callproc('sp_modify_user', [new_alias, new_correo, hashed_password])
@@ -443,8 +441,6 @@ async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: s
         
         connection = mysql.connector.connect(**temp_mysql_config)
         cursor = connection.cursor()
-
-        cursor.callproc('sp_modify_mysql_user_password', [mysql_config["user"], new_pswd])
 
         connection.commit()
         cursor.close()
