@@ -226,23 +226,6 @@ async def get_most_recent_price(partial_product_name: str):
         print(f"Error: {e}")
 
 
-@app.delete("/delete_review")
-async def delete_review(pro_id: str, id_autoinc: int):
-    try:
-        connection = get_mysql_connection()
-        cursor = connection.cursor()
-        # Call the stored procedure
-        cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
-        # Commit the changes to the database
-        connection.commit()
-        cursor.close()
-        connection.close()
-
-        return {"message": "Review deleted successfully"}
-
-    except Exception as e:
-        print(f"Error: {e}")
-
 @app.post("/create_review")
 async def create_review(pro_id: str, calificacion: int, comentario: str):
     try:

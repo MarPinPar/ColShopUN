@@ -214,15 +214,10 @@ DROP PROCEDURE IF EXISTS sp_insert_product_into_list;
 DELIMITER $$
 CREATE PROCEDURE sp_insert_product_into_list (IN id VARCHAR(45), IN list_name VARCHAR(30))
 BEGIN
-	DECLARE flag_list_exists VARCHAR(45);
 	START TRANSACTION;
-    SELECT Autor INTO flag_list_exists FROM mislistas WHERE Nombre = list_name;
-    IF flag_list_exists IS NOT NULL THEN
 		SET SQL_SAFE_UPDATES = 0;
-        INSERT INTO lista_has_producto VALUES (list_name, flag_list_exists, id);
+        INSERT INTO lista_has_producto VALUES (list_name, SUBSTRING_INDEX(USER(), '@', 1), id);
         SET SQL_SAFE_UPDATES = 1;
-    END IF;
-    
 	COMMIT;
 END $$
 
