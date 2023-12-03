@@ -410,19 +410,43 @@ async def create_user(username: str, alias: str, correo: str, pswd: str):
 #to run this we have first to give permissions and give the
 @app.post("/modify_user")
 async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: str = None):
+    if new_pswd != None:
+        hashed_password = get_password_hash(new_pswd)
+    else:
+        hashed_password = None
+
     connection = get_mysql_connection()
+
+    print(mysql_config["user"])
     try:
         cursor = connection.cursor()
-        cursor.callproc('sp_modify_user', [new_alias, new_correo, new_pswd])
+        cursor.callproc('sp_modify_user', [new_alias, new_correo, hashed_password])
         connection.commit()
+        cursor.close()
+        connection.close()
+
+        temp_mysql_config = {
+            "host": config('MYSQL_HOST'),
+            "user": config('MYSQL_USER'),
+            "password": config('MYSQL_PASSWORD'),
+            "database": config('MYSQL_DATABASE'),
+            }
+        
+        connection = mysql.connector.connect(**temp_mysql_config)
+        cursor = connection.cursor()
+
+        cursor.callproc('sp_modify_mysql_user_password', [mysql_config["user"], new_pswd])
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+
         return {"message": "User modified successfully"}
     except Exception as e:
 
         return {"error": str(e)}
-    finally:
 
-        cursor.close()
-        connection.close()
+        
 
 @app.get("/view_list")
 async def view_list(username: str, list_name: str):

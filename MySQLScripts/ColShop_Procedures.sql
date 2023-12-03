@@ -153,7 +153,7 @@ DELIMITER ;
 -- 5. Modify an user's information
 DROP PROCEDURE IF EXISTS sp_modify_user;
 DELIMITER $$
-CREATE PROCEDURE sp_modify_user (IN new_alias VARCHAR(45), IN new_correo VARCHAR(320), IN new_pswd VARCHAR(128))
+CREATE PROCEDURE sp_modify_user (IN new_alias VARCHAR(45), IN new_correo VARCHAR(320), IN new_pswd VARCHAR(128), IN hashed_pswd VARCHAR(300))
 BEGIN
 	DECLARE us VARCHAR(45);
     START TRANSACTION;
