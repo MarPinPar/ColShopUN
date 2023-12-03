@@ -80,7 +80,6 @@ async def get_product_info(product_id: str):
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    print("hello")
     await logout()
     # Close the MySQL connection when the application shuts down
     conn.close()
@@ -103,10 +102,15 @@ async def search_product(product_to_search: str):
         "database": config('MYSQL_DATABASE'),
     }
 
-    # Establish a MySQL connection
-    conn = mysql.connector.connect(**mysql_config)
+    try:
+        await create_busqueda(product_to_search)
+    except Exception as e:
+        print("No record of search created")
 
     try:
+        # Establish a MySQL connection
+        conn = mysql.connector.connect(**mysql_config)
+
         # Call the unified_product_search function to perform product search and save results to a CSV
         unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 
@@ -117,10 +121,15 @@ async def search_product(product_to_search: str):
 
         # Insert the data into the MySQL database
         insert_data_into_database(df, conn)
-        return {"result": result}
-    finally:
+
         # Close the MySQL connection in a finally block to ensure it gets closed even if an exception occurs
         conn.close()
+
+        return {"result": result}
+    
+    except Exception as e:
+       print(f"Error: {e}")
+        
 
 @app.get("/get_lowest_price")
 async def get_lowest_price(product_name: str):
@@ -226,23 +235,6 @@ async def get_most_recent_price(partial_product_name: str):
         print(f"Error: {e}")
 
 
-@app.delete("/delete_review")
-async def delete_review(pro_id: str, id_autoinc: int):
-    try:
-        connection = get_mysql_connection()
-        cursor = connection.cursor()
-        # Call the stored procedure
-        cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
-        # Commit the changes to the database
-        connection.commit()
-        cursor.close()
-        connection.close()
-
-        return {"message": "Review deleted successfully"}
-
-    except Exception as e:
-        print(f"Error: {e}")
-
 @app.post("/create_review")
 async def create_review(pro_id: str, calificacion: int, comentario: str):
     try:
@@ -285,6 +277,58 @@ async def create_list(list_name: str, privada: int):
        print(f"Error: {e}")
        response = {"message": "Error creating the list.Details: {str(e)}"}
        return response
+
+
+@app.delete("/delete_product_from_list")
+async def delete_product_from_list(product_id: str, list_name: str):
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
+        # Llamar al procedimiento almacenado
+        print(f"Deleting product {product_id} from list: {list_name}")
+        cursor.callproc('sp_delete_product_from_list', [product_id, list_name])
+
+        # Commit the changes
+        connection.commit()
+
+        # Close the cursor and connection
+        cursor.close()
+        connection.close()
+
+        response = {"message": f"Product {product_id} deleted from list {list_name} successfully."}
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        response = {"message": f"Error deleting product from list. Details: {str(e)}"}
+        return response
+
+
+@app.delete("/delete_review")
+async def delete_review(pro_id: str, id_autoinc: int):
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
+        # Llamar al procedimiento almacenado
+        print(f"Deleting review with PRODUCTO_pro_ID: {pro_id} and ACCION_ac_ID: {id_autoinc}")
+        cursor.callproc('sp_delete_reseña', [pro_id, id_autoinc])
+
+        # Commit para confirmar los cambios
+        connection.commit()
+
+        # Cerrar el cursor y la conexión
+        cursor.close()
+        connection.close()
+
+        response = {"message": f"Review deleted successfully for PRODUCTO_pro_ID: {pro_id} and ACCION_ac_ID: {id_autoinc}."}
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        response = {"message": f"Error deleting review. Details: {str(e)}"}
+        return response
 
 #user
 @app.post("/token")
@@ -375,19 +419,43 @@ async def create_user(username: str, alias: str, correo: str, pswd: str):
 #to run this we have first to give permissions and give the
 @app.post("/modify_user")
 async def modify_user(new_alias: str = None, new_correo: str = None, new_pswd: str = None):
+    if new_pswd != None:
+        hashed_password = get_password_hash(new_pswd)
+    else:
+        hashed_password = None
+
     connection = get_mysql_connection()
+
+    print(mysql_config["user"])
     try:
         cursor = connection.cursor()
-        cursor.callproc('sp_modify_user', [new_alias, new_correo, new_pswd])
+        cursor.callproc('sp_modify_user', [new_alias, new_correo, hashed_password])
         connection.commit()
+        cursor.close()
+        connection.close()
+
+        temp_mysql_config = {
+            "host": config('MYSQL_HOST'),
+            "user": config('MYSQL_USER'),
+            "password": config('MYSQL_PASSWORD'),
+            "database": config('MYSQL_DATABASE'),
+            }
+        
+        connection = mysql.connector.connect(**temp_mysql_config)
+        cursor = connection.cursor()
+
+        cursor.callproc('sp_modify_mysql_user_password', [mysql_config["user"], new_pswd])
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+
         return {"message": "User modified successfully"}
     except Exception as e:
 
         return {"error": str(e)}
-    finally:
 
-        cursor.close()
-        connection.close()
+        
 
 @app.get("/view_list")
 async def view_list(username: str, list_name: str):
@@ -564,27 +632,19 @@ async def get_product_average_price(product_id: str):
         connection = get_mysql_connection()
         cursor = connection.cursor()
 
+        average_price = None
         # Call the MySQL function fn_GetProductAveragePrice
-        cursor.execute(f"SELECT fn_GetProductAveragePrice('{product_id}') AS average_price")
+        result = cursor.callproc('sp_get_avg_price_product', [product_id, average_price])
 
-        # Retrieve the result
-        result = cursor.fetchone()
+        average_price = result[1]
 
-        # Check if the result is not None
-        if result is not None:
-            average_price = result[0]
+        cursor.close()
+        connection.close()
 
-            # Close the cursor
-            cursor.close()
-            connection.close()
+        # Create the response
+        response = {"average_price": average_price}
 
-            # Create the response
-            response = {"average_price": average_price}
-
-            return response
-        else:
-            # Handle the case where the result is None
-            raise HTTPException(status_code=404, detail="Product not found")
+        return response
 
     except Exception as e:
         # Handle other errors
@@ -611,22 +671,57 @@ async def get_mis_listas():
     
     return response
     
-@app.get("/get_reseñas_producto")
-async def get_reseñas_producto(pr_id:str):
-    connection = get_mysql_connection()
-    cursor = connection.cursor()
+@app.get("/get_reviews_by_product")
+async def get_reviews_by_product(product_id: str):
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
 
-    cursor.callproc('sp_get_reseñas_producto', [pr_id])
+        cursor.callproc('sp_get_review_by_product', [product_id])
 
-    for result in cursor.stored_results():
-        reseñas = result.fetchall()
+        result = []
+        for review in cursor.stored_results():
+            result.extend(review.fetchall())
 
-    cursor.close()
-    connection.close()
+        cursor.close()
+        connection.close()
 
-    if reseñas:
-        response = [{'Fecha': row[2], 'Usuario': row[3], 'Calificacion': row[4], 'Comentario': row[5]} for row in reseñas]
-    else:
-        response = {"message": "No se encontraron reseñas para el producto."}
-    
-    return response
+        if result:
+            reviews = [{"res_calificacion": row[0], "res_comentario": row[1]} for row in result]
+            response = {"reviews": reviews}
+        else:
+            response = {"message": "No se encontró información de reseñas para el producto."}
+
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "Error en la solicitud."}
+
+
+@app.get("/get_search_history")
+async def get_search_history():
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
+        cursor.callproc('sp_get_search_history')
+
+        result = []
+        for review in cursor.stored_results():
+            result.extend(review.fetchall())
+
+        cursor.close()
+        connection.close()
+
+        if result:
+            historial = [{"bus_fecha": row[0], "bus_termino": row[1]} for row in result]
+            response = {"historial": historial}
+        else:
+            response = {"message": "No se encontró historial de busqueda."}
+
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "Error en la solicitud."}

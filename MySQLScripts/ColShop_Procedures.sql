@@ -7,6 +7,7 @@ USE ColShop;
 select  * from usuario;
 select * from producto ;
 select  * from precio;
+select * from reseña;
 
 -- View an specifc product:
 -- Procedure to get product price information by ID
@@ -180,6 +181,24 @@ END $$
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS sp_modify_mysql_user_password;
+DELIMITER $$
+CREATE PROCEDURE sp_modify_mysql_user_password (IN username VARCHAR(45), IN new_pswd VARCHAR(128))
+BEGIN
+    START TRANSACTION;
+    SET SQL_SAFE_UPDATES = 0;
+    
+    SET @command = CONCAT("ALTER USER '", username , "'@'localhost' IDENTIFIED BY '", new_pswd,"'");
+    PREPARE stmt FROM @command;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+    
+    SET SQL_SAFE_UPDATES = 1;
+    COMMIT;
+END $$
+
+DELIMITER ;
+
 -- Can be tested through other users
 -- CALL sp_modify_user("prueba1", NULL, NULL);
 -- SELECT * FROM usuario;
@@ -217,15 +236,10 @@ DROP PROCEDURE IF EXISTS sp_insert_product_into_list;
 DELIMITER $$
 CREATE PROCEDURE sp_insert_product_into_list (IN id VARCHAR(45), IN list_name VARCHAR(30))
 BEGIN
-	DECLARE flag_list_exists VARCHAR(45);
 	START TRANSACTION;
-    SELECT Autor INTO flag_list_exists FROM mislistas WHERE Nombre = list_name;
-    IF flag_list_exists IS NOT NULL THEN
 		SET SQL_SAFE_UPDATES = 0;
-        INSERT INTO lista_has_producto VALUES (list_name, flag_list_exists, id);
+        INSERT INTO lista_has_producto VALUES (list_name, SUBSTRING_INDEX(USER(), '@', 1), id);
         SET SQL_SAFE_UPDATES = 1;
-    END IF;
-    
 	COMMIT;
 END $$
 
@@ -236,7 +250,7 @@ DELIMITER ;
 -- 9. Delete Item From List
 DROP PROCEDURE IF EXISTS sp_delete_product_from_list;
 DELIMITER $$
-CREATE PROCEDURE sp_delete_product_from_list (IN id INT, IN list_name VARCHAR(30))
+CREATE PROCEDURE sp_delete_product_from_list (IN id VARCHAR(45), IN list_name VARCHAR(30))
 BEGIN
 	DECLARE flag_list_exists VARCHAR(45);
     SELECT Autor INTO flag_list_exists FROM mislistas WHERE Nombre = list_name;
@@ -247,6 +261,9 @@ BEGIN
 			AND LISTA_USUARIO_us_username = flag_list_exists AND PRODUCTO_pro_ID = id;
         SET SQL_SAFE_UPDATES = 1;
 	COMMIT;
+    ELSE
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No está autorizado para eliminar elementos a esta lista o No existe esta lista';
     END IF;
 END $$
 
@@ -257,6 +274,10 @@ DROP PROCEDURE IF EXISTS sp_delete_list;
 DELIMITER $$
 CREATE PROCEDURE sp_delete_list (IN list_name VARCHAR(30))
 BEGIN
+IF NOT EXISTS(SELECT mislistas.Nombre FROM mislistas WHERE mislistas.Nombre = list_name) THEN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No está autorizado para eliminar esta lista';
+END IF;
 START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM mislistas WHERE Nombre=list_name;
@@ -569,10 +590,42 @@ END $$
 DELIMITER ;
 
 -- Get comentarios from producto
-DROP PROCEDURE IF EXISTS sp_get_reseñas_producto;
-DELIMITER $$
-CREATE PROCEDURE sp_get_reseñas_producto(IN id VARCHAR(45))
+
+DROP PROCEDURE IF EXISTS sp_get_review_by_product;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_review_by_product(IN producto_pro_id VARCHAR(255))
 BEGIN
-	SELECT * FROM comentariosProducto WHERE comentariosProducto.ID = id;
-END $$
+    SELECT res_calificacion, res_comentario
+    FROM reseña
+    WHERE PRODUCTO_pro_ID = producto_pro_id;
+END //
+DELIMITER ;
+
+-- CALL sp_get_review_by_product('MCO1319575303');
+
+-- Get comentarios from producto
+
+DROP PROCEDURE IF EXISTS sp_get_avg_price_product;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_avg_price_product(IN producto_pro_id VARCHAR(255), OUT precio DOUBLE)
+BEGIN
+    SELECT pro_precio_promedio
+    INTO precio
+    FROM producto
+    WHERE pro_ID = producto_pro_id;
+END //
+DELIMITER ;
+
+
+-- Get historial de búsqueda
+
+DROP PROCEDURE IF EXISTS sp_get_search_history;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_search_history()
+BEGIN
+    SELECT * FROM historialbusqueda;
+END //
 DELIMITER ;
