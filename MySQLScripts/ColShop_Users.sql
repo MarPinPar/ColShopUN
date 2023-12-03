@@ -61,6 +61,7 @@ GRANT EXECUTE ON PROCEDURE sp_getMostRecentPriceByProductName TO 'usuario'@'loca
 GRANT EXECUTE ON PROCEDURE sp_get_mis_listas TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE sp_get_review_by_product TO 'usuario'@'localhost';
 GRANT EXECUTE ON PROCEDURE GetProductInfo TO 'usuario'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_avg_price_product TO 'usuario'@'localhost';
 
 GRANT EXECUTE ON FUNCTION fn_getCurrentSession TO 'usuario'@'localhost';
 

@@ -599,3 +599,17 @@ END //
 DELIMITER ;
 
 -- CALL sp_get_review_by_product('MCO1319575303');
+
+-- Get comentarios from producto
+
+DROP PROCEDURE IF EXISTS sp_get_avg_price_product;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_avg_price_product(IN producto_pro_id VARCHAR(255), OUT precio DOUBLE)
+BEGIN
+    SELECT pro_precio_promedio
+    INTO precio
+    FROM producto
+    WHERE pro_ID = producto_pro_id;
+END //
+DELIMITER ;
