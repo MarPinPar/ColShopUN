@@ -73,4 +73,26 @@ END $$
 
 DELIMITER ;
 
+-- Trigger to allow only creators of a review or the other roles (root not included) to delete review
+DROP TRIGGER IF EXISTS tr_before_delete_review;
+
+DELIMITER $$
+
+CREATE TRIGGER tr_before_delete_review
+BEFORE DELETE ON reseña
+FOR EACH ROW
+BEGIN
+	DECLARE checked_user VARCHAR(45);
+    
+	IF SUBSTRING_INDEX(USER(), '@', 1) = "root" OR 
+		(EXISTS(SELECT us_username FROM vista_usuariosregistrados WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1)) 
+			AND NOT EXISTS (SELECT mis_reviews.ACCION_ac_ID FROM mis_reviews WHERE mis_reviews.ACCION_ac_ID = OLD.ACCION_ac_ID))
+		THEN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No está autorizado para eliminar esta reseña';
+    END IF;
+END $$
+
+DELIMITER ;
+
 

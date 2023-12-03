@@ -579,5 +579,3 @@ END //
 DELIMITER ;
 
 -- CALL sp_get_review_by_product('MCO1319575303');
-
-

@@ -17,6 +17,7 @@ GRANT SELECT ON historialBusqueda TO 'usuario'@'localhost';
 GRANT SELECT ON historialComparaciones TO 'usuario'@'localhost';
 GRANT SELECT ON comentariosProducto TO 'usuario'@'localhost';
 GRANT SELECT ON vista_usuariosregistrados TO 'usuario'@'localhost';
+GRANT SELECT ON mis_reviews TO 'usuario'@'localhost';
 GRANT SELECT, UPDATE, DELETE, INSERT ON misListas TO 'usuario'@'localhost';
 
 GRANT SELECT, CREATE ON sesion TO 'usuario'@'localhost';

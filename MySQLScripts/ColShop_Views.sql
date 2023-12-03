@@ -133,3 +133,9 @@ CREATE VIEW Vista_EstadisticasSistema AS
 SELECT
     (SELECT COUNT(*) FROM USUARIO) AS Total_Usuarios,
     (SELECT COUNT(*) FROM PRODUCTO) AS Total_Productos;
+    
+-- Vista de mis reseñas:
+DROP VIEW IF EXISTS mis_reviews;
+CREATE VIEW mis_reviews AS
+SELECT * FROM reseña WHERE ACCION_ac_ID IN
+	(SELECT ACCION_ac_ID FROM sesion_has_accion WHERE SESION_USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1));
