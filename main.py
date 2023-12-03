@@ -697,3 +697,31 @@ async def get_reviews_by_product(product_id: str):
     except Exception as e:
         print(f"Error: {e}")
         return {"message": "Error en la solicitud."}
+
+
+@app.get("/get_search_history")
+async def get_search_history():
+    try:
+        connection = get_mysql_connection()
+        cursor = connection.cursor()
+
+        cursor.callproc('sp_get_search_history')
+
+        result = []
+        for review in cursor.stored_results():
+            result.extend(review.fetchall())
+
+        cursor.close()
+        connection.close()
+
+        if result:
+            historial = [{"bus_fecha": row[0], "bus_termino": row[1]} for row in result]
+            response = {"historial": historial}
+        else:
+            response = {"message": "No se encontró historial de busqueda."}
+
+        return response
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": "Error en la solicitud."}
