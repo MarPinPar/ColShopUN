@@ -80,7 +80,6 @@ async def get_product_info(product_id: str):
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    print("hello")
     await logout()
     # Close the MySQL connection when the application shuts down
     conn.close()

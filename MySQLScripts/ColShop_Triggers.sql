@@ -114,3 +114,19 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+-- Trigger to allow only users to create search
+
+DELIMITER $$
+
+CREATE TRIGGER tr_before_create_search
+BEFORE INSERT ON busqueda
+FOR EACH ROW
+BEGIN
+	IF NOT EXISTS(SELECT us_username FROM vista_usuariosregistrados WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1)) THEN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No está autorizado para crear una busqueda';
+    END IF;
+END $$
+
+DELIMITER ;
