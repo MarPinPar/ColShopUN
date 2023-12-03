@@ -270,6 +270,10 @@ DROP PROCEDURE IF EXISTS sp_delete_list;
 DELIMITER $$
 CREATE PROCEDURE sp_delete_list (IN list_name VARCHAR(30))
 BEGIN
+IF NOT EXISTS(SELECT mislistas.Nombre FROM mislistas WHERE mislistas.Nombre = list_name) THEN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No está autorizado para eliminar esta lista';
+END IF;
 START TRANSACTION;
 	SET SQL_SAFE_UPDATES = 0;
 	DELETE FROM mislistas WHERE Nombre=list_name;

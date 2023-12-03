@@ -130,3 +130,17 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+-- Trigger to allow list deletion
+DROP TRIGGER IF EXISTS tr_before_delete_list;
+
+DELIMITER $$
+
+CREATE TRIGGER tr_before_delete_list
+BEFORE DELETE ON lista
+FOR EACH ROW
+BEGIN
+    DELETE FROM lista_has_producto WHERE LISTA_lis_nombre = OLD.lis_nombre AND LISTA_USUARIO_us_username = SUBSTRING_INDEX(USER(), '@', 1);
+END $$
+
+DELIMITER ;
