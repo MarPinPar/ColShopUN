@@ -102,10 +102,15 @@ async def search_product(product_to_search: str):
         "database": config('MYSQL_DATABASE'),
     }
 
-    # Establish a MySQL connection
-    conn = mysql.connector.connect(**mysql_config)
+    try:
+        await create_busqueda(product_to_search)
+    except Exception as e:
+        print("No record of search created")
 
     try:
+        # Establish a MySQL connection
+        conn = mysql.connector.connect(**mysql_config)
+
         # Call the unified_product_search function to perform product search and save results to a CSV
         unified_product_search(product_to_search, chromedriver_path, output_csv_path)
 
@@ -116,10 +121,15 @@ async def search_product(product_to_search: str):
 
         # Insert the data into the MySQL database
         insert_data_into_database(df, conn)
-        return {"result": result}
-    finally:
+
         # Close the MySQL connection in a finally block to ensure it gets closed even if an exception occurs
         conn.close()
+
+        return {"result": result}
+    
+    except Exception as e:
+       print(f"Error: {e}")
+        
 
 @app.get("/get_lowest_price")
 async def get_lowest_price(product_name: str):
