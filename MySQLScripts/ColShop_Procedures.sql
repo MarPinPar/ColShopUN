@@ -1,3 +1,7 @@
+-- -----------------------------------------------------------------------
+--                  !!! PROCEDIMIENTOS !!!!
+-- -----------------------------------------------------------------------
+
 USE ColShop;
 
 select  * from usuario;
@@ -611,5 +615,17 @@ BEGIN
     INTO precio
     FROM producto
     WHERE pro_ID = producto_pro_id;
+END //
+DELIMITER ;
+
+
+-- Get historial de búsqueda
+
+DROP PROCEDURE IF EXISTS sp_get_search_history;
+
+DELIMITER //
+CREATE PROCEDURE sp_get_search_history()
+BEGIN
+    SELECT * FROM historialbusqueda;
 END //
 DELIMITER ;
