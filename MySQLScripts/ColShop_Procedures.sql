@@ -228,7 +228,7 @@ DELIMITER ;
 -- 9. Delete Item From List
 DROP PROCEDURE IF EXISTS sp_delete_product_from_list;
 DELIMITER $$
-CREATE PROCEDURE sp_delete_product_from_list (IN id INT, IN list_name VARCHAR(30))
+CREATE PROCEDURE sp_delete_product_from_list (IN id VARCHAR(45), IN list_name VARCHAR(30))
 BEGIN
 	DECLARE flag_list_exists VARCHAR(45);
     SELECT Autor INTO flag_list_exists FROM mislistas WHERE Nombre = list_name;
@@ -239,6 +239,9 @@ BEGIN
 			AND LISTA_USUARIO_us_username = flag_list_exists AND PRODUCTO_pro_ID = id;
         SET SQL_SAFE_UPDATES = 1;
 	COMMIT;
+    ELSE
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No está autorizado para eliminar elementos a esta lista o No existe esta lista';
     END IF;
 END $$
 

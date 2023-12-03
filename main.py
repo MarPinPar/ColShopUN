@@ -271,7 +271,7 @@ async def create_list(list_name: str, privada: int):
 
 
 @app.delete("/delete_product_from_list")
-async def delete_product_from_list(product_id: int, list_name: str):
+async def delete_product_from_list(product_id: str, list_name: str):
     try:
         connection = get_mysql_connection()
         cursor = connection.cursor()
