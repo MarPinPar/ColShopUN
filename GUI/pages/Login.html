@@ -18,25 +18,27 @@
 			Registrate
 		</h2>
 		<div class="form-holder">
-			<input type="text" class="input" placeholder="Nombre" />
-			<input type="email" class="input" placeholder="Correo" />
-			<input type="password" class="input" placeholder="Contraseña" />
+			<input id = 'name' type="text" class="input" placeholder="Nombre" />
+			<input id = 'email' type="email" class="input" placeholder="Correo" />
+			<input id = 'password' type="password" class="input" placeholder="Contraseña" />
+      <input id = 'nickname' type="text" class="input" placeholder="Apodo" />
 		</div>
-		<button class="submit-btn">Registrate</button>
+		<button id = 'btRegister' class="submit-btn">Registrate</button>
 	</div>
 	<div class="login slide-up">
 		<div class="center">
 			<h2 class="form-title" id="login"><span>o</span>Inicia Sesión</h2>
 			<div class="form-holder">
-				<input type="email" class="input" placeholder="Correo" />
-				<input type="password" class="input" placeholder="Contraseña" />
+				<input id = 'nam' type= "text" class="input" placeholder="Nombre de usuario" />
+				<input id = 'psw' type="password" class="input" placeholder="Contraseña" />
 			</div>
-			<button class="submit-btn">Registrate</button>
+			<button id = 'btLogIn' class="submit-btn">Iniciar Sesión</button>
 		</div>
 	</div>
 </div>
 <!-- partial -->
   <script  src="/scripts/animateLogin.js"></script>
-
+  <script src ="/scripts/signUp.js" type="module"></script>
+  <script  src = "/scripts/Login.js" type="module"></script>
 </body>
 </html>

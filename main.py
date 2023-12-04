@@ -365,7 +365,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return {"access_token": access_token, "token_type": "bearer", "message": response}
 
 
-@app.post("/logout")
+@app.post("/logout_user")
 async def logout():
     try:
         connection = get_mysql_connection()
@@ -378,6 +378,7 @@ async def logout():
         connection.close()
     except:
         return "Not signed in"
+    print("out")
 
 
     reset_my_sql_connection()
