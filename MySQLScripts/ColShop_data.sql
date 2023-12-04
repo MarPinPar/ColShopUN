@@ -106,7 +106,7 @@ INSERT INTO LISTA (lis_nombre, lis_fechaCreacion, lis_fechaUltAct, USUARIO_us_us
 -- -----------------------------------------------------
 -- Llenado de LISTA_has_PRODUCTO
 -- -----------------------------------------------------
-
+SET @flag = 0;
 INSERT INTO LISTA_has_PRODUCTO (LISTA_lis_nombre, LISTA_USUARIO_us_username, PRODUCTO_pro_ID) VALUES
 ('Lista de juan_perez', 'juan_perez', 'MCO1991235718'),
 ('Lista de maria_gomez', 'maria_gomez', 'MCO1991235660'),
@@ -135,7 +135,6 @@ INSERT INTO LISTA_has_PRODUCTO (LISTA_lis_nombre, LISTA_USUARIO_us_username, PRO
 ('Lista de patricia_santos', 'patricia_santos', 'MCO1268357573'),
 ('Lista de manuel_ramirez', 'manuel_ramirez', '711719566625'),
 ('Lista de rosa_gutierrez', 'rosa_gutierrez', '101112640');
-
 
 -- SELECT* FROM LISTA_has_PRODUCTO;
 
@@ -451,3 +450,5 @@ INSERT INTO RESEÑA VALUES
   ('MCO21817325', 24, 4, 'Ya puedo ver el partido!'),
   ('8806095058290', 25, 5, 'Es lo que se esperaría por el precio')
   ;
+  
+  SET @flag = 1;

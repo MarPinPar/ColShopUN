@@ -66,7 +66,8 @@ CREATE TRIGGER tr_before_create_review
 BEFORE INSERT ON reseña
 FOR EACH ROW
 BEGIN
-	IF NOT EXISTS(SELECT us_username FROM vista_usuariosregistrados WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1)) THEN
+	IF NOT EXISTS(SELECT us_username FROM vista_usuariosregistrados WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1)) AND 
+		@flag = 1 THEN
 		SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'No está autorizado para crear una reseña';
     END IF;
@@ -95,6 +96,7 @@ END $$
 DELIMITER ;
 
 -- Trigger to throw error when trying to insert item into a list that doesn´t exist/is not owned by the current user
+SELECT LISTA_lis_nombre FROM lista_has_producto;
 DROP TRIGGER IF EXISTS tr_before_insert_product_into_list;
 
 DELIMITER $$
@@ -103,7 +105,8 @@ CREATE TRIGGER tr_before_insert_product_into_list
 BEFORE INSERT ON lista_has_producto
 FOR EACH ROW
 BEGIN
-	IF NOT EXISTS(SELECT mislistas.Nombre FROM mislistas WHERE mislistas.Nombre = NEW.LISTA_lis_nombre) THEN
+	IF (NOT EXISTS(SELECT mislistas.Nombre FROM mislistas WHERE mislistas.Nombre = NEW.LISTA_lis_nombre) AND 
+		@flag = 1) THEN
 		SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'No está autorizado para añadir elementos a esta lista o No existe esta lista';
     END IF;
@@ -123,7 +126,8 @@ CREATE TRIGGER tr_before_create_search
 BEFORE INSERT ON busqueda
 FOR EACH ROW
 BEGIN
-	IF NOT EXISTS(SELECT us_username FROM vista_usuariosregistrados WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1)) THEN
+	IF NOT EXISTS(SELECT us_username FROM vista_usuariosregistrados WHERE us_username = SUBSTRING_INDEX(USER(), '@', 1)) AND 
+		@flag = 1 THEN
 		SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'No está autorizado para crear una busqueda';
     END IF;

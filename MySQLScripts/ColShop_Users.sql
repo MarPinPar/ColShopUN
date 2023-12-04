@@ -11,6 +11,7 @@ CREATE ROLE 'usuario'@'localhost';
 -- Permisos sobre tablas/vistas
 GRANT SELECT, UPDATE ON miPerfil TO 'usuario'@'localhost';
 GRANT SELECT ON perfiles TO 'usuario'@'localhost';
+GRANT SELECT ON lista TO 'usuario'@'localhost';
 GRANT SELECT ON listasVisibles TO 'usuario'@'localhost';
 GRANT SELECT ON contenidoListas TO 'usuario'@'localhost';
 GRANT SELECT ON historialBusqueda TO 'usuario'@'localhost';
